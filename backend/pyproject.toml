@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "cheat-bot-detection-backend"
 version = "0.1.0"
@@ -12,6 +16,7 @@ dependencies = [
     "sqlalchemy>=2.0.31",
     "alembic>=1.13.2",
     "python-multipart>=0.0.9",
+    "pandas>=2.2.0",
 ]
 
 [project.optional-dependencies]
@@ -20,3 +25,10 @@ dev = [
     "httpx>=0.27.0",
     "ruff>=0.5.0",
 ]
+
+[tool.setuptools]
+py-modules = ["config", "main", "parser"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
