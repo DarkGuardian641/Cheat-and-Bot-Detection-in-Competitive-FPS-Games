@@ -1,9 +1,9 @@
 {
-  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe",
-  "python.terminal.activateEnvironment": true,
+  "python.defaultInterpreterPath": "${workspaceFolder}/.python311/python.exe",
+  "python.terminal.activateEnvironment": false,
   "python.analysis.extraPaths": [
+    "${workspaceFolder}",
     "${workspaceFolder}/backend",
     "${workspaceFolder}/ml"
   ]
 }
-

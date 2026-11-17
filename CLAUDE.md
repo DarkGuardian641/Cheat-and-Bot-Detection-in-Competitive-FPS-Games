@@ -7,7 +7,8 @@ Guidelines and development instructions for this repository.
 - **Backend Tests**: `pytest tests` (inside `backend/`)
 - **Frontend Run**: `npm run dev` (inside `frontend/`)
 - **Frontend Build**: `npm run build` (inside `frontend/`)
-- **ML Training**: `python ml/train.py`
+- **Dataset Prep (CS2CD)**: `python -m ml.dataset --matches 2`
+- **ML Training**: `python -m ml.train`
 
 ## Architecture
 - `backend/`: FastAPI backend handling demo uploads, coordinating inference, and serving API requests.

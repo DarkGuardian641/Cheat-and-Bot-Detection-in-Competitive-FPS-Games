@@ -67,10 +67,14 @@ npm run dev
 
 - Dashboard: `http://localhost:3000/`
 
-### 3. Machine Learning
+### 3. Machine Learning (CS2CD Dataset)
+
+The ML pipeline integrates the [CS2CD Counter-Strike 2 Cheat Detection dataset](https://huggingface.co/datasets/CS2CD/CS2CD.Counter-Strike_2_Cheat_Detection) from Hugging Face:
 
 ```bash
-python ml/train.py
-```
+# 1. Download and extract sliding telemetry windows (e.g. 5 matches per category)
+python -m ml.dataset --matches 5 --window 256 --step 128
 
-.
+# 2. Train baseline XGBoost / Random Forest model
+python -m ml.train --model xgboost
+```
