@@ -1,0 +1,1234 @@
+{
+  "match_info": {
+    "demo_filename": "analysis_4bdf1289e2df_CSGO-2cwpm-RHnSX-yD4A5-XJPWe-wjNYE.dem",
+    "map_name": "de_anubis",
+    "server_name": "Valve Counter-Strike 2 spain Server (srcds2026-mad1.196.270)",
+    "model_name": "XGBoost"
+  },
+  "status": "completed",
+  "threshold_used": 0.61,
+  "total_windows": 3668,
+  "suspicious_windows_count": 390,
+  "suspicious_players": [
+    {
+      "steamid": "76561199879300852",
+      "player_name": "Chico da Maria",
+      "total_windows": 416,
+      "suspicious_windows": 149,
+      "suspicious_ratio": 0.3582,
+      "mean_suspicion_score": 0.5888,
+      "max_suspicion_score": 0.9448,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "total_windows": 425,
+      "suspicious_windows": 143,
+      "suspicious_ratio": 0.3365,
+      "mean_suspicion_score": 0.5899,
+      "max_suspicion_score": 0.9992,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561198064512066",
+      "player_name": "Kenny",
+      "total_windows": 218,
+      "suspicious_windows": 13,
+      "suspicious_ratio": 0.0596,
+      "mean_suspicion_score": 0.4227,
+      "max_suspicion_score": 0.8186,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561198273927484",
+      "player_name": "SOYCALVO",
+      "total_windows": 314,
+      "suspicious_windows": 16,
+      "suspicious_ratio": 0.051,
+      "mean_suspicion_score": 0.4879,
+      "max_suspicion_score": 0.8836,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561199192210241",
+      "player_name": "GHOST",
+      "total_windows": 419,
+      "suspicious_windows": 19,
+      "suspicious_ratio": 0.0453,
+      "mean_suspicion_score": 0.4543,
+      "max_suspicion_score": 0.8299,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561198302925284",
+      "player_name": "\u265b\ufe0eZappeS\u265b",
+      "total_windows": 407,
+      "suspicious_windows": 15,
+      "suspicious_ratio": 0.0369,
+      "mean_suspicion_score": 0.4947,
+      "max_suspicion_score": 0.7849,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561198176500114",
+      "player_name": "Zeefxd =)",
+      "total_windows": 418,
+      "suspicious_windows": 13,
+      "suspicious_ratio": 0.0311,
+      "mean_suspicion_score": 0.4425,
+      "max_suspicion_score": 0.9425,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561198139860388",
+      "player_name": "TitoNocilla",
+      "total_windows": 287,
+      "suspicious_windows": 7,
+      "suspicious_ratio": 0.0244,
+      "mean_suspicion_score": 0.4516,
+      "max_suspicion_score": 0.8865,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561198385519826",
+      "player_name": "3RcoLd*",
+      "total_windows": 454,
+      "suspicious_windows": 11,
+      "suspicious_ratio": 0.0242,
+      "mean_suspicion_score": 0.364,
+      "max_suspicion_score": 0.7739,
+      "status": "Flagged"
+    }
+  ],
+  "player_summaries": {
+    "76561197998573839": {
+      "steamid": "76561197998573839",
+      "player_name": "Eniac",
+      "total_windows": 310,
+      "suspicious_windows": 4,
+      "suspicious_ratio": 0.0129,
+      "mean_suspicion_score": 0.3732,
+      "max_suspicion_score": 0.7288,
+      "status": "Clean"
+    },
+    "76561198064512066": {
+      "steamid": "76561198064512066",
+      "player_name": "Kenny",
+      "total_windows": 218,
+      "suspicious_windows": 13,
+      "suspicious_ratio": 0.0596,
+      "mean_suspicion_score": 0.4227,
+      "max_suspicion_score": 0.8186,
+      "status": "Flagged"
+    },
+    "76561198139860388": {
+      "steamid": "76561198139860388",
+      "player_name": "TitoNocilla",
+      "total_windows": 287,
+      "suspicious_windows": 7,
+      "suspicious_ratio": 0.0244,
+      "mean_suspicion_score": 0.4516,
+      "max_suspicion_score": 0.8865,
+      "status": "Flagged"
+    },
+    "76561198176500114": {
+      "steamid": "76561198176500114",
+      "player_name": "Zeefxd =)",
+      "total_windows": 418,
+      "suspicious_windows": 13,
+      "suspicious_ratio": 0.0311,
+      "mean_suspicion_score": 0.4425,
+      "max_suspicion_score": 0.9425,
+      "status": "Flagged"
+    },
+    "76561198273927484": {
+      "steamid": "76561198273927484",
+      "player_name": "SOYCALVO",
+      "total_windows": 314,
+      "suspicious_windows": 16,
+      "suspicious_ratio": 0.051,
+      "mean_suspicion_score": 0.4879,
+      "max_suspicion_score": 0.8836,
+      "status": "Flagged"
+    },
+    "76561198302925284": {
+      "steamid": "76561198302925284",
+      "player_name": "\u265b\ufe0eZappeS\u265b",
+      "total_windows": 407,
+      "suspicious_windows": 15,
+      "suspicious_ratio": 0.0369,
+      "mean_suspicion_score": 0.4947,
+      "max_suspicion_score": 0.7849,
+      "status": "Flagged"
+    },
+    "76561198385519826": {
+      "steamid": "76561198385519826",
+      "player_name": "3RcoLd*",
+      "total_windows": 454,
+      "suspicious_windows": 11,
+      "suspicious_ratio": 0.0242,
+      "mean_suspicion_score": 0.364,
+      "max_suspicion_score": 0.7739,
+      "status": "Flagged"
+    },
+    "76561199192210241": {
+      "steamid": "76561199192210241",
+      "player_name": "GHOST",
+      "total_windows": 419,
+      "suspicious_windows": 19,
+      "suspicious_ratio": 0.0453,
+      "mean_suspicion_score": 0.4543,
+      "max_suspicion_score": 0.8299,
+      "status": "Flagged"
+    },
+    "76561199466425287": {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "total_windows": 425,
+      "suspicious_windows": 143,
+      "suspicious_ratio": 0.3365,
+      "mean_suspicion_score": 0.5899,
+      "max_suspicion_score": 0.9992,
+      "status": "Flagged"
+    },
+    "76561199879300852": {
+      "steamid": "76561199879300852",
+      "player_name": "Chico da Maria",
+      "total_windows": 416,
+      "suspicious_windows": 149,
+      "suspicious_ratio": 0.3582,
+      "mean_suspicion_score": 0.5888,
+      "max_suspicion_score": 0.9448,
+      "status": "Flagged"
+    }
+  },
+  "evidence_windows": [
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 61702,
+      "end_tick": 61957,
+      "start_time": 964.09,
+      "end_time": 968.08,
+      "suspicion_score": 0.9992
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 45446,
+      "end_tick": 45701,
+      "start_time": 710.09,
+      "end_time": 714.08,
+      "suspicion_score": 0.9987
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 46982,
+      "end_tick": 47237,
+      "start_time": 734.09,
+      "end_time": 738.08,
+      "suspicion_score": 0.9985
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 33414,
+      "end_tick": 33669,
+      "start_time": 522.09,
+      "end_time": 526.08,
+      "suspicion_score": 0.9984
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 49542,
+      "end_tick": 49797,
+      "start_time": 774.09,
+      "end_time": 778.08,
+      "suspicion_score": 0.9984
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 45190,
+      "end_tick": 45445,
+      "start_time": 706.09,
+      "end_time": 710.08,
+      "suspicion_score": 0.9984
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 45062,
+      "end_tick": 45317,
+      "start_time": 704.09,
+      "end_time": 708.08,
+      "suspicion_score": 0.9984
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 47238,
+      "end_tick": 47493,
+      "start_time": 738.09,
+      "end_time": 742.08,
+      "suspicion_score": 0.9982
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 15903,
+      "end_tick": 16158,
+      "start_time": 248.48,
+      "end_time": 252.47,
+      "suspicion_score": 0.9977
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 58374,
+      "end_tick": 58629,
+      "start_time": 912.09,
+      "end_time": 916.08,
+      "suspicion_score": 0.9974
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 61574,
+      "end_tick": 61829,
+      "start_time": 962.09,
+      "end_time": 966.08,
+      "suspicion_score": 0.9974
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 61446,
+      "end_tick": 61701,
+      "start_time": 960.09,
+      "end_time": 964.08,
+      "suspicion_score": 0.9971
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 52358,
+      "end_tick": 52613,
+      "start_time": 818.09,
+      "end_time": 822.08,
+      "suspicion_score": 0.9968
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 45318,
+      "end_tick": 45573,
+      "start_time": 708.09,
+      "end_time": 712.08,
+      "suspicion_score": 0.9967
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 48902,
+      "end_tick": 49157,
+      "start_time": 764.09,
+      "end_time": 768.08,
+      "suspicion_score": 0.9967
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 49030,
+      "end_tick": 49285,
+      "start_time": 766.09,
+      "end_time": 770.08,
+      "suspicion_score": 0.9966
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 41350,
+      "end_tick": 41605,
+      "start_time": 646.09,
+      "end_time": 650.08,
+      "suspicion_score": 0.996
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 49414,
+      "end_tick": 49669,
+      "start_time": 772.09,
+      "end_time": 776.08,
+      "suspicion_score": 0.9959
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 46598,
+      "end_tick": 46853,
+      "start_time": 728.09,
+      "end_time": 732.08,
+      "suspicion_score": 0.9957
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 7809,
+      "end_tick": 8064,
+      "start_time": 122.02,
+      "end_time": 126.0,
+      "suspicion_score": 0.995
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 4609,
+      "end_tick": 4864,
+      "start_time": 72.02,
+      "end_time": 76.0,
+      "suspicion_score": 0.9947
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 15775,
+      "end_tick": 16030,
+      "start_time": 246.48,
+      "end_time": 250.47,
+      "suspicion_score": 0.9947
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 16031,
+      "end_tick": 16286,
+      "start_time": 250.48,
+      "end_time": 254.47,
+      "suspicion_score": 0.9943
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 8193,
+      "end_tick": 8448,
+      "start_time": 128.02,
+      "end_time": 132.0,
+      "suspicion_score": 0.994
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 4353,
+      "end_tick": 4608,
+      "start_time": 68.02,
+      "end_time": 72.0,
+      "suspicion_score": 0.9939
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 37126,
+      "end_tick": 37381,
+      "start_time": 580.09,
+      "end_time": 584.08,
+      "suspicion_score": 0.9935
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 60422,
+      "end_tick": 60677,
+      "start_time": 944.09,
+      "end_time": 948.08,
+      "suspicion_score": 0.9934
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 62598,
+      "end_tick": 62853,
+      "start_time": 978.09,
+      "end_time": 982.08,
+      "suspicion_score": 0.9905
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 8449,
+      "end_tick": 8704,
+      "start_time": 132.02,
+      "end_time": 136.0,
+      "suspicion_score": 0.9902
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 49670,
+      "end_tick": 49925,
+      "start_time": 776.09,
+      "end_time": 780.08,
+      "suspicion_score": 0.99
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 31494,
+      "end_tick": 31749,
+      "start_time": 492.09,
+      "end_time": 496.08,
+      "suspicion_score": 0.9899
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 27910,
+      "end_tick": 28165,
+      "start_time": 436.09,
+      "end_time": 440.08,
+      "suspicion_score": 0.9894
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 46726,
+      "end_tick": 46981,
+      "start_time": 730.09,
+      "end_time": 734.08,
+      "suspicion_score": 0.9894
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 8321,
+      "end_tick": 8576,
+      "start_time": 130.02,
+      "end_time": 134.0,
+      "suspicion_score": 0.9892
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 33542,
+      "end_tick": 33797,
+      "start_time": 524.09,
+      "end_time": 528.08,
+      "suspicion_score": 0.9882
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 45574,
+      "end_tick": 45829,
+      "start_time": 712.09,
+      "end_time": 716.08,
+      "suspicion_score": 0.9873
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 24503,
+      "end_tick": 24758,
+      "start_time": 382.86,
+      "end_time": 386.84,
+      "suspicion_score": 0.9863
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 4481,
+      "end_tick": 4736,
+      "start_time": 70.02,
+      "end_time": 74.0,
+      "suspicion_score": 0.9863
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 2817,
+      "end_tick": 3072,
+      "start_time": 44.02,
+      "end_time": 48.0,
+      "suspicion_score": 0.9859
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 41222,
+      "end_tick": 41477,
+      "start_time": 644.09,
+      "end_time": 648.08,
+      "suspicion_score": 0.9856
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 45958,
+      "end_tick": 46213,
+      "start_time": 718.09,
+      "end_time": 722.08,
+      "suspicion_score": 0.9849
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 33286,
+      "end_tick": 33541,
+      "start_time": 520.09,
+      "end_time": 524.08,
+      "suspicion_score": 0.9837
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 38918,
+      "end_tick": 39173,
+      "start_time": 608.09,
+      "end_time": 612.08,
+      "suspicion_score": 0.9823
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 52486,
+      "end_tick": 52741,
+      "start_time": 820.09,
+      "end_time": 824.08,
+      "suspicion_score": 0.9817
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 39046,
+      "end_tick": 39301,
+      "start_time": 610.09,
+      "end_time": 614.08,
+      "suspicion_score": 0.9816
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 46470,
+      "end_tick": 46725,
+      "start_time": 726.09,
+      "end_time": 730.08,
+      "suspicion_score": 0.981
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 61830,
+      "end_tick": 62085,
+      "start_time": 966.09,
+      "end_time": 970.08,
+      "suspicion_score": 0.9805
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 31622,
+      "end_tick": 31877,
+      "start_time": 494.09,
+      "end_time": 498.08,
+      "suspicion_score": 0.9792
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 43398,
+      "end_tick": 43653,
+      "start_time": 678.09,
+      "end_time": 682.08,
+      "suspicion_score": 0.9782
+    },
+    {
+      "steamid": "76561199466425287",
+      "player_name": "donk666",
+      "start_tick": 41478,
+      "end_tick": 41733,
+      "start_time": 648.09,
+      "end_time": 652.08,
+      "suspicion_score": 0.9706
+    }
+  ],
+  "forensic_proofs": {
+    "kill_breakdowns": {
+      "76561197998573839": {
+        "player_name": "Eniac",
+        "total_kills": 6,
+        "headshot_count": 6,
+        "headshot_rate": 1.0,
+        "blind_kills": 0,
+        "smoke_kills": 0,
+        "wallbang_kills": 0,
+        "air_kills": 0,
+        "hitgroups": {
+          "Head (Headshot)": 6
+        },
+        "weapons": {
+          "DEAGLE": 4,
+          "M4A1_SILENCER": 1,
+          "GLOCK": 1
+        }
+      },
+      "76561198064512066": {
+        "player_name": "Kenny",
+        "total_kills": 4,
+        "headshot_count": 3,
+        "headshot_rate": 0.75,
+        "blind_kills": 1,
+        "smoke_kills": 0,
+        "wallbang_kills": 0,
+        "air_kills": 0,
+        "hitgroups": {
+          "Head (Headshot)": 3,
+          "Unknown": 1
+        },
+        "weapons": {
+          "DEAGLE": 3,
+          "WORLD": 1
+        }
+      },
+      "76561198139860388": {
+        "player_name": "TitoNocilla",
+        "total_kills": 4,
+        "headshot_count": 1,
+        "headshot_rate": 0.25,
+        "blind_kills": 0,
+        "smoke_kills": 1,
+        "wallbang_kills": 0,
+        "air_kills": 0,
+        "hitgroups": {
+          "Upper Chest": 1,
+          "Head (Headshot)": 1,
+          "Right Arm": 1,
+          "Generic / Body": 1
+        },
+        "weapons": {
+          "M4A1": 2,
+          "MP9": 1,
+          "HEGRENADE": 1
+        }
+      },
+      "76561198176500114": {
+        "player_name": "Zeefxd =)",
+        "total_kills": 7,
+        "headshot_count": 5,
+        "headshot_rate": 0.714,
+        "blind_kills": 0,
+        "smoke_kills": 0,
+        "wallbang_kills": 0,
+        "air_kills": 0,
+        "hitgroups": {
+          "Head (Headshot)": 5,
+          "Upper Chest": 1,
+          "Unknown": 1
+        },
+        "weapons": {
+          "AK47": 4,
+          "GALILAR": 1,
+          "FAMAS": 1,
+          "WORLD": 1
+        }
+      },
+      "76561198273927484": {
+        "player_name": "SOYCALVO",
+        "total_kills": 4,
+        "headshot_count": 1,
+        "headshot_rate": 0.25,
+        "blind_kills": 0,
+        "smoke_kills": 0,
+        "wallbang_kills": 0,
+        "air_kills": 0,
+        "hitgroups": {
+          "Upper Chest": 2,
+          "Head (Headshot)": 1,
+          "Unknown": 1
+        },
+        "weapons": {
+          "DEAGLE": 3,
+          "WORLD": 1
+        }
+      },
+      "76561198302925284": {
+        "player_name": "\u265b\ufe0eZappeS\u265b",
+        "total_kills": 6,
+        "headshot_count": 5,
+        "headshot_rate": 0.833,
+        "blind_kills": 0,
+        "smoke_kills": 0,
+        "wallbang_kills": 0,
+        "air_kills": 0,
+        "hitgroups": {
+          "Head (Headshot)": 5,
+          "Upper Chest": 1
+        },
+        "weapons": {
+          "USP_SILENCER": 3,
+          "DEAGLE": 2,
+          "AWP": 1
+        }
+      },
+      "76561198385519826": {
+        "player_name": "3RcoLd*",
+        "total_kills": 6,
+        "headshot_count": 2,
+        "headshot_rate": 0.333,
+        "blind_kills": 0,
+        "smoke_kills": 0,
+        "wallbang_kills": 0,
+        "air_kills": 0,
+        "hitgroups": {
+          "Left Arm": 2,
+          "Head (Headshot)": 2,
+          "Upper Chest": 1,
+          "Unknown": 1
+        },
+        "weapons": {
+          "P90": 3,
+          "MAC10": 2,
+          "WORLD": 1
+        }
+      },
+      "76561199192210241": {
+        "player_name": "GHOST",
+        "total_kills": 17,
+        "headshot_count": 8,
+        "headshot_rate": 0.471,
+        "blind_kills": 0,
+        "smoke_kills": 3,
+        "wallbang_kills": 0,
+        "air_kills": 1,
+        "hitgroups": {
+          "Head (Headshot)": 8,
+          "Upper Chest": 4,
+          "Stomach": 3,
+          "Right Arm": 1,
+          "Unknown": 1
+        },
+        "weapons": {
+          "AK47": 8,
+          "USP_SILENCER": 4,
+          "REVOLVER": 3,
+          "GALILAR": 1,
+          "WORLD": 1
+        }
+      },
+      "76561199466425287": {
+        "player_name": "donk666",
+        "total_kills": 18,
+        "headshot_count": 14,
+        "headshot_rate": 0.778,
+        "blind_kills": 1,
+        "smoke_kills": 5,
+        "wallbang_kills": 2,
+        "air_kills": 0,
+        "hitgroups": {
+          "Head (Headshot)": 14,
+          "Stomach": 2,
+          "Upper Chest": 1,
+          "Generic / Body": 1
+        },
+        "weapons": {
+          "DEAGLE": 5,
+          "GLOCK": 4,
+          "AWP": 4,
+          "USP_SILENCER": 2,
+          "SSG08": 1,
+          "REVOLVER": 1,
+          "HEGRENADE": 1
+        }
+      },
+      "76561199879300852": {
+        "player_name": "Chico da Maria",
+        "total_kills": 17,
+        "headshot_count": 13,
+        "headshot_rate": 0.765,
+        "blind_kills": 0,
+        "smoke_kills": 3,
+        "wallbang_kills": 4,
+        "air_kills": 0,
+        "hitgroups": {
+          "Head (Headshot)": 13,
+          "Upper Chest": 3,
+          "Generic / Body": 1
+        },
+        "weapons": {
+          "SSG08": 8,
+          "DEAGLE": 8,
+          "HEGRENADE": 1
+        }
+      }
+    },
+    "proof_incidents": [
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "donk666",
+        "steamid": "76561199466425287",
+        "tick": 61702,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 61702 - 61957.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "donk666",
+        "steamid": "76561199466425287",
+        "tick": 45446,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 45446 - 45701.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "donk666",
+        "steamid": "76561199466425287",
+        "tick": 46982,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 46982 - 47237.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "donk666",
+        "steamid": "76561199466425287",
+        "tick": 33414,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.8% anomaly probability across ticks 33414 - 33669.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "donk666",
+        "steamid": "76561199466425287",
+        "tick": 49542,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.8% anomaly probability across ticks 49542 - 49797.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "donk666",
+        "steamid": "76561199466425287",
+        "tick": 45190,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.8% anomaly probability across ticks 45190 - 45445.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "donk666",
+        "steamid": "76561199466425287",
+        "tick": 45062,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.8% anomaly probability across ticks 45062 - 45317.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "donk666",
+        "steamid": "76561199466425287",
+        "tick": 47238,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.8% anomaly probability across ticks 47238 - 47493.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "donk666",
+        "steamid": "76561199466425287",
+        "tick": 15903,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.8% anomaly probability across ticks 15903 - 16158.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "donk666",
+        "steamid": "76561199466425287",
+        "tick": 58374,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.7% anomaly probability across ticks 58374 - 58629.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "donk666",
+        "steamid": "76561199466425287",
+        "tick": 61574,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.7% anomaly probability across ticks 61574 - 61829.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "donk666",
+        "steamid": "76561199466425287",
+        "tick": 61446,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.7% anomaly probability across ticks 61446 - 61701.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "donk666",
+        "steamid": "76561199466425287",
+        "tick": 52358,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.7% anomaly probability across ticks 52358 - 52613.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "donk666",
+        "steamid": "76561199466425287",
+        "tick": 45318,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.7% anomaly probability across ticks 45318 - 45573.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "donk666",
+        "steamid": "76561199466425287",
+        "tick": 48902,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.7% anomaly probability across ticks 48902 - 49157.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "donk666",
+        "steamid": "76561199466425287",
+        "tick": 49030,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.7% anomaly probability across ticks 49030 - 49285.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "donk666",
+        "steamid": "76561199466425287",
+        "tick": 41350,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.6% anomaly probability across ticks 41350 - 41605.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "donk666",
+        "steamid": "76561199466425287",
+        "tick": 49414,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.6% anomaly probability across ticks 49414 - 49669.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "donk666",
+        "steamid": "76561199466425287",
+        "tick": 46598,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.6% anomaly probability across ticks 46598 - 46853.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "donk666",
+        "steamid": "76561199466425287",
+        "tick": 7809,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.5% anomaly probability across ticks 7809 - 8064.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "donk666",
+        "steamid": "76561199466425287",
+        "tick": 4609,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.5% anomaly probability across ticks 4609 - 4864.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "donk666",
+        "steamid": "76561199466425287",
+        "tick": 15775,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.5% anomaly probability across ticks 15775 - 16030.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "donk666",
+        "steamid": "76561199466425287",
+        "tick": 16031,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.4% anomaly probability across ticks 16031 - 16286.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "donk666",
+        "steamid": "76561199466425287",
+        "tick": 8193,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.4% anomaly probability across ticks 8193 - 8448.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "donk666",
+        "steamid": "76561199466425287",
+        "tick": 4353,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.4% anomaly probability across ticks 4353 - 4608.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "donk666",
+        "steamid": "76561199466425287",
+        "tick": 37126,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.4% anomaly probability across ticks 37126 - 37381.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "donk666",
+        "steamid": "76561199466425287",
+        "tick": 60422,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.3% anomaly probability across ticks 60422 - 60677.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "donk666",
+        "steamid": "76561199466425287",
+        "tick": 62598,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.1% anomaly probability across ticks 62598 - 62853.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "donk666",
+        "steamid": "76561199466425287",
+        "tick": 8449,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.0% anomaly probability across ticks 8449 - 8704.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "donk666",
+        "steamid": "76561199466425287",
+        "tick": 49670,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.0% anomaly probability across ticks 49670 - 49925.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      }
+    ]
+  },
+  "analysis_id": "analysis_4bdf1289e2df",
+  "match_id": "analysis_4bdf1289e2df",
+  "completed_at": "2026-11-17T07:38:18.957556+00:00",
+  "demo_path": "C:\\Visual Studio Code\\Cheat-and-Bot-Detection-in-Competitive-FPS-Games\\data\\demos\\analysis_4bdf1289e2df_CSGO-2cwpm-RHnSX-yD4A5-XJPWe-wjNYE.dem"
+}

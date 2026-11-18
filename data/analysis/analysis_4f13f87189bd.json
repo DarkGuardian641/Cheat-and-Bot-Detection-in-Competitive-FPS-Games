@@ -1,0 +1,672 @@
+{
+  "match_info": {
+    "demo_filename": "analysis_4f13f87189bd_CSGO-299c5-rzmqA-dD4BX-uWvq9-yKkXM.dem",
+    "map_name": "de_inferno",
+    "server_name": "Valve Counter-Strike 2 spain Server (srcds2014-mad1.196.14)",
+    "model_name": "XGBoost"
+  },
+  "status": "completed",
+  "threshold_used": 0.61,
+  "total_windows": 11508,
+  "suspicious_windows_count": 273,
+  "suspicious_players": [
+    {
+      "steamid": "76561198369312545",
+      "player_name": "PNTHR",
+      "total_windows": 1147,
+      "suspicious_windows": 55,
+      "suspicious_ratio": 0.048,
+      "mean_suspicion_score": 0.4247,
+      "max_suspicion_score": 0.9493,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561197977523314",
+      "player_name": "GH0ST FACE",
+      "total_windows": 1302,
+      "suspicious_windows": 47,
+      "suspicious_ratio": 0.0361,
+      "mean_suspicion_score": 0.3755,
+      "max_suspicion_score": 0.808,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561199198494387",
+      "player_name": "Neliiii",
+      "total_windows": 1200,
+      "suspicious_windows": 35,
+      "suspicious_ratio": 0.0292,
+      "mean_suspicion_score": 0.3759,
+      "max_suspicion_score": 0.8802,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561198220307611",
+      "player_name": "ericaxe",
+      "total_windows": 1117,
+      "suspicious_windows": 30,
+      "suspicious_ratio": 0.0269,
+      "mean_suspicion_score": 0.377,
+      "max_suspicion_score": 0.8877,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561198728209230",
+      "player_name": "YeeTo",
+      "total_windows": 1066,
+      "suspicious_windows": 28,
+      "suspicious_ratio": 0.0263,
+      "mean_suspicion_score": 0.3413,
+      "max_suspicion_score": 0.9529,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561198215610975",
+      "player_name": "supern0va",
+      "total_windows": 1238,
+      "suspicious_windows": 29,
+      "suspicious_ratio": 0.0234,
+      "mean_suspicion_score": 0.3273,
+      "max_suspicion_score": 0.827,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561197993580907",
+      "player_name": "germinator",
+      "total_windows": 991,
+      "suspicious_windows": 17,
+      "suspicious_ratio": 0.0172,
+      "mean_suspicion_score": 0.3813,
+      "max_suspicion_score": 0.7885,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561198215972051",
+      "player_name": "V1o",
+      "total_windows": 1028,
+      "suspicious_windows": 15,
+      "suspicious_ratio": 0.0146,
+      "mean_suspicion_score": 0.3425,
+      "max_suspicion_score": 0.7897,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561197984082777",
+      "player_name": "Choukka",
+      "total_windows": 1223,
+      "suspicious_windows": 10,
+      "suspicious_ratio": 0.0082,
+      "mean_suspicion_score": 0.3281,
+      "max_suspicion_score": 0.6747,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561198009922492",
+      "player_name": "TontonJWoo",
+      "total_windows": 1196,
+      "suspicious_windows": 7,
+      "suspicious_ratio": 0.0059,
+      "mean_suspicion_score": 0.2989,
+      "max_suspicion_score": 0.8588,
+      "status": "Flagged"
+    }
+  ],
+  "player_summaries": {
+    "76561197977523314": {
+      "steamid": "76561197977523314",
+      "player_name": "GH0ST FACE",
+      "total_windows": 1302,
+      "suspicious_windows": 47,
+      "suspicious_ratio": 0.0361,
+      "mean_suspicion_score": 0.3755,
+      "max_suspicion_score": 0.808,
+      "status": "Flagged"
+    },
+    "76561197984082777": {
+      "steamid": "76561197984082777",
+      "player_name": "Choukka",
+      "total_windows": 1223,
+      "suspicious_windows": 10,
+      "suspicious_ratio": 0.0082,
+      "mean_suspicion_score": 0.3281,
+      "max_suspicion_score": 0.6747,
+      "status": "Flagged"
+    },
+    "76561197993580907": {
+      "steamid": "76561197993580907",
+      "player_name": "germinator",
+      "total_windows": 991,
+      "suspicious_windows": 17,
+      "suspicious_ratio": 0.0172,
+      "mean_suspicion_score": 0.3813,
+      "max_suspicion_score": 0.7885,
+      "status": "Flagged"
+    },
+    "76561198009922492": {
+      "steamid": "76561198009922492",
+      "player_name": "TontonJWoo",
+      "total_windows": 1196,
+      "suspicious_windows": 7,
+      "suspicious_ratio": 0.0059,
+      "mean_suspicion_score": 0.2989,
+      "max_suspicion_score": 0.8588,
+      "status": "Flagged"
+    },
+    "76561198215610975": {
+      "steamid": "76561198215610975",
+      "player_name": "supern0va",
+      "total_windows": 1238,
+      "suspicious_windows": 29,
+      "suspicious_ratio": 0.0234,
+      "mean_suspicion_score": 0.3273,
+      "max_suspicion_score": 0.827,
+      "status": "Flagged"
+    },
+    "76561198215972051": {
+      "steamid": "76561198215972051",
+      "player_name": "V1o",
+      "total_windows": 1028,
+      "suspicious_windows": 15,
+      "suspicious_ratio": 0.0146,
+      "mean_suspicion_score": 0.3425,
+      "max_suspicion_score": 0.7897,
+      "status": "Flagged"
+    },
+    "76561198220307611": {
+      "steamid": "76561198220307611",
+      "player_name": "ericaxe",
+      "total_windows": 1117,
+      "suspicious_windows": 30,
+      "suspicious_ratio": 0.0269,
+      "mean_suspicion_score": 0.377,
+      "max_suspicion_score": 0.8877,
+      "status": "Flagged"
+    },
+    "76561198369312545": {
+      "steamid": "76561198369312545",
+      "player_name": "PNTHR",
+      "total_windows": 1147,
+      "suspicious_windows": 55,
+      "suspicious_ratio": 0.048,
+      "mean_suspicion_score": 0.4247,
+      "max_suspicion_score": 0.9493,
+      "status": "Flagged"
+    },
+    "76561198728209230": {
+      "steamid": "76561198728209230",
+      "player_name": "YeeTo",
+      "total_windows": 1066,
+      "suspicious_windows": 28,
+      "suspicious_ratio": 0.0263,
+      "mean_suspicion_score": 0.3413,
+      "max_suspicion_score": 0.9529,
+      "status": "Flagged"
+    },
+    "76561199198494387": {
+      "steamid": "76561199198494387",
+      "player_name": "Neliiii",
+      "total_windows": 1200,
+      "suspicious_windows": 35,
+      "suspicious_ratio": 0.0292,
+      "mean_suspicion_score": 0.3759,
+      "max_suspicion_score": 0.8802,
+      "status": "Flagged"
+    }
+  },
+  "evidence_windows": [
+    {
+      "steamid": "76561198728209230",
+      "player_name": "YeeTo",
+      "start_tick": 124755,
+      "end_tick": 125010,
+      "start_time": 1949.3,
+      "end_time": 1953.28,
+      "suspicion_score": 0.9529
+    },
+    {
+      "steamid": "76561198369312545",
+      "player_name": "PNTHR",
+      "start_tick": 116121,
+      "end_tick": 116376,
+      "start_time": 1814.39,
+      "end_time": 1818.38,
+      "suspicion_score": 0.9493
+    },
+    {
+      "steamid": "76561198220307611",
+      "player_name": "ericaxe",
+      "start_tick": 59309,
+      "end_tick": 59564,
+      "start_time": 926.7,
+      "end_time": 930.69,
+      "suspicion_score": 0.8877
+    },
+    {
+      "steamid": "76561199198494387",
+      "player_name": "Neliiii",
+      "start_tick": 183687,
+      "end_tick": 183942,
+      "start_time": 2870.11,
+      "end_time": 2874.09,
+      "suspicion_score": 0.8802
+    },
+    {
+      "steamid": "76561198728209230",
+      "player_name": "YeeTo",
+      "start_tick": 92948,
+      "end_tick": 96472,
+      "start_time": 1452.31,
+      "end_time": 1507.38,
+      "suspicion_score": 0.88
+    },
+    {
+      "steamid": "76561198728209230",
+      "player_name": "YeeTo",
+      "start_tick": 8321,
+      "end_tick": 8576,
+      "start_time": 130.02,
+      "end_time": 134.0,
+      "suspicion_score": 0.8781
+    },
+    {
+      "steamid": "76561198220307611",
+      "player_name": "ericaxe",
+      "start_tick": 92306,
+      "end_tick": 96581,
+      "start_time": 1442.28,
+      "end_time": 1509.08,
+      "suspicion_score": 0.875
+    },
+    {
+      "steamid": "76561198220307611",
+      "player_name": "ericaxe",
+      "start_tick": 12033,
+      "end_tick": 12288,
+      "start_time": 188.02,
+      "end_time": 192.0,
+      "suspicion_score": 0.8676
+    },
+    {
+      "steamid": "76561198220307611",
+      "player_name": "ericaxe",
+      "start_tick": 72475,
+      "end_tick": 72730,
+      "start_time": 1132.42,
+      "end_time": 1136.41,
+      "suspicion_score": 0.8589
+    },
+    {
+      "steamid": "76561198009922492",
+      "player_name": "TontonJWoo",
+      "start_tick": 136544,
+      "end_tick": 136799,
+      "start_time": 2133.5,
+      "end_time": 2137.48,
+      "suspicion_score": 0.8588
+    },
+    {
+      "steamid": "76561198220307611",
+      "player_name": "ericaxe",
+      "start_tick": 72603,
+      "end_tick": 72858,
+      "start_time": 1134.42,
+      "end_time": 1138.41,
+      "suspicion_score": 0.8524
+    },
+    {
+      "steamid": "76561198369312545",
+      "player_name": "PNTHR",
+      "start_tick": 17853,
+      "end_tick": 18108,
+      "start_time": 278.95,
+      "end_time": 282.94,
+      "suspicion_score": 0.8454
+    },
+    {
+      "steamid": "76561198728209230",
+      "player_name": "YeeTo",
+      "start_tick": 36845,
+      "end_tick": 37100,
+      "start_time": 575.7,
+      "end_time": 579.69,
+      "suspicion_score": 0.8399
+    },
+    {
+      "steamid": "76561198728209230",
+      "player_name": "YeeTo",
+      "start_tick": 124883,
+      "end_tick": 128826,
+      "start_time": 1951.3,
+      "end_time": 2012.91,
+      "suspicion_score": 0.8348
+    },
+    {
+      "steamid": "76561198728209230",
+      "player_name": "YeeTo",
+      "start_tick": 59018,
+      "end_tick": 60729,
+      "start_time": 922.16,
+      "end_time": 948.89,
+      "suspicion_score": 0.8336
+    },
+    {
+      "steamid": "76561198728209230",
+      "player_name": "YeeTo",
+      "start_tick": 49241,
+      "end_tick": 49496,
+      "start_time": 769.39,
+      "end_time": 773.38,
+      "suspicion_score": 0.8322
+    },
+    {
+      "steamid": "76561198215610975",
+      "player_name": "supern0va",
+      "start_tick": 72742,
+      "end_tick": 76693,
+      "start_time": 1136.59,
+      "end_time": 1198.33,
+      "suspicion_score": 0.827
+    },
+    {
+      "steamid": "76561198220307611",
+      "player_name": "ericaxe",
+      "start_tick": 90130,
+      "end_tick": 90385,
+      "start_time": 1408.28,
+      "end_time": 1412.27,
+      "suspicion_score": 0.8172
+    },
+    {
+      "steamid": "76561198369312545",
+      "player_name": "PNTHR",
+      "start_tick": 163030,
+      "end_tick": 163285,
+      "start_time": 2547.34,
+      "end_time": 2551.33,
+      "suspicion_score": 0.8086
+    },
+    {
+      "steamid": "76561199198494387",
+      "player_name": "Neliiii",
+      "start_tick": 38816,
+      "end_tick": 39071,
+      "start_time": 606.5,
+      "end_time": 610.48,
+      "suspicion_score": 0.8082
+    },
+    {
+      "steamid": "76561197977523314",
+      "player_name": "GH0ST FACE",
+      "start_tick": 174845,
+      "end_tick": 175100,
+      "start_time": 2731.95,
+      "end_time": 2735.94,
+      "suspicion_score": 0.808
+    },
+    {
+      "steamid": "76561198369312545",
+      "player_name": "PNTHR",
+      "start_tick": 86823,
+      "end_tick": 87977,
+      "start_time": 1356.61,
+      "end_time": 1374.64,
+      "suspicion_score": 0.798
+    },
+    {
+      "steamid": "76561198728209230",
+      "player_name": "YeeTo",
+      "start_tick": 66618,
+      "end_tick": 66873,
+      "start_time": 1040.91,
+      "end_time": 1044.89,
+      "suspicion_score": 0.7947
+    },
+    {
+      "steamid": "76561198215610975",
+      "player_name": "supern0va",
+      "start_tick": 196842,
+      "end_tick": 197097,
+      "start_time": 3075.66,
+      "end_time": 3079.64,
+      "suspicion_score": 0.79
+    },
+    {
+      "steamid": "76561198728209230",
+      "player_name": "YeeTo",
+      "start_tick": 79334,
+      "end_tick": 79589,
+      "start_time": 1239.59,
+      "end_time": 1243.58,
+      "suspicion_score": 0.7898
+    },
+    {
+      "steamid": "76561198215972051",
+      "player_name": "V1o",
+      "start_tick": 28340,
+      "end_tick": 28595,
+      "start_time": 442.81,
+      "end_time": 446.8,
+      "suspicion_score": 0.7897
+    },
+    {
+      "steamid": "76561198215610975",
+      "player_name": "supern0va",
+      "start_tick": 174051,
+      "end_tick": 174306,
+      "start_time": 2719.55,
+      "end_time": 2723.53,
+      "suspicion_score": 0.7888
+    },
+    {
+      "steamid": "76561197993580907",
+      "player_name": "germinator",
+      "start_tick": 151628,
+      "end_tick": 151883,
+      "start_time": 2369.19,
+      "end_time": 2373.17,
+      "suspicion_score": 0.7885
+    },
+    {
+      "steamid": "76561198215610975",
+      "player_name": "supern0va",
+      "start_tick": 165219,
+      "end_tick": 165474,
+      "start_time": 2581.55,
+      "end_time": 2585.53,
+      "suspicion_score": 0.7873
+    },
+    {
+      "steamid": "76561197977523314",
+      "player_name": "GH0ST FACE",
+      "start_tick": 174973,
+      "end_tick": 175228,
+      "start_time": 2733.95,
+      "end_time": 2737.94,
+      "suspicion_score": 0.783
+    },
+    {
+      "steamid": "76561198220307611",
+      "player_name": "ericaxe",
+      "start_tick": 193675,
+      "end_tick": 193930,
+      "start_time": 3026.17,
+      "end_time": 3030.16,
+      "suspicion_score": 0.7818
+    },
+    {
+      "steamid": "76561198220307611",
+      "player_name": "ericaxe",
+      "start_tick": 13185,
+      "end_tick": 15009,
+      "start_time": 206.02,
+      "end_time": 234.52,
+      "suspicion_score": 0.7814
+    },
+    {
+      "steamid": "76561198215972051",
+      "player_name": "V1o",
+      "start_tick": 82021,
+      "end_tick": 82276,
+      "start_time": 1281.58,
+      "end_time": 1285.56,
+      "suspicion_score": 0.7781
+    },
+    {
+      "steamid": "76561198369312545",
+      "player_name": "PNTHR",
+      "start_tick": 174934,
+      "end_tick": 175189,
+      "start_time": 2733.34,
+      "end_time": 2737.33,
+      "suspicion_score": 0.7745
+    },
+    {
+      "steamid": "76561198369312545",
+      "player_name": "PNTHR",
+      "start_tick": 174806,
+      "end_tick": 175061,
+      "start_time": 2731.34,
+      "end_time": 2735.33,
+      "suspicion_score": 0.7745
+    },
+    {
+      "steamid": "76561198215610975",
+      "player_name": "supern0va",
+      "start_tick": 118881,
+      "end_tick": 119136,
+      "start_time": 1857.52,
+      "end_time": 1861.5,
+      "suspicion_score": 0.7732
+    },
+    {
+      "steamid": "76561198215610975",
+      "player_name": "supern0va",
+      "start_tick": 119009,
+      "end_tick": 119264,
+      "start_time": 1859.52,
+      "end_time": 1863.5,
+      "suspicion_score": 0.7732
+    },
+    {
+      "steamid": "76561197977523314",
+      "player_name": "GH0ST FACE",
+      "start_tick": 180989,
+      "end_tick": 181244,
+      "start_time": 2827.95,
+      "end_time": 2831.94,
+      "suspicion_score": 0.7699
+    },
+    {
+      "steamid": "76561197977523314",
+      "player_name": "GH0ST FACE",
+      "start_tick": 181117,
+      "end_tick": 181372,
+      "start_time": 2829.95,
+      "end_time": 2833.94,
+      "suspicion_score": 0.7699
+    },
+    {
+      "steamid": "76561197993580907",
+      "player_name": "germinator",
+      "start_tick": 130917,
+      "end_tick": 131172,
+      "start_time": 2045.58,
+      "end_time": 2049.56,
+      "suspicion_score": 0.7697
+    },
+    {
+      "steamid": "76561197977523314",
+      "player_name": "GH0ST FACE",
+      "start_tick": 112953,
+      "end_tick": 113208,
+      "start_time": 1764.89,
+      "end_time": 1768.88,
+      "suspicion_score": 0.7696
+    },
+    {
+      "steamid": "76561198215610975",
+      "player_name": "supern0va",
+      "start_tick": 165091,
+      "end_tick": 165346,
+      "start_time": 2579.55,
+      "end_time": 2583.53,
+      "suspicion_score": 0.7691
+    },
+    {
+      "steamid": "76561198728209230",
+      "player_name": "YeeTo",
+      "start_tick": 93076,
+      "end_tick": 96600,
+      "start_time": 1454.31,
+      "end_time": 1509.38,
+      "suspicion_score": 0.7681
+    },
+    {
+      "steamid": "76561198369312545",
+      "player_name": "PNTHR",
+      "start_tick": 91050,
+      "end_tick": 91305,
+      "start_time": 1422.66,
+      "end_time": 1426.64,
+      "suspicion_score": 0.7663
+    },
+    {
+      "steamid": "76561198728209230",
+      "player_name": "YeeTo",
+      "start_tick": 190203,
+      "end_tick": 190458,
+      "start_time": 2971.92,
+      "end_time": 2975.91,
+      "suspicion_score": 0.7593
+    },
+    {
+      "steamid": "76561197977523314",
+      "player_name": "GH0ST FACE",
+      "start_tick": 156469,
+      "end_tick": 156724,
+      "start_time": 2444.83,
+      "end_time": 2448.81,
+      "suspicion_score": 0.7579
+    },
+    {
+      "steamid": "76561198220307611",
+      "player_name": "ericaxe",
+      "start_tick": 193803,
+      "end_tick": 194058,
+      "start_time": 3028.17,
+      "end_time": 3032.16,
+      "suspicion_score": 0.7522
+    },
+    {
+      "steamid": "76561198220307611",
+      "player_name": "ericaxe",
+      "start_tick": 193931,
+      "end_tick": 194186,
+      "start_time": 3030.17,
+      "end_time": 3034.16,
+      "suspicion_score": 0.7522
+    },
+    {
+      "steamid": "76561198728209230",
+      "player_name": "YeeTo",
+      "start_tick": 79206,
+      "end_tick": 79461,
+      "start_time": 1237.59,
+      "end_time": 1241.58,
+      "suspicion_score": 0.7479
+    },
+    {
+      "steamid": "76561198215610975",
+      "player_name": "supern0va",
+      "start_tick": 48778,
+      "end_tick": 49033,
+      "start_time": 762.16,
+      "end_time": 766.14,
+      "suspicion_score": 0.7458
+    }
+  ],
+  "analysis_id": "analysis_4f13f87189bd",
+  "match_id": "analysis_4f13f87189bd",
+  "completed_at": "2026-11-17T06:24:30.287352+00:00",
+  "demo_path": "C:\\Visual Studio Code\\Cheat-and-Bot-Detection-in-Competitive-FPS-Games\\data\\demos\\analysis_4f13f87189bd_CSGO-299c5-rzmqA-dD4BX-uWvq9-yKkXM.dem"
+}

@@ -5,5 +5,12 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,
+    proxy: {
+      '/health': 'http://127.0.0.1:8000',
+      '/analyses': 'http://127.0.0.1:8000',
+      '/matches': 'http://127.0.0.1:8000',
+      '/players': 'http://127.0.0.1:8000',
+      '/api': 'http://127.0.0.1:8000',
+    },
   },
 });

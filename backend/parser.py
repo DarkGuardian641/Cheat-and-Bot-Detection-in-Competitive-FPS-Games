@@ -107,6 +107,9 @@ class CS2DemoParser:
             "Z",
             "pitch",
             "yaw",
+            "is_airborne",
+            "duck_amount",
+            "flash_duration",
         ]
         if extra_fields:
             for f in extra_fields:

@@ -1,11 +1,13 @@
 import io
 import json
-import pytest
+
 from fastapi.testclient import TestClient
-from backend.main import app
+
 from backend.config import settings
+from backend.main import app
 
 client = TestClient(app)
+
 
 def test_health():
     res = client.get("/health")
@@ -14,6 +16,28 @@ def test_health():
     assert data["status"] == "ok"
     assert "storage" in data
     assert "demos" in data["storage"]
+
+
+def test_upload_valid_demo():
+    # Synthetic demo with proper header magic bytes
+    valid_header_bytes = b"PBDEMS\x00\x00" + b"\x00" * 100
+    demo_file = io.BytesIO(valid_header_bytes)
+    res = client.post("/analyses/upload", files={"file": ("test_match.dem", demo_file, "application/octet-stream")})
+    assert res.status_code == 202
+    data = res.json()
+    assert "analysis_id" in data
+    assert data["status"] == "pending"
+    assert data["filename"] == "test_match.dem"
+
+    # Verify initial analysis record was written locally
+    analysis_id = data["analysis_id"]
+    record_file = settings.ANALYSIS_DIR / f"{analysis_id}.json"
+    assert record_file.exists()
+    
+    # Clean up test artifact
+    record_file.unlink(missing_ok=True)
+    saved_demo = settings.DEMOS_DIR / f"{analysis_id}_test_match.dem"
+    saved_demo.unlink(missing_ok=True)
 
 
 def test_upload_invalid_extension():
@@ -30,12 +54,33 @@ def test_upload_empty_file():
     assert "empty" in res.json()["detail"].lower()
 
 
+def test_upload_oversized_file(monkeypatch):
+    # Temporarily set max demo size to 0.001 MB (1 KB)
+    monkeypatch.setattr(settings, "MAX_DEMO_SIZE_MB", 0.001)
+    large_bytes = b"HL2DEMO\x00" + b"X" * 2048  # 2 KB
+    oversized = io.BytesIO(large_bytes)
+    res = client.post("/analyses/upload", files={"file": ("large.dem", oversized, "application/octet-stream")})
+    assert res.status_code == 400
+    assert "exceeds maximum allowed size" in res.json()["detail"]
+
+
 def test_analysis_status_and_results_not_found():
     res = client.get("/analyses/nonexistent_id")
     assert res.status_code == 404
+    assert "not found" in res.json()["detail"].lower()
 
     res2 = client.get("/analyses/nonexistent_id/results")
     assert res2.status_code == 404
+    assert "not found" in res2.json()["detail"].lower()
+
+    traversal = client.get("/analyses/../nonexistent_id")
+    assert traversal.status_code == 404
+
+
+def test_list_analyses_endpoint():
+    res = client.get("/analyses")
+    assert res.status_code == 200
+    assert isinstance(res.json(), list)
 
 
 def test_matches_endpoint():
@@ -44,16 +89,18 @@ def test_matches_endpoint():
     assert isinstance(res.json(), list)
 
 
-def test_player_endpoint_with_mock_report(tmp_path):
+def test_player_endpoint_with_mock_report():
     mock_id = "test_match_123"
     report_file = settings.ANALYSIS_DIR / f"{mock_id}.json"
-    
+
     mock_report = {
         "analysis_id": mock_id,
+        "match_id": mock_id,
         "status": "completed",
         "match_info": {"demo_filename": "test.dem"},
         "player_summaries": {
             "76561198000000001": {
+                "steamid": "76561198000000001",
                 "player_name": "ProShooter",
                 "total_windows": 10,
                 "suspicious_windows": 2,
@@ -71,23 +118,29 @@ def test_player_endpoint_with_mock_report(tmp_path):
         with open(report_file, "w", encoding="utf-8") as f:
             json.dump(mock_report, f)
 
-        # Test GET /analyses/{id}
+        # 1. GET /analyses/{analysis_id}
         res_status = client.get(f"/analyses/{mock_id}")
         assert res_status.status_code == 200
         assert res_status.json()["status"] == "completed"
 
-        # Test GET /analyses/{id}/results
+        # 2. GET /analyses/{analysis_id}/results
         res_results = client.get(f"/analyses/{mock_id}/results")
         assert res_results.status_code == 200
         assert res_results.json()["analysis_id"] == mock_id
 
-        # Test GET /matches
+        # 3. GET /matches
         res_matches = client.get("/matches")
         assert res_matches.status_code == 200
         match_ids = [m["match_id"] for m in res_matches.json()]
         assert mock_id in match_ids
 
-        # Test GET /players/{id}
+        # 4. GET /analyses
+        res_analyses = client.get("/analyses")
+        assert res_analyses.status_code == 200
+        analysis_ids = [a["analysis_id"] for a in res_analyses.json()]
+        assert mock_id in analysis_ids
+
+        # 5. GET /players/{id}
         res_player = client.get("/players/76561198000000001")
         assert res_player.status_code == 200
         pdata = res_player.json()
@@ -95,7 +148,15 @@ def test_player_endpoint_with_mock_report(tmp_path):
         assert pdata["total_windows"] == 10
         assert pdata["overall_verdict"] == "Flagged"
 
-        # Non-existent player
+        # 6. GET /players list endpoint
+        res_players = client.get("/players")
+        assert res_players.status_code == 200
+        players_list = res_players.json()
+        assert len(players_list) >= 1
+        tracked_ids = [p["player_id"] for p in players_list]
+        assert "76561198000000001" in tracked_ids
+
+        # 7. Non-existent player
         res_not_found = client.get("/players/999999999999")
         assert res_not_found.status_code == 404
 

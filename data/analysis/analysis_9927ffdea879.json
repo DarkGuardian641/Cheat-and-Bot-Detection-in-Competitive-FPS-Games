@@ -1,0 +1,1290 @@
+{
+  "match_info": {
+    "demo_filename": "analysis_9927ffdea879_CSGO-7PJ4C-NdmRk-6t3aE-jGjSm-iEbJD.dem",
+    "map_name": "de_dust2",
+    "server_name": "Valve Counter-Strike 2 spain Server (srcds2030-mad1.196.261)",
+    "model_name": "XGBoost"
+  },
+  "status": "completed",
+  "threshold_used": 0.61,
+  "total_windows": 4536,
+  "suspicious_windows_count": 840,
+  "suspicious_players": [
+    {
+      "steamid": "76561199839390315",
+      "player_name": "au pays du cocaine",
+      "total_windows": 524,
+      "suspicious_windows": 268,
+      "suspicious_ratio": 0.5115,
+      "mean_suspicion_score": 0.7219,
+      "max_suspicion_score": 0.9994,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561199874855932",
+      "player_name": "Golem",
+      "total_windows": 449,
+      "suspicious_windows": 203,
+      "suspicious_ratio": 0.4521,
+      "mean_suspicion_score": 0.6623,
+      "max_suspicion_score": 0.9996,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561198805333600",
+      "player_name": "pixy",
+      "total_windows": 494,
+      "suspicious_windows": 105,
+      "suspicious_ratio": 0.2126,
+      "mean_suspicion_score": 0.5275,
+      "max_suspicion_score": 0.9914,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561199850205990",
+      "player_name": "M",
+      "total_windows": 426,
+      "suspicious_windows": 51,
+      "suspicious_ratio": 0.1197,
+      "mean_suspicion_score": 0.513,
+      "max_suspicion_score": 0.8759,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561198217104720",
+      "player_name": "PAY TO WIN",
+      "total_windows": 422,
+      "suspicious_windows": 49,
+      "suspicious_ratio": 0.1161,
+      "mean_suspicion_score": 0.4773,
+      "max_suspicion_score": 0.875,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561198441456441",
+      "player_name": "-kN\u30b8666",
+      "total_windows": 505,
+      "suspicious_windows": 57,
+      "suspicious_ratio": 0.1129,
+      "mean_suspicion_score": 0.532,
+      "max_suspicion_score": 0.9027,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561199474366936",
+      "player_name": "snow",
+      "total_windows": 401,
+      "suspicious_windows": 29,
+      "suspicious_ratio": 0.0723,
+      "mean_suspicion_score": 0.5055,
+      "max_suspicion_score": 0.8886,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561198283875403",
+      "player_name": "Rex99",
+      "total_windows": 439,
+      "suspicious_windows": 31,
+      "suspicious_ratio": 0.0706,
+      "mean_suspicion_score": 0.4932,
+      "max_suspicion_score": 0.9369,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561199470458948",
+      "player_name": "Churiset",
+      "total_windows": 484,
+      "suspicious_windows": 29,
+      "suspicious_ratio": 0.0599,
+      "mean_suspicion_score": 0.3953,
+      "max_suspicion_score": 0.9652,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561198148237179",
+      "player_name": "Theus",
+      "total_windows": 392,
+      "suspicious_windows": 18,
+      "suspicious_ratio": 0.0459,
+      "mean_suspicion_score": 0.3846,
+      "max_suspicion_score": 0.8779,
+      "status": "Flagged"
+    }
+  ],
+  "player_summaries": {
+    "76561198148237179": {
+      "steamid": "76561198148237179",
+      "player_name": "Theus",
+      "total_windows": 392,
+      "suspicious_windows": 18,
+      "suspicious_ratio": 0.0459,
+      "mean_suspicion_score": 0.3846,
+      "max_suspicion_score": 0.8779,
+      "status": "Flagged"
+    },
+    "76561198217104720": {
+      "steamid": "76561198217104720",
+      "player_name": "PAY TO WIN",
+      "total_windows": 422,
+      "suspicious_windows": 49,
+      "suspicious_ratio": 0.1161,
+      "mean_suspicion_score": 0.4773,
+      "max_suspicion_score": 0.875,
+      "status": "Flagged"
+    },
+    "76561198283875403": {
+      "steamid": "76561198283875403",
+      "player_name": "Rex99",
+      "total_windows": 439,
+      "suspicious_windows": 31,
+      "suspicious_ratio": 0.0706,
+      "mean_suspicion_score": 0.4932,
+      "max_suspicion_score": 0.9369,
+      "status": "Flagged"
+    },
+    "76561198441456441": {
+      "steamid": "76561198441456441",
+      "player_name": "-kN\u30b8666",
+      "total_windows": 505,
+      "suspicious_windows": 57,
+      "suspicious_ratio": 0.1129,
+      "mean_suspicion_score": 0.532,
+      "max_suspicion_score": 0.9027,
+      "status": "Flagged"
+    },
+    "76561198805333600": {
+      "steamid": "76561198805333600",
+      "player_name": "pixy",
+      "total_windows": 494,
+      "suspicious_windows": 105,
+      "suspicious_ratio": 0.2126,
+      "mean_suspicion_score": 0.5275,
+      "max_suspicion_score": 0.9914,
+      "status": "Flagged"
+    },
+    "76561199470458948": {
+      "steamid": "76561199470458948",
+      "player_name": "Churiset",
+      "total_windows": 484,
+      "suspicious_windows": 29,
+      "suspicious_ratio": 0.0599,
+      "mean_suspicion_score": 0.3953,
+      "max_suspicion_score": 0.9652,
+      "status": "Flagged"
+    },
+    "76561199474366936": {
+      "steamid": "76561199474366936",
+      "player_name": "snow",
+      "total_windows": 401,
+      "suspicious_windows": 29,
+      "suspicious_ratio": 0.0723,
+      "mean_suspicion_score": 0.5055,
+      "max_suspicion_score": 0.8886,
+      "status": "Flagged"
+    },
+    "76561199839390315": {
+      "steamid": "76561199839390315",
+      "player_name": "au pays du cocaine",
+      "total_windows": 524,
+      "suspicious_windows": 268,
+      "suspicious_ratio": 0.5115,
+      "mean_suspicion_score": 0.7219,
+      "max_suspicion_score": 0.9994,
+      "status": "Flagged"
+    },
+    "76561199850205990": {
+      "steamid": "76561199850205990",
+      "player_name": "M",
+      "total_windows": 426,
+      "suspicious_windows": 51,
+      "suspicious_ratio": 0.1197,
+      "mean_suspicion_score": 0.513,
+      "max_suspicion_score": 0.8759,
+      "status": "Flagged"
+    },
+    "76561199874855932": {
+      "steamid": "76561199874855932",
+      "player_name": "Golem",
+      "total_windows": 449,
+      "suspicious_windows": 203,
+      "suspicious_ratio": 0.4521,
+      "mean_suspicion_score": 0.6623,
+      "max_suspicion_score": 0.9996,
+      "status": "Flagged"
+    }
+  },
+  "evidence_windows": [
+    {
+      "steamid": "76561199874855932",
+      "player_name": "Golem",
+      "start_tick": 67274,
+      "end_tick": 67529,
+      "start_time": 1051.16,
+      "end_time": 1055.14,
+      "suspicion_score": 0.9996
+    },
+    {
+      "steamid": "76561199874855932",
+      "player_name": "Golem",
+      "start_tick": 60618,
+      "end_tick": 60873,
+      "start_time": 947.16,
+      "end_time": 951.14,
+      "suspicion_score": 0.9996
+    },
+    {
+      "steamid": "76561199874855932",
+      "player_name": "Golem",
+      "start_tick": 19012,
+      "end_tick": 19267,
+      "start_time": 297.06,
+      "end_time": 301.05,
+      "suspicion_score": 0.9994
+    },
+    {
+      "steamid": "76561199839390315",
+      "player_name": "au pays du cocaine",
+      "start_tick": 45906,
+      "end_tick": 46161,
+      "start_time": 717.28,
+      "end_time": 721.27,
+      "suspicion_score": 0.9994
+    },
+    {
+      "steamid": "76561199874855932",
+      "player_name": "Golem",
+      "start_tick": 49108,
+      "end_tick": 49363,
+      "start_time": 767.31,
+      "end_time": 771.3,
+      "suspicion_score": 0.9994
+    },
+    {
+      "steamid": "76561199839390315",
+      "player_name": "au pays du cocaine",
+      "start_tick": 15174,
+      "end_tick": 15429,
+      "start_time": 237.09,
+      "end_time": 241.08,
+      "suspicion_score": 0.9994
+    },
+    {
+      "steamid": "76561199839390315",
+      "player_name": "au pays du cocaine",
+      "start_tick": 15046,
+      "end_tick": 15301,
+      "start_time": 235.09,
+      "end_time": 239.08,
+      "suspicion_score": 0.9993
+    },
+    {
+      "steamid": "76561199874855932",
+      "player_name": "Golem",
+      "start_tick": 48980,
+      "end_tick": 49235,
+      "start_time": 765.31,
+      "end_time": 769.3,
+      "suspicion_score": 0.9993
+    },
+    {
+      "steamid": "76561199839390315",
+      "player_name": "au pays du cocaine",
+      "start_tick": 46418,
+      "end_tick": 46673,
+      "start_time": 725.28,
+      "end_time": 729.27,
+      "suspicion_score": 0.9992
+    },
+    {
+      "steamid": "76561199839390315",
+      "player_name": "au pays du cocaine",
+      "start_tick": 65059,
+      "end_tick": 65314,
+      "start_time": 1016.55,
+      "end_time": 1020.53,
+      "suspicion_score": 0.9991
+    },
+    {
+      "steamid": "76561199874855932",
+      "player_name": "Golem",
+      "start_tick": 73309,
+      "end_tick": 73564,
+      "start_time": 1145.45,
+      "end_time": 1149.44,
+      "suspicion_score": 0.9991
+    },
+    {
+      "steamid": "76561199874855932",
+      "player_name": "Golem",
+      "start_tick": 28100,
+      "end_tick": 28355,
+      "start_time": 439.06,
+      "end_time": 443.05,
+      "suspicion_score": 0.9991
+    },
+    {
+      "steamid": "76561199839390315",
+      "player_name": "au pays du cocaine",
+      "start_tick": 5121,
+      "end_tick": 5376,
+      "start_time": 80.02,
+      "end_time": 84.0,
+      "suspicion_score": 0.9991
+    },
+    {
+      "steamid": "76561199839390315",
+      "player_name": "au pays du cocaine",
+      "start_tick": 76472,
+      "end_tick": 76727,
+      "start_time": 1194.88,
+      "end_time": 1198.86,
+      "suspicion_score": 0.9991
+    },
+    {
+      "steamid": "76561199874855932",
+      "player_name": "Golem",
+      "start_tick": 21828,
+      "end_tick": 22083,
+      "start_time": 341.06,
+      "end_time": 345.05,
+      "suspicion_score": 0.9991
+    },
+    {
+      "steamid": "76561199839390315",
+      "player_name": "au pays du cocaine",
+      "start_tick": 46546,
+      "end_tick": 46801,
+      "start_time": 727.28,
+      "end_time": 731.27,
+      "suspicion_score": 0.999
+    },
+    {
+      "steamid": "76561199839390315",
+      "player_name": "au pays du cocaine",
+      "start_tick": 33874,
+      "end_tick": 34129,
+      "start_time": 529.28,
+      "end_time": 533.27,
+      "suspicion_score": 0.999
+    },
+    {
+      "steamid": "76561199839390315",
+      "player_name": "au pays du cocaine",
+      "start_tick": 35282,
+      "end_tick": 35537,
+      "start_time": 551.28,
+      "end_time": 555.27,
+      "suspicion_score": 0.999
+    },
+    {
+      "steamid": "76561199874855932",
+      "player_name": "Golem",
+      "start_tick": 24004,
+      "end_tick": 24259,
+      "start_time": 375.06,
+      "end_time": 379.05,
+      "suspicion_score": 0.9989
+    },
+    {
+      "steamid": "76561199839390315",
+      "player_name": "au pays du cocaine",
+      "start_tick": 9798,
+      "end_tick": 10053,
+      "start_time": 153.09,
+      "end_time": 157.08,
+      "suspicion_score": 0.9988
+    },
+    {
+      "steamid": "76561199839390315",
+      "player_name": "au pays du cocaine",
+      "start_tick": 46290,
+      "end_tick": 46545,
+      "start_time": 723.28,
+      "end_time": 727.27,
+      "suspicion_score": 0.9988
+    },
+    {
+      "steamid": "76561199839390315",
+      "player_name": "au pays du cocaine",
+      "start_tick": 67107,
+      "end_tick": 67362,
+      "start_time": 1048.55,
+      "end_time": 1052.53,
+      "suspicion_score": 0.9988
+    },
+    {
+      "steamid": "76561199874855932",
+      "player_name": "Golem",
+      "start_tick": 18500,
+      "end_tick": 18755,
+      "start_time": 289.06,
+      "end_time": 293.05,
+      "suspicion_score": 0.9988
+    },
+    {
+      "steamid": "76561199874855932",
+      "player_name": "Golem",
+      "start_tick": 74717,
+      "end_tick": 74972,
+      "start_time": 1167.45,
+      "end_time": 1171.44,
+      "suspicion_score": 0.9988
+    },
+    {
+      "steamid": "76561199839390315",
+      "player_name": "au pays du cocaine",
+      "start_tick": 28626,
+      "end_tick": 28881,
+      "start_time": 447.28,
+      "end_time": 451.27,
+      "suspicion_score": 0.9988
+    },
+    {
+      "steamid": "76561199874855932",
+      "player_name": "Golem",
+      "start_tick": 31940,
+      "end_tick": 32195,
+      "start_time": 499.06,
+      "end_time": 503.05,
+      "suspicion_score": 0.9988
+    },
+    {
+      "steamid": "76561199839390315",
+      "player_name": "au pays du cocaine",
+      "start_tick": 69795,
+      "end_tick": 70050,
+      "start_time": 1090.55,
+      "end_time": 1094.53,
+      "suspicion_score": 0.9988
+    },
+    {
+      "steamid": "76561199839390315",
+      "player_name": "au pays du cocaine",
+      "start_tick": 74040,
+      "end_tick": 74295,
+      "start_time": 1156.88,
+      "end_time": 1160.86,
+      "suspicion_score": 0.9988
+    },
+    {
+      "steamid": "76561199839390315",
+      "player_name": "au pays du cocaine",
+      "start_tick": 9926,
+      "end_tick": 10181,
+      "start_time": 155.09,
+      "end_time": 159.08,
+      "suspicion_score": 0.9987
+    },
+    {
+      "steamid": "76561199874855932",
+      "player_name": "Golem",
+      "start_tick": 43837,
+      "end_tick": 44092,
+      "start_time": 684.95,
+      "end_time": 688.94,
+      "suspicion_score": 0.9986
+    },
+    {
+      "steamid": "76561199874855932",
+      "player_name": "Golem",
+      "start_tick": 37188,
+      "end_tick": 37443,
+      "start_time": 581.06,
+      "end_time": 585.05,
+      "suspicion_score": 0.9986
+    },
+    {
+      "steamid": "76561199874855932",
+      "player_name": "Golem",
+      "start_tick": 21188,
+      "end_tick": 21443,
+      "start_time": 331.06,
+      "end_time": 335.05,
+      "suspicion_score": 0.9986
+    },
+    {
+      "steamid": "76561199874855932",
+      "player_name": "Golem",
+      "start_tick": 48852,
+      "end_tick": 49107,
+      "start_time": 763.31,
+      "end_time": 767.3,
+      "suspicion_score": 0.9986
+    },
+    {
+      "steamid": "76561199839390315",
+      "player_name": "au pays du cocaine",
+      "start_tick": 76728,
+      "end_tick": 76983,
+      "start_time": 1198.88,
+      "end_time": 1202.86,
+      "suspicion_score": 0.9986
+    },
+    {
+      "steamid": "76561199874855932",
+      "player_name": "Golem",
+      "start_tick": 73053,
+      "end_tick": 73308,
+      "start_time": 1141.45,
+      "end_time": 1145.44,
+      "suspicion_score": 0.9986
+    },
+    {
+      "steamid": "76561199874855932",
+      "player_name": "Golem",
+      "start_tick": 34756,
+      "end_tick": 35011,
+      "start_time": 543.06,
+      "end_time": 547.05,
+      "suspicion_score": 0.9985
+    },
+    {
+      "steamid": "76561199839390315",
+      "player_name": "au pays du cocaine",
+      "start_tick": 40658,
+      "end_tick": 40913,
+      "start_time": 635.28,
+      "end_time": 639.27,
+      "suspicion_score": 0.9984
+    },
+    {
+      "steamid": "76561199874855932",
+      "player_name": "Golem",
+      "start_tick": 62538,
+      "end_tick": 62793,
+      "start_time": 977.16,
+      "end_time": 981.14,
+      "suspicion_score": 0.9984
+    },
+    {
+      "steamid": "76561199874855932",
+      "player_name": "Golem",
+      "start_tick": 69322,
+      "end_tick": 69577,
+      "start_time": 1083.16,
+      "end_time": 1087.14,
+      "suspicion_score": 0.9984
+    },
+    {
+      "steamid": "76561199839390315",
+      "player_name": "au pays du cocaine",
+      "start_tick": 38354,
+      "end_tick": 38609,
+      "start_time": 599.28,
+      "end_time": 603.27,
+      "suspicion_score": 0.9983
+    },
+    {
+      "steamid": "76561199839390315",
+      "player_name": "au pays du cocaine",
+      "start_tick": 24006,
+      "end_tick": 24261,
+      "start_time": 375.09,
+      "end_time": 379.08,
+      "suspicion_score": 0.9983
+    },
+    {
+      "steamid": "76561199839390315",
+      "player_name": "au pays du cocaine",
+      "start_tick": 32722,
+      "end_tick": 32977,
+      "start_time": 511.28,
+      "end_time": 515.27,
+      "suspicion_score": 0.9983
+    },
+    {
+      "steamid": "76561199839390315",
+      "player_name": "au pays du cocaine",
+      "start_tick": 34258,
+      "end_tick": 34513,
+      "start_time": 535.28,
+      "end_time": 539.27,
+      "suspicion_score": 0.9983
+    },
+    {
+      "steamid": "76561199874855932",
+      "player_name": "Golem",
+      "start_tick": 73181,
+      "end_tick": 73436,
+      "start_time": 1143.45,
+      "end_time": 1147.44,
+      "suspicion_score": 0.9983
+    },
+    {
+      "steamid": "76561199839390315",
+      "player_name": "au pays du cocaine",
+      "start_tick": 32850,
+      "end_tick": 33105,
+      "start_time": 513.28,
+      "end_time": 517.27,
+      "suspicion_score": 0.9982
+    },
+    {
+      "steamid": "76561199839390315",
+      "player_name": "au pays du cocaine",
+      "start_tick": 10566,
+      "end_tick": 10821,
+      "start_time": 165.09,
+      "end_time": 169.08,
+      "suspicion_score": 0.9981
+    },
+    {
+      "steamid": "76561199874855932",
+      "player_name": "Golem",
+      "start_tick": 74589,
+      "end_tick": 74844,
+      "start_time": 1165.45,
+      "end_time": 1169.44,
+      "suspicion_score": 0.9981
+    },
+    {
+      "steamid": "76561199839390315",
+      "player_name": "au pays du cocaine",
+      "start_tick": 3073,
+      "end_tick": 3328,
+      "start_time": 48.02,
+      "end_time": 52.0,
+      "suspicion_score": 0.9981
+    },
+    {
+      "steamid": "76561199874855932",
+      "player_name": "Golem",
+      "start_tick": 64586,
+      "end_tick": 64841,
+      "start_time": 1009.16,
+      "end_time": 1013.14,
+      "suspicion_score": 0.9981
+    },
+    {
+      "steamid": "76561199874855932",
+      "player_name": "Golem",
+      "start_tick": 43581,
+      "end_tick": 43836,
+      "start_time": 680.95,
+      "end_time": 684.94,
+      "suspicion_score": 0.9981
+    }
+  ],
+  "forensic_proofs": {
+    "kill_breakdowns": {
+      "76561198148237179": {
+        "player_name": "Theus",
+        "total_kills": 1,
+        "headshot_count": 0,
+        "headshot_rate": 0.0,
+        "blind_kills": 0,
+        "smoke_kills": 0,
+        "wallbang_kills": 0,
+        "air_kills": 0,
+        "hitgroups": {
+          "Right Arm": 1
+        },
+        "weapons": {
+          "AWP": 1
+        }
+      },
+      "76561198217104720": {
+        "player_name": "PAY TO WIN",
+        "total_kills": 12,
+        "headshot_count": 6,
+        "headshot_rate": 0.5,
+        "blind_kills": 0,
+        "smoke_kills": 2,
+        "wallbang_kills": 0,
+        "air_kills": 0,
+        "hitgroups": {
+          "Head (Headshot)": 6,
+          "Upper Chest": 3,
+          "Stomach": 2,
+          "Right Leg": 1
+        },
+        "weapons": {
+          "AK47": 6,
+          "TEC9": 2,
+          "GLOCK": 1,
+          "USP_SILENCER": 1,
+          "SSG08": 1,
+          "DEAGLE": 1
+        }
+      },
+      "76561198283875403": {
+        "player_name": "Rex99",
+        "total_kills": 3,
+        "headshot_count": 1,
+        "headshot_rate": 0.333,
+        "blind_kills": 0,
+        "smoke_kills": 0,
+        "wallbang_kills": 0,
+        "air_kills": 0,
+        "hitgroups": {
+          "Head (Headshot)": 1,
+          "Unknown": 1,
+          "Upper Chest": 1
+        },
+        "weapons": {
+          "AWP": 1,
+          "INFERNO": 1,
+          "M4A1_SILENCER": 1
+        }
+      },
+      "76561198441456441": {
+        "player_name": "-kN\u30b8666",
+        "total_kills": 6,
+        "headshot_count": 3,
+        "headshot_rate": 0.5,
+        "blind_kills": 0,
+        "smoke_kills": 0,
+        "wallbang_kills": 1,
+        "air_kills": 0,
+        "hitgroups": {
+          "Head (Headshot)": 3,
+          "Unknown": 1,
+          "Upper Chest": 1,
+          "Stomach": 1
+        },
+        "weapons": {
+          "AK47": 2,
+          "KNIFE_CANIS": 1,
+          "DEAGLE": 1,
+          "TASER": 1,
+          "AWP": 1
+        }
+      },
+      "76561198805333600": {
+        "player_name": "pixy",
+        "total_kills": 19,
+        "headshot_count": 10,
+        "headshot_rate": 0.526,
+        "blind_kills": 0,
+        "smoke_kills": 2,
+        "wallbang_kills": 4,
+        "air_kills": 1,
+        "hitgroups": {
+          "Head (Headshot)": 10,
+          "Stomach": 4,
+          "Upper Chest": 1,
+          "Right Arm": 1,
+          "Left Leg": 1,
+          "Generic / Body": 1,
+          "Right Leg": 1
+        },
+        "weapons": {
+          "AWP": 8,
+          "GLOCK": 4,
+          "SSG08": 2,
+          "USP_SILENCER": 2,
+          "M4A1_SILENCER": 1,
+          "HEGRENADE": 1,
+          "AK47": 1
+        }
+      },
+      "76561199470458948": {
+        "player_name": "Churiset",
+        "total_kills": 6,
+        "headshot_count": 2,
+        "headshot_rate": 0.333,
+        "blind_kills": 0,
+        "smoke_kills": 0,
+        "wallbang_kills": 0,
+        "air_kills": 0,
+        "hitgroups": {
+          "Stomach": 2,
+          "Head (Headshot)": 2,
+          "Upper Chest": 1,
+          "Unknown": 1
+        },
+        "weapons": {
+          "AK47": 5,
+          "WORLD": 1
+        }
+      },
+      "76561199474366936": {
+        "player_name": "snow",
+        "total_kills": 6,
+        "headshot_count": 2,
+        "headshot_rate": 0.333,
+        "blind_kills": 0,
+        "smoke_kills": 0,
+        "wallbang_kills": 0,
+        "air_kills": 0,
+        "hitgroups": {
+          "Upper Chest": 2,
+          "Left Arm": 2,
+          "Head (Headshot)": 2
+        },
+        "weapons": {
+          "DEAGLE": 4,
+          "M4A1_SILENCER": 1,
+          "USP_SILENCER": 1
+        }
+      },
+      "76561199839390315": {
+        "player_name": "au pays du cocaine",
+        "total_kills": 21,
+        "headshot_count": 10,
+        "headshot_rate": 0.476,
+        "blind_kills": 0,
+        "smoke_kills": 0,
+        "wallbang_kills": 2,
+        "air_kills": 5,
+        "hitgroups": {
+          "Head (Headshot)": 10,
+          "Stomach": 5,
+          "Unknown": 4,
+          "Upper Chest": 1,
+          "Right Arm": 1
+        },
+        "weapons": {
+          "AWP": 6,
+          "SCAR20": 5,
+          "DEAGLE": 3,
+          "SSG08": 2,
+          "KNIFE_T": 2,
+          "WORLD": 2,
+          "GLOCK": 1
+        }
+      },
+      "76561199850205990": {
+        "player_name": "M",
+        "total_kills": 21,
+        "headshot_count": 19,
+        "headshot_rate": 0.905,
+        "blind_kills": 0,
+        "smoke_kills": 0,
+        "wallbang_kills": 7,
+        "air_kills": 2,
+        "hitgroups": {
+          "Head (Headshot)": 19,
+          "Stomach": 2
+        },
+        "weapons": {
+          "SSG08": 10,
+          "DEAGLE": 6,
+          "AWP": 4,
+          "M4A1_SILENCER": 1
+        }
+      },
+      "76561199874855932": {
+        "player_name": "Golem",
+        "total_kills": 20,
+        "headshot_count": 9,
+        "headshot_rate": 0.45,
+        "blind_kills": 0,
+        "smoke_kills": 1,
+        "wallbang_kills": 3,
+        "air_kills": 11,
+        "hitgroups": {
+          "Head (Headshot)": 9,
+          "Upper Chest": 6,
+          "Stomach": 3,
+          "Right Arm": 1,
+          "Unknown": 1
+        },
+        "weapons": {
+          "AWP": 10,
+          "DEAGLE": 3,
+          "P90": 3,
+          "SSG08": 2,
+          "INFERNO": 1,
+          "M4A1_SILENCER": 1
+        }
+      }
+    },
+    "proof_incidents": [
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "Golem",
+        "steamid": "76561199874855932",
+        "tick": 67274,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 100.0% anomaly probability across ticks 67274 - 67529.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "Golem",
+        "steamid": "76561199874855932",
+        "tick": 60618,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 100.0% anomaly probability across ticks 60618 - 60873.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "Golem",
+        "steamid": "76561199874855932",
+        "tick": 19012,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 19012 - 19267.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "au pays du cocaine",
+        "steamid": "76561199839390315",
+        "tick": 45906,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 45906 - 46161.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "Golem",
+        "steamid": "76561199874855932",
+        "tick": 49108,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 49108 - 49363.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "au pays du cocaine",
+        "steamid": "76561199839390315",
+        "tick": 15174,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 15174 - 15429.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "au pays du cocaine",
+        "steamid": "76561199839390315",
+        "tick": 15046,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 15046 - 15301.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "Golem",
+        "steamid": "76561199874855932",
+        "tick": 48980,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 48980 - 49235.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "au pays du cocaine",
+        "steamid": "76561199839390315",
+        "tick": 46418,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 46418 - 46673.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "au pays du cocaine",
+        "steamid": "76561199839390315",
+        "tick": 65059,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 65059 - 65314.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "Golem",
+        "steamid": "76561199874855932",
+        "tick": 73309,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 73309 - 73564.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "Golem",
+        "steamid": "76561199874855932",
+        "tick": 28100,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 28100 - 28355.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "au pays du cocaine",
+        "steamid": "76561199839390315",
+        "tick": 5121,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 5121 - 5376.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "au pays du cocaine",
+        "steamid": "76561199839390315",
+        "tick": 76472,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 76472 - 76727.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "Golem",
+        "steamid": "76561199874855932",
+        "tick": 21828,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 21828 - 22083.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "au pays du cocaine",
+        "steamid": "76561199839390315",
+        "tick": 46546,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 46546 - 46801.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "au pays du cocaine",
+        "steamid": "76561199839390315",
+        "tick": 33874,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 33874 - 34129.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "au pays du cocaine",
+        "steamid": "76561199839390315",
+        "tick": 35282,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 35282 - 35537.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "Golem",
+        "steamid": "76561199874855932",
+        "tick": 24004,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 24004 - 24259.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "au pays du cocaine",
+        "steamid": "76561199839390315",
+        "tick": 9798,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 9798 - 10053.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "au pays du cocaine",
+        "steamid": "76561199839390315",
+        "tick": 46290,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 46290 - 46545.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "au pays du cocaine",
+        "steamid": "76561199839390315",
+        "tick": 67107,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 67107 - 67362.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "Golem",
+        "steamid": "76561199874855932",
+        "tick": 18500,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 18500 - 18755.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "Golem",
+        "steamid": "76561199874855932",
+        "tick": 74717,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 74717 - 74972.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "au pays du cocaine",
+        "steamid": "76561199839390315",
+        "tick": 28626,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 28626 - 28881.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "Golem",
+        "steamid": "76561199874855932",
+        "tick": 31940,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 31940 - 32195.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "au pays du cocaine",
+        "steamid": "76561199839390315",
+        "tick": 69795,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 69795 - 70050.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "au pays du cocaine",
+        "steamid": "76561199839390315",
+        "tick": 74040,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 74040 - 74295.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "au pays du cocaine",
+        "steamid": "76561199839390315",
+        "tick": 9926,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 9926 - 10181.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "Golem",
+        "steamid": "76561199874855932",
+        "tick": 43837,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 99.9% anomaly probability across ticks 43837 - 44092.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      }
+    ]
+  },
+  "model_provenance": {
+    "model_name": "XGBoost",
+    "model_version": "2.4.1",
+    "calibrated_threshold": 0.61,
+    "target_max_fpr": 0.08,
+    "empirical_fpr": 0.0666,
+    "training_dataset": "CS2CD (Hugging Face) - 399,156 windows",
+    "split_method": "Stratified match-held-out split (prevents player/map leakage)",
+    "decision_support_only": true
+  },
+  "limitations": {
+    "uncertainty_notes": [
+      "Model scores reflect statistical anomaly likelihood compared to CS2CD reference distribution, NOT absolute proof of cheating.",
+      "High-DPI flick adjustments and exceptional pro aim can produce elevated jerk scores without cheat software.",
+      "Decision support only: Human referee review is strictly required before issuing competitive sanctions or bans."
+    ],
+    "missing_fields": [
+      "visibility_ts: Client viewport opponent entry timestamps are not logged in CS2 Source 2 demo streams.",
+      "crosshair_align_ts: Sub-tick raycast bone alignment intervals are unrecorded; reaction features are stubbed in current models.",
+      "client_input_hardware: Direct USB mouse driver packets are unavailable in server-side demo replays."
+    ],
+    "unsupported_cheat_categories": [
+      "Triggerbot: Cannot be authoritatively confirmed without client-side visibility timing data.",
+      "External Bot / AI Autopilot: Requires full navmesh / behavioral task trajectory annotations."
+    ],
+    "research_track_signals": [
+      "Wall Penetration / ESP: Contextual only. Geometry penetration events logged, but requires visual review of radar and audio callout context.",
+      "Through-Smoke Combat: Incidental smoke kills vs wireframe ESP cannot be separated with 100% confidence from server events alone."
+    ]
+  },
+  "analysis_id": "analysis_9927ffdea879",
+  "match_id": "analysis_9927ffdea879",
+  "completed_at": "2026-11-17T08:49:36.403198+00:00",
+  "demo_path": "C:\\Visual Studio Code\\Cheat-and-Bot-Detection-in-Competitive-FPS-Games\\data\\demos\\analysis_9927ffdea879_CSGO-7PJ4C-NdmRk-6t3aE-jGjSm-iEbJD.dem"
+}

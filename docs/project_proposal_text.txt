@@ -1,0 +1,776 @@
+=== PAGE 1 ===
+CHEAT & BOT DETECTION
+ FOR COMPETITIVE FPS
+ GAMES
+ A machine-learning-assisted detection and investigation platform for competitive
+ first-person shooter games
+ PROJECT PROPOSAL
+ Concept • Dataset strategy • Technical architecture
+User experience • Development roadmap • Evaluation plan
+Initial target
+Counter-Strike 2 (CS2)
+Proposed format
+Web application with a Python machine-learning backend
+Document status
+Initial end-to-end planning proposal
+THE CENTRAL IDEA
+Analyse match replays and, optionally, gameplay video to identify unusual player behaviour, explain
+why it was flagged, and give a reviewer useful evidence. The platform is a decision-support tool—not an
+automatic ban system.
+
+=== PAGE 2 ===
+CHEAT & BOT DETECTION  |  PROJECT PROPOSAL
+2
+Executive summary
+Competitive first-person shooter (FPS) games generate large amounts of gameplay information, but
+manually reviewing suspicious behaviour can be slow, inconsistent and difficult to scale. This proposal
+describes a web application that uses replay telemetry, optional video analysis and machine learning to
+help analysts identify players and moments that deserve closer inspection.
+The first version will focus on Counter-Strike 2. A user uploads a match demo file (.dem), optionally adds
+a matching gameplay video, chooses the analysis to run and receives a report containing player-level
+indicators, relevant timestamps, visualisations and explanations. The application will communicate
+uncertainty and will not treat a model score as proof of cheating.
+The recommended first milestone is deliberately narrow: parse CS2 demo files, extract player-level
+behavioural features, train and evaluate a baseline model, and present the results in a dashboard. Video
+analysis and specialised cheat categories should follow only after the replay-data pipeline is reliable.
+What the first release should demonstrate
+ • A working upload workflow for CS2 demo files, with optional matching video.
+ • A repeatable pipeline that converts replay data into structured, time-based player features.
+ • Baseline supervised and anomaly-detection models for suspicious-behaviour screening.
+ • A player-centric dashboard with review-priority indicators, evidence timelines and downloadable
+ reports.
+• An evaluation report covering precision, recall, false positives, data quality, generalisation and
+ limitations.
+Project positioning
+This is an academic anti-cheat research prototype and investigation aid. It does not replace official game
+anti-cheat systems, inspect protected game memory, interfere with live matches or automatically punish
+players. Its purpose is to organise evidence for human review.
+
+=== PAGE 3 ===
+CHEAT & BOT DETECTION  |  PROJECT PROPOSAL
+3
+Contents
+01 Project overview and objectives
+02 Problem statement and proposed solution
+03 Detection scope and limitations
+04 Input formats and data conversion
+05 Dataset strategy and sources
+06 Data preparation and feature engineering
+07 Machine-learning approach
+08 End-to-end system architecture
+09 User journey and application design
+10 Detection reports and explainability
+11 Development roadmap
+12 Evaluation, risks and responsible use
+13 Deliverables and project pitch
+14 References and useful links
+This is a proposed implementation plan. Dataset availability, schemas, licensing and model performance must be verified
+during the first development phase. No detection-performance results are claimed in this document.
+
+=== PAGE 4 ===
+CHEAT & BOT DETECTION  |  PROJECT PROPOSAL
+4
+01. Project overview and objectives
+A focused first release for CS2, designed so that the underlying pipeline can be extended later.
+The project is a match-analysis platform for competitive FPS games. It turns gameplay information into
+structured behavioural evidence that can help an analyst identify unusual patterns. The first target is
+CS2 because its replay ecosystem provides a practical way to extract player positions, view angles, ticks
+and selected events.
+The architecture should be modular enough to support other games in the future, but multi-game
+support is not part of the first release.
+Primary objectives
+ • Build a reliable CS2 demo ingestion and parsing pipeline.
+ • Create player-level and time-window-level numerical features from replay telemetry.
+ • Train an initial model to identify patterns associated with suspicious matches or players, while
+ respecting the limits of available labels.
+• Add anomaly detection to surface unusual patterns that may not be represented in labelled training
+ examples.
+• Present results in a web interface that explains what was flagged, when it occurred and which evidence
+ contributed.
+• Evaluate the system with match-separated test data and report false positives as carefully as detection
+ rates.
+Success criteria for the first version
+ • A user can upload a valid CS2 demo and receive a completed analysis report.
+ • The parser extracts and validates documented player, tick and event fields.
+ • Training and testing are split by match—not by randomly splitting rows from the same match.
+ • The report includes evidence and uncertainty rather than a bare accusation.
+ • The project demonstrates a repeatable pipeline from input file to player report.
+ 
+Intended users
+Primary users include tournament administrators, esports analysts, community league moderators and
+researchers studying player behaviour. The application is not intended to be an unquestioned
+automated judge of players.
+
+=== PAGE 5 ===
+CHEAT & BOT DETECTION  |  PROJECT PROPOSAL
+5
+02. Problem statement and proposed
+solution
+Problem statement
+A suspicious performance can be difficult to assess from a scoreboard alone. High accuracy, fast
+reactions or a strong match result do not prove cheating. Reviewers need context: how aim changed
+over time, where a player was looking, what happened around a shot, whether an opponent was visible,
+and whether similar patterns repeat across a match.
+Manual review can be slow and inconsistent. A useful analysis tool should organise relevant evidence,
+highlight unusual sequences and help reviewers focus their attention.
+Proposed solution
+The application processes match data in stages: validate the uploaded file, parse the replay, construct
+behavioural features, run one or more models, combine outputs into an explainable review assessment
+and create a report for a human reviewer. When video is supplied, the application can use it as a
+complementary visual source and attach clips or frames to selected events.
+Why a player-centric design?
+The main unit of investigation is the player, not the uploaded file. A match may contain ten players with
+different behaviour. The interface should organise findings by player, then by suspected behaviour and
+timestamp. A reviewer should be able to move from a match overview to one player's evidence without
+interpreting a large raw dataset.
+Core workflow
+ Stage
+What happens
+1. Upload
+User submits a CS2 .dem file and optionally a matching MP4.
+2. Validate
+Check file type, size, readability and whether required replay data exists.
+3. Parse
+Extract player ticks, positions, view angles and available events.
+4. Engineer
+Create player-round and rolling-window features.
+5. Analyse
+Run baseline supervised and/or anomaly-detection models.
+6. Review
+Show player indicators, timestamps, charts and limitations.
+7. Export
+Generate a report that a reviewer can annotate and retain.
+
+=== PAGE 6 ===
+CHEAT & BOT DETECTION  |  PROJECT PROPOSAL
+6
+03. Detection scope and limitations
+Different cheat behaviours require different evidence. The first release should avoid claiming that one model can reliably
+detect every category.
+Detection categories
+ Behaviour
+Potential indicators
+Data needs and limitations
+Aimbot-like aim
+assistance
+Abrupt or highly repeatable aim corrections;
+suspicious target alignment; aim
+trajectories unlike comparable players.
+Demo view-angle and event sequences can
+support analysis. Skilled play, recoil control and
+legitimate flicks can also look exceptional.
+Triggerbot-like firing
+Consistently firing immediately after target
+alignment or visibility; unusually narrow
+reaction-time patterns.
+Requires precise alignment of visibility, aim and
+fire events. Client-side input detail may be
+unavailable.
+Wallhack / information
+advantage
+Pre-aiming or tracking while an opponent is
+occluded; suspicious decisions correlated
+with hidden positions.
+Requires reliable visibility/occlusion context and
+map geometry. A demo may not prove what the
+client displayed to the player.
+Spinbot / abnormal
+rotation
+Extreme or repetitive view-angle changes
+and implausible rotation patterns.
+Potentially easier to flag from telemetry, but
+legitimate rapid camera movement and parser
+artefacts must be considered.
+Automated / scripted
+behaviour
+Highly repetitive movement or action
+sequences and repeated timing or path
+patterns.
+Define whether 'bot' means in-game AI, scripted
+accounts or cheat automation; these are different
+classes.
+Recommended release scope
+Version 1 should focus on general suspicious-behaviour screening and aim-related indicators.
+Triggerbot-like timing can be explored when the necessary event fields are available. Wallhack and bot
+detection should remain research tracks until the project has suitable labels and visibility/context data.
+Video-only analysis is possible but limited. From video, the system may estimate crosshair motion,
+visible targets and screen-space movement. It cannot reliably reconstruct hidden game state or prove
+that a player saw an enemy through a wall. Video analysis should be treated as a complementary mode,
+not as equivalent to full replay telemetry.
+Important distinction
+A suspicious indicator is not the same as a confirmed cheat. A strong player may naturally produce high
+accuracy, fast reactions or unusual aim movement. Findings must be contextual, explainable and
+reviewed by a person.
+
+=== PAGE 7 ===
+CHEAT & BOT DETECTION  |  PROJECT PROPOSAL
+7
+04. Input formats and data conversion
+The application should distinguish the original files from the structured data created during processing. A
+CS2 demo is not a video, and a video is not a substitute for replay telemetry.
+Input
+What it contains
+How the system uses it
+CS2 .dem replay
+(primary)
+Replay/game-state information, tick timeline
+and events exposed by a parser.
+Primary source for player-level telemetry and
+feature engineering.
+MP4 gameplay video
+(optional)
+Rendered frames showing the game from a
+particular viewpoint.
+Computer-vision estimates such as
+screen-space aim motion, visible objects and
+clip evidence.
+CSV / Parquet
+(intermediate)
+Tabular rows and columns containing
+extracted numeric or categorical values.
+Efficient storage, feature engineering, model
+training and analysis.
+What is a .dem file?
+A CS2 demo is a replay recording from which a compatible parser can recover selected game-state
+information and events. It is not an MP4 recording. Depending on the parser and available fields,
+extracted data may include player positions, view angles, tick identifiers, round information and events
+such as player deaths or weapon activity.
+How a user obtains a demo
+ • In CS2, open the match history / Watch area and download an available match replay when the game
+ provides it.
+• For a locally recorded session, use the game's supported demo-recording workflow where available;
+ confirm the exact console commands and save location for the current CS2 version.
+• Use only demos the user is permitted to access and process. Demo availability and compatibility can
+ change with game updates.
+Parsing and conversion
+A Python parser such as demoparser2 can be used to inspect demo ticks and events. The parser output
+should be validated against the installed library version and the fields actually present in the demo. Do
+not assume that every desired field—especially visibility or client input—is exposed.
+Illustrative extraction pattern
+The following is a conceptual example; verify the current API and field names against the installed demoparser2 version
+before use:
+from demoparser2 import DemoParser
+parser = DemoParser("mymatch.dem")
+ticks = parser.parse_ticks(["X", "Y", "Z", "pitch", "yaw"])
+print(ticks.head())
+Video processing
+An MP4 can be sampled into frames using OpenCV. A vision pipeline may estimate crosshair location,
+screen-space motion or visible entities. Those measurements are converted into numerical features too,
+but they remain estimates from pixels and depend on resolution, HUD layout, compression, viewpoint
+and occlusion.
+Aligning demo and video
+The video and demo must represent the same match and player viewpoint. The engineering work must
+align video timestamps with demo ticks. If reliable alignment cannot be established, the interface should
+keep the sources separate rather than implying that a video clip proves a telemetry event.
+
+=== PAGE 8 ===
+CHEAT & BOT DETECTION  |  PROJECT PROPOSAL
+8
+05. Dataset strategy and sources
+The central data challenge is not just obtaining gameplay records; it is obtaining trustworthy labels at the correct level.
+Three dataset roles
+The project should combine (1) cheat-associated data for supervised experiments, (2) ordinary
+gameplay telemetry/video for feature development and baseline behaviour, and (3) demos collected by
+the team for parser and integration testing. These sources are not interchangeable.
+Source
+Project link
+Potential use and caveats
+CS2CD —
+Counter-Strike 2 Cheat
+Detection
+https://huggingface.co/datasets/CS2C
+D/CS2CD.Counter-Strike_2_Cheat_Det
+ection
+Potential supervised research source. Dataset card
+reports 795 matches (478 without an identified cheater
+and 317 with at least one cheater), with substantial
+tick/event data. Verify current size, files and access
+before downloading.
+EgoCS-400K
+https://egocs-400k.github.io/ | https://
+github.com/EgoCS-400K/Dataset
+Large collection of first-person CS/CS2 videos aligned
+with actions, controls, camera motion, player states and
+events. Useful for visual/temporal feature work and
+normal-play patterns; not a cheat-labelled dataset.
+PureSkill CS2
+telemetry
+https://docs.pureskill.gg/ | https://doc
+s.pureskill.gg/datascience/adx/cs2/cs
+ds/
+Structured CS2 telemetry and events, useful for feature
+extraction and normal gameplay context. Review current
+access and non-commercial/research terms.
+Own CS2 demos
+Collected through permitted match
+replay or local recording workflows.
+Useful for parser validation, UI testing and end-to-end
+demonstrations. These files are not labelled as legitimate
+or cheating merely because the team collected them.
+Critical label caveats
+ • CS2CD's match-level labels must not be copied to every player in a match as if they were player-level
+ ground truth.
+• The dataset description indicates that the no-cheater group is not fully verified, while matches in the
+ cheater-present group contain at least one VAC-banned player. This is useful evidence, but it is not
+perfect ground truth for every player or every cheat category.
+• EgoCS-400K and PureSkill can help develop features and understand ordinary gameplay, but ordinary
+ gameplay data alone cannot train a reliable supervised cheat classifier.
+• Synthetic examples can test code paths and feature calculations, but must not be presented as real
+ cheater examples or as sufficient real-world validation.
+Recommended dataset audit
+ • Download a small sample first; inspect its directory structure, file formats, columns, tick rate and
+ approximate size.
+• Document what each label actually means, its source and whether it is match-level, player-level or
+ event-level.
+• Check licences, terms of use, redistribution restrictions and research/commercial permissions before
+ integrating data.
+• Record dataset version, source URL, retrieval date and preprocessing steps.
+ • Keep separate evaluation data from different matches and, where possible, different players/accounts.
+ 
+=== PAGE 9 ===
+CHEAT & BOT DETECTION  |  PROJECT PROPOSAL
+9
+06. Data preparation and feature
+engineering
+The model should not learn directly from raw demo files. The parser first converts the replay into
+structured tables. A feature pipeline then aggregates those records into meaningful player-round or
+rolling time-window examples.
+Recommended unit of analysis
+Use a player-round or rolling time window as the primary training example rather than treating every
+tick as an independent observation. Tick-level data is highly correlated; random row splitting can make
+test results look unrealistically strong.
+Feature groups
+ Feature group
+Example features
+Aim and view
+Yaw/pitch changes, angular velocity, acceleration, jerk, direction changes, aim stability and
+target-alignment estimates.
+Engagement timing
+Time from a reliably observed visibility event to shot, firing around alignment, inter-shot
+intervals and reaction-time distributions.
+Combat outcomes
+Shots, hits, headshots, damage, weapon and range context. These are context features, not
+proof of cheating.
+Movement
+Player positions, velocity, acceleration, path repetition, movement smoothness and unusual
+movement sequences.
+Context
+Weapon, map, round phase, team, distance, role, smoke/flash conditions and visibility context
+where genuinely available.
+Video-derived (optional)
+Estimated crosshair trajectory, screen-space target movement and frame-level visual context.
+Important engineering details
+ • Yaw wrap-around: angles near +180° and −180° are close together, not almost 360° apart. Use
+ circular-angle differences.
+• Time units: validate tick rate and convert tick differences to seconds consistently.
+ • Missing values: record why fields are missing; do not silently replace unavailable visibility or input data
+ with invented values.
+• Context: compare behaviour within appropriate weapon, map, range and round contexts where
+ possible.
+• Aggregation: calculate stable window summaries and preserve event timestamps so the dashboard can
+ show the underlying sequence.
+• Provenance: retain match ID, player identifier, demo/parser version and feature-pipeline version for
+ reproducibility.
+Avoiding data leakage
+Split by match and, where possible, by player/account. Keep all rows from one match in a single split. Fit
+imputers, scalers, feature selection, class balancing and thresholds using training/validation data only.
+The final test set should remain untouched until model selection is complete.
+
+=== PAGE 10 ===
+CHEAT & BOT DETECTION  |  PROJECT PROPOSAL
+10
+07. Machine-learning approach
+Start with interpretable tabular baselines. A complex temporal neural network is not automatically
+better, especially when labels are limited or noisy.
+Recommended model progression
+ Model
+Role in the project
+Random Forest
+Strong first supervised baseline for tabular features; handles non-linear interactions and
+provides useful feature-importance diagnostics.
+Gradient boosting (e.g.
+XGBoost)
+Candidate main supervised model when there are enough suitable labels. Tune carefully
+and compare against simpler baselines.
+Isolation Forest
+Unsupervised anomaly-detection baseline for unusual patterns. An anomaly is not
+necessarily cheating.
+LSTM / temporal Transformer
+Later research option for sequential behaviour, only after enough reliable labelled
+sequences and match-held-out evaluation data exist.
+Training strategy
+ • Define the prediction target before training: match-level suspiciousness, player-level review priority or
+ event/window-level anomaly are different tasks.
+• Begin with a transparent baseline and a small, documented feature set.
+ • Handle class imbalance using training-only methods and report class prevalence.
+ • Tune thresholds on validation data based on the cost of false positives, not just overall accuracy.
+ • Compare supervised predictions with anomaly scores without treating the two outputs as equivalent.
+ 
+Output semantics
+Unless the model has been properly calibrated and validated, do not call its output a probability that a
+player is cheating. Prefer terms such as review priority, risk indicator or anomaly score. Show the model
+version, threshold and supporting feature evidence.
+Explainability
+For each flagged window, show the most relevant contributing features and the underlying time range.
+Feature importance is an explanation of model behaviour, not proof of intent. The report should also
+show missing context and alternative explanations.
+
+=== PAGE 11 ===
+CHEAT & BOT DETECTION  |  PROJECT PROPOSAL
+11
+08. End-to-end system architecture
+The system can be built as a modular web application. The frontend manages uploads and review; the
+backend validates files and schedules processing; specialised workers parse demos and optionally
+analyse video; the ML layer produces review indicators; and the report service stores and presents
+results.
+Proposed components
+ Layer
+Suggested technology
+Responsibility
+Frontend
+React + Tailwind CSS
+Upload workflow, job status, match overview, player detail,
+charts, evidence viewer and report access.
+API backend
+Python + FastAPI
+Authentication, upload validation, job creation, result endpoints
+and report orchestration.
+Background
+processing
+Worker + queue
+Long-running parsing, feature extraction, video processing and
+inference without holding a browser request open.
+Demo parser
+demoparser2 (subject to
+compatibility testing)
+Extract tick-level player data and supported game events.
+Video pipeline
+(optional)
+OpenCV; object detection/tracking
+where justified
+Sample frames and estimate visual features; preserve
+uncertainty and source timestamps.
+Data/ML
+Pandas, NumPy, PyArrow,
+scikit-learn, XGBoost; PyTorch
+later
+Feature tables, model training, inference, evaluation and
+explainability.
+Storage
+PostgreSQL + file/object storage
+Store users, jobs, metadata, feature summaries, findings and
+report references.
+Processing pipeline
+Upload → file validation → job queue → demo parsing → feature extraction → model
+inference → evidence aggregation → database/report storage → dashboard.
+Design considerations
+ • Use background jobs for large demos and video files; return a job ID and expose progress/status
+ endpoints.
+• Keep original files separate from derived feature tables and generated reports.
+ • Apply upload-size limits, file-type checks, safe storage paths and access controls.
+ • Store parser and model versions with each result so reports can be reproduced.
+ • Use a local prototype stack first; introduce cloud storage or distributed workers only when the workload
+ requires them.
+
+=== PAGE 12 ===
+CHEAT & BOT DETECTION  |  PROJECT PROPOSAL
+12
+09. User journey and application design
+The interface should make the analysis understandable to a reviewer who does not want to inspect raw
+CSV files. It should present the match first, then the player, then the specific time window and evidence.
+Primary screens
+ Screen
+Key contents
+Dashboard
+Analysed matches, players reviewed, recent processing jobs and cases needing attention.
+New analysis
+Upload .dem file; optionally upload a matching MP4; select available analysis modules; show
+file requirements and privacy notice.
+Processing status
+Stages such as validation, parsing, feature extraction, inference and report generation, with
+clear failure messages.
+Match overview
+Player list ranked by review priority, with status, key indicators and a route into player details.
+Player detail
+Aim/movement charts, event summaries, model outputs, time ranges and relevant context.
+Evidence viewer
+Selected time window, linked events and optional aligned video clips/frames where alignment
+is verified.
+Review and export
+Reviewer notes, supported/unsupported/inconclusive status and PDF report export.
+Suggested upload interaction
+ • The .dem file is the required primary input for the MVP.
+ • The MP4 is optional and should be labelled as a complementary visual source.
+ • Explain that only a matching recording can be aligned with replay events.
+ • Show accepted formats, maximum file size and expected processing stages.
+ • Let users know when a requested analysis cannot run because required fields are unavailable.
+ 
+Finding states
+ • Flagged for review: one or more indicators crossed the configured review threshold.
+ • No significant anomaly found: the current analysis did not identify indicators above the threshold; this is
+ not proof of fair play.
+• Insufficient data: the replay or selected source did not contain enough usable information.
+ • Inconclusive: evidence is mixed or the analysis could not support a reliable interpretation.
+ 
+=== PAGE 13 ===
+CHEAT & BOT DETECTION  |  PROJECT PROPOSAL
+13
+10. Detection reports and explainability
+The report is the main product of the analysis. It should answer four questions: who was flagged, when
+did the behaviour occur, what measurable pattern caused the flag, and what limitations could affect the
+interpretation?
+Recommended report structure
+ Report section
+Information to include
+Match summary
+Match metadata, source file, parser version, processing date and overall analysis status.
+Player overview
+Player identifier, review-priority indicator, number of flagged windows and evidence
+completeness.
+Finding details
+Behavioural indicator, timestamp/tick range, relevant feature values and comparison context.
+Visualisations
+Aim/view-angle timeline, movement plot, event markers and optional aligned video frame/clip.
+Model explanation
+Model name/version, threshold, top contributing features and uncertainty notes.
+Reviewer assessment
+Supported, unsupported or inconclusive; reviewer notes and review timestamp.
+Limitations
+Missing fields, uncertain labels, alignment quality and warnings about interpretation.
+Evidence timeline
+A useful finding should link to a specific time range rather than merely stating that a player is suspicious.
+For example, a report could show a sequence of view-angle changes and firing events within a defined
+window, alongside the feature values and contextual information available to the parser.
+Human review loop
+Reviewers can mark a finding as supported, unsupported or inconclusive. Those decisions may help build
+a future annotation set, but should not automatically become training labels without a defined review
+protocol, multiple-reviewer checks where appropriate and documented quality control.
+Avoid misleading presentation
+ • Do not use a single red score as the only explanation.
+ • Do not label a player a cheater based solely on model output.
+ • Distinguish missing evidence from evidence of normal behaviour.
+ • Make it possible to inspect the data behind each displayed indicator.
+ 
+=== PAGE 14 ===
+CHEAT & BOT DETECTION  |  PROJECT PROPOSAL
+14
+11. Development roadmap
+Indicative six-to-eight-week plan for a small team already comfortable with Python and web development.
+Phase
+Work
+Output / milestone
+1. Research and
+data audit
+Inspect CS2CD sample schema and labels; review
+PureSkill/EgoCS access and terms; collect test demos.
+Dataset inventory, label-quality notes and
+sample files.
+2. Demo parser
+Install and test demoparser2; parse one demo; extract
+player ticks and events; validate fields.
+Repeatable .dem → CSV/Parquet
+extraction script.
+3. Feature
+engineering
+Create player-round/time-window features; handle
+missing data; define labels and match-separated splits.
+Versioned feature dataset and data
+dictionary.
+4. Baseline ML
+Train Random Forest/gradient-boosting and Isolation
+Forest baselines; evaluate false positives and
+generalisation.
+Saved baseline models and evaluation
+report.
+5. API and jobs
+Build upload/validation endpoints, background
+processing, status and result endpoints.
+Working backend pipeline.
+6. Frontend
+dashboard
+Build upload page, progress page, match overview and
+player detail view.
+Usable web application.
+7. Integration and
+QA
+Test unseen demos, malformed files, missing fields and
+different match contexts.
+End-to-end demonstration and test log.
+8. Optional video
+track
+Add video upload, frame sampling, visual tracking and
+timestamp-alignment experiments.
+Experimental video-analysis prototype.
+First three practical tasks
+ • Download a small CS2CD sample and inspect its schema, label definitions and file size before
+ attempting the full dataset.
+• Install demoparser2 and parse one locally recorded or downloaded CS2 demo. Save a small set of tick
+ and event tables.
+• Create a notebook that plots one player's yaw/pitch and position over time. Validate that the data is
+ meaningful before training.
+Do not start by building the entire dashboard or a deep learning model. The parser and data audit are
+the foundation. If the extracted fields or labels are unsuitable, the rest of the project will be built on
+unreliable assumptions.
+
+=== PAGE 15 ===
+CHEAT & BOT DETECTION  |  PROJECT PROPOSAL
+15
+12. Evaluation, risks and responsible use
+Evaluation plan
+ Metric / test
+What it tells us
+Precision
+Of the players/windows flagged, how many are supported by the chosen reference labels or
+expert review? Important for limiting false accusations.
+Recall
+Of labelled positive examples, how many does the system identify? Interpret in light of label
+quality.
+F1-score
+Combined summary of precision and recall; should not replace reviewing the confusion
+matrix.
+False-positive rate
+How often legitimate examples are flagged. Particularly important for a tool used to
+investigate real players.
+PR-AUC / ROC-AUC
+Ranking metrics where labels and class distribution make them meaningful.
+Match-held-out testing
+Tests generalisation to matches not used during training and helps prevent leakage.
+Calibration and threshold
+analysis
+Checks whether risk scores correspond to observed outcomes and supports sensible review
+thresholds.
+Main risks and mitigations
+ Risk
+Mitigation
+Weak or noisy cheat labels
+Document provenance; separate match-level from player-level labels; seek reviewed
+examples; report uncertainty.
+False positives against skilled
+players
+Compare within context; use conservative thresholds; show evidence; require human
+review.
+Data leakage
+Split by match/player where possible; keep preprocessing and threshold tuning inside
+training/validation.
+Incomplete demo information
+Document parser fields and missingness; avoid claiming visibility/input details not
+present.
+Overclaiming wallhack detection
+Treat as later research requiring visibility/occlusion context and reliable annotations.
+Dataset licensing and privacy
+Check current licence/terms; minimise personal identifiers; anonymise where practical;
+define retention/deletion rules.
+Large files and processing time
+Start with small samples; use background jobs; impose upload limits; store only
+required intermediate outputs.
+Responsible-use requirements
+ • The system must not automatically ban, report or publicly accuse a player.
+ • Every finding must be traceable to a match, time range, feature set and model version.
+ • Users must be told that a model score is a screening signal, not proof.
+ • Access to uploaded demos, videos and player identifiers should be restricted; retention should be
+ configurable.
+• Do not attempt to bypass game protections, inspect protected process memory or interfere with live
+ matches.
+• Use only data the project is permitted to access and process.
+ 
+=== PAGE 16 ===
+CHEAT & BOT DETECTION  |  PROJECT PROPOSAL
+16
+13. Deliverables and project pitch
+Expected project deliverables
+ • Project proposal and system requirements.
+ • Dataset inventory, data dictionary and label-quality assessment.
+ • Demo parser and reproducible feature-extraction pipeline.
+ • Cleaned feature dataset with documented provenance and splits.
+ • Baseline ML training scripts/notebooks, saved models and evaluation results.
+ • FastAPI backend and React dashboard.
+ • Sample match report and reviewer workflow.
+ • Testing documentation, limitations and final presentation/demo.
+ 
+Suggested team workstreams
+ Workstream
+Responsibilities
+Data and research
+Dataset discovery, licences, schema inspection, labels, annotation protocol and data
+documentation.
+ML and analytics
+Feature engineering, baseline models, anomaly detection, evaluation, explainability and
+threshold selection.
+Backend
+Upload validation, parsing jobs, API design, storage, database and report generation.
+Frontend
+Dashboard, upload workflow, match/player views, charts, evidence viewer and usability.
+Integration and testing
+End-to-end testing, test demos, failure handling, performance and final demonstration.
+Minimum viable product (MVP)
+The MVP is complete when a user can upload one CS2 demo, the backend parses it, the feature pipeline
+creates player-level records, a baseline model produces review indicators, and the dashboard presents a
+match overview plus player detail with timestamps and explanations. Video processing is not required
+for the MVP.
+Possible extensions
+ • Video upload and visual analysis with crosshair/object tracking.
+ • Temporal models such as LSTM or Transformer after suitable labelled sequences are available.
+ • Category-specific models for triggerbot-like timing and other behaviours.
+ • Better visibility/occlusion analysis for wallhack research.
+ • Support for additional games after the CS2 pipeline is stable.
+ • Reviewer feedback and carefully governed annotation workflows.
+ 
+One-minute project pitch
+Cheat & Bot Detection is an investigation platform for competitive FPS games. Starting with
+Counter-Strike 2, it analyses replay telemetry, extracts player-level behavioural features, and uses
+supervised and anomaly-detection models to highlight unusual patterns. An evidence-focused
+dashboard helps tournament staff and analysts decide which players and moments deserve closer
+review. Rather than making automatic accusations, the system presents explainable indicators for
+human assessment. The first version focuses on demo-based telemetry, with video analysis and
+additional cheat categories planned as extensions.
+
+=== PAGE 17 ===
+CHEAT & BOT DETECTION  |  PROJECT PROPOSAL
+17
+14. References and useful links
+Verify current dataset versions, access requirements and licence terms before downloading or redistributing any material.
+Resource
+Why it matters
+CS2CD — Counter-Strike 2 Cheat Detection
+https://huggingface.co/datasets/CS2CD/CS2CD.Counter-Strike_2_Ch
+eat_Detection
+Dataset card, match-level labels, data formats and research
+context.
+EgoCS-400K project page
+https://egocs-400k.github.io/
+Project overview and description of the aligned first-person
+video/telemetry dataset.
+EgoCS-400K dataset repository
+https://github.com/EgoCS-400K/Dataset
+Dataset release materials, annotations and repository
+documentation.
+PureSkill documentation
+https://docs.pureskill.gg/
+CS2 telemetry and data-science documentation; check
+current access and non-commercial terms.
+PureSkill CS2 dataset overview
+https://docs.pureskill.gg/datascience/adx/cs2/csds/
+Overview of available telemetry and event data.
+PureSkill coordinates and view angles
+https://docs.pureskill.gg/datascience/adx/cs2/csds/coordinates/
+Coordinate conventions and player view-angle fields.
+demoparser2 GitHub repository
+https://github.com/LaihoE/demoparser
+CS2 demo parser for Python and JavaScript; installation and
+parsing examples.
+ITU research record for CS2CD
+https://research.itu.dk/
+Research provenance and citation information; locate the
+CS2CD record through the institution's research portal.
+Dataset interpretation notes
+The CS2CD dataset card describes a group of matches without an identified cheater and a group with at
+least one cheater, but the former is not fully verified and the latter does not establish which player
+cheated or which category of cheat was used. Treat these labels as imperfect match-level signals unless
+stronger player-level annotations are independently available.
+EgoCS-400K describes synchronized first-person videos and replay-derived telemetry/actions. It is useful
+for visual and temporal feature work, but it is not a cheat-labelled dataset. PureSkill provides CS2
+telemetry and event documentation; review its current terms and access conditions before use.
+Final note
+This proposal is an initial planning document. The project name and first-release scope are defined here;
+detailed implementation choices should be confirmed after the dataset audit and the first successful CS2
+demo parse.

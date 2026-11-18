@@ -47,6 +47,16 @@ frontend/node_modules/
 frontend/dist/
 frontend/.vite/
 
+# Testing & Linting Caches
+.pytest_cache/
+.ruff_cache/
+
+# Demo Files & Sample Data
+*.dem
+sample_match.dem
+sample_demos/
+stitch_cs2_anti_cheat_dashboard/
+
 # Environment and secrets
 .env
 .env.local

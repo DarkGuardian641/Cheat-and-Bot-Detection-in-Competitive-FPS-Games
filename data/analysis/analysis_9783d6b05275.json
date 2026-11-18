@@ -1,0 +1,1114 @@
+{
+  "match_info": {
+    "demo_filename": "analysis_9783d6b05275_CSGO-4CKLL-FKTLp-pUcHE-nVFnE-sST8N.dem",
+    "map_name": "de_dust2",
+    "server_name": "Valve Counter-Strike 2 spain Server (srcds2034-mad1.196.186)",
+    "model_name": "XGBoost"
+  },
+  "status": "completed",
+  "threshold_used": 0.61,
+  "total_windows": 6244,
+  "suspicious_windows_count": 173,
+  "suspicious_players": [
+    {
+      "steamid": "76561198820974239",
+      "player_name": "Thor",
+      "total_windows": 707,
+      "suspicious_windows": 27,
+      "suspicious_ratio": 0.0382,
+      "mean_suspicion_score": 0.39,
+      "max_suspicion_score": 0.9161,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561199229254469",
+      "player_name": "FREAKYt0xic_",
+      "total_windows": 523,
+      "suspicious_windows": 20,
+      "suspicious_ratio": 0.0382,
+      "mean_suspicion_score": 0.4292,
+      "max_suspicion_score": 0.6942,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561198018420406",
+      "player_name": "Zaca",
+      "total_windows": 662,
+      "suspicious_windows": 25,
+      "suspicious_ratio": 0.0378,
+      "mean_suspicion_score": 0.3903,
+      "max_suspicion_score": 0.8602,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561199044553140",
+      "player_name": "Onyx",
+      "total_windows": 586,
+      "suspicious_windows": 20,
+      "suspicious_ratio": 0.0341,
+      "mean_suspicion_score": 0.3843,
+      "max_suspicion_score": 0.8898,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561198295779505",
+      "player_name": "\ud835\udcdd\ud835\udcee\ud835\udcf4\ud835\udcf8",
+      "total_windows": 561,
+      "suspicious_windows": 18,
+      "suspicious_ratio": 0.0321,
+      "mean_suspicion_score": 0.425,
+      "max_suspicion_score": 0.7142,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561198328075079",
+      "player_name": "FridX",
+      "total_windows": 646,
+      "suspicious_windows": 18,
+      "suspicious_ratio": 0.0279,
+      "mean_suspicion_score": 0.325,
+      "max_suspicion_score": 0.8348,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561198045960909",
+      "player_name": "AceTen",
+      "total_windows": 624,
+      "suspicious_windows": 12,
+      "suspicious_ratio": 0.0192,
+      "mean_suspicion_score": 0.3745,
+      "max_suspicion_score": 0.9311,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561198046012724",
+      "player_name": "Cardee",
+      "total_windows": 790,
+      "suspicious_windows": 14,
+      "suspicious_ratio": 0.0177,
+      "mean_suspicion_score": 0.3573,
+      "max_suspicion_score": 0.7761,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561197964713516",
+      "player_name": "kanubis",
+      "total_windows": 696,
+      "suspicious_windows": 12,
+      "suspicious_ratio": 0.0172,
+      "mean_suspicion_score": 0.3164,
+      "max_suspicion_score": 0.7636,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561199183687887",
+      "player_name": "Trriickss",
+      "total_windows": 449,
+      "suspicious_windows": 7,
+      "suspicious_ratio": 0.0156,
+      "mean_suspicion_score": 0.3661,
+      "max_suspicion_score": 0.7906,
+      "status": "Flagged"
+    }
+  ],
+  "player_summaries": {
+    "76561197964713516": {
+      "steamid": "76561197964713516",
+      "player_name": "kanubis",
+      "total_windows": 696,
+      "suspicious_windows": 12,
+      "suspicious_ratio": 0.0172,
+      "mean_suspicion_score": 0.3164,
+      "max_suspicion_score": 0.7636,
+      "status": "Flagged"
+    },
+    "76561198018420406": {
+      "steamid": "76561198018420406",
+      "player_name": "Zaca",
+      "total_windows": 662,
+      "suspicious_windows": 25,
+      "suspicious_ratio": 0.0378,
+      "mean_suspicion_score": 0.3903,
+      "max_suspicion_score": 0.8602,
+      "status": "Flagged"
+    },
+    "76561198045960909": {
+      "steamid": "76561198045960909",
+      "player_name": "AceTen",
+      "total_windows": 624,
+      "suspicious_windows": 12,
+      "suspicious_ratio": 0.0192,
+      "mean_suspicion_score": 0.3745,
+      "max_suspicion_score": 0.9311,
+      "status": "Flagged"
+    },
+    "76561198046012724": {
+      "steamid": "76561198046012724",
+      "player_name": "Cardee",
+      "total_windows": 790,
+      "suspicious_windows": 14,
+      "suspicious_ratio": 0.0177,
+      "mean_suspicion_score": 0.3573,
+      "max_suspicion_score": 0.7761,
+      "status": "Flagged"
+    },
+    "76561198295779505": {
+      "steamid": "76561198295779505",
+      "player_name": "\ud835\udcdd\ud835\udcee\ud835\udcf4\ud835\udcf8",
+      "total_windows": 561,
+      "suspicious_windows": 18,
+      "suspicious_ratio": 0.0321,
+      "mean_suspicion_score": 0.425,
+      "max_suspicion_score": 0.7142,
+      "status": "Flagged"
+    },
+    "76561198328075079": {
+      "steamid": "76561198328075079",
+      "player_name": "FridX",
+      "total_windows": 646,
+      "suspicious_windows": 18,
+      "suspicious_ratio": 0.0279,
+      "mean_suspicion_score": 0.325,
+      "max_suspicion_score": 0.8348,
+      "status": "Flagged"
+    },
+    "76561198820974239": {
+      "steamid": "76561198820974239",
+      "player_name": "Thor",
+      "total_windows": 707,
+      "suspicious_windows": 27,
+      "suspicious_ratio": 0.0382,
+      "mean_suspicion_score": 0.39,
+      "max_suspicion_score": 0.9161,
+      "status": "Flagged"
+    },
+    "76561199044553140": {
+      "steamid": "76561199044553140",
+      "player_name": "Onyx",
+      "total_windows": 586,
+      "suspicious_windows": 20,
+      "suspicious_ratio": 0.0341,
+      "mean_suspicion_score": 0.3843,
+      "max_suspicion_score": 0.8898,
+      "status": "Flagged"
+    },
+    "76561199183687887": {
+      "steamid": "76561199183687887",
+      "player_name": "Trriickss",
+      "total_windows": 449,
+      "suspicious_windows": 7,
+      "suspicious_ratio": 0.0156,
+      "mean_suspicion_score": 0.3661,
+      "max_suspicion_score": 0.7906,
+      "status": "Flagged"
+    },
+    "76561199229254469": {
+      "steamid": "76561199229254469",
+      "player_name": "FREAKYt0xic_",
+      "total_windows": 523,
+      "suspicious_windows": 20,
+      "suspicious_ratio": 0.0382,
+      "mean_suspicion_score": 0.4292,
+      "max_suspicion_score": 0.6942,
+      "status": "Flagged"
+    }
+  },
+  "evidence_windows": [
+    {
+      "steamid": "76561198045960909",
+      "player_name": "AceTen",
+      "start_tick": 37090,
+      "end_tick": 37345,
+      "start_time": 579.53,
+      "end_time": 583.52,
+      "suspicion_score": 0.9311
+    },
+    {
+      "steamid": "76561198820974239",
+      "player_name": "Thor",
+      "start_tick": 45707,
+      "end_tick": 45962,
+      "start_time": 714.17,
+      "end_time": 718.16,
+      "suspicion_score": 0.9161
+    },
+    {
+      "steamid": "76561198045960909",
+      "player_name": "AceTen",
+      "start_tick": 60476,
+      "end_tick": 60731,
+      "start_time": 944.94,
+      "end_time": 948.92,
+      "suspicion_score": 0.912
+    },
+    {
+      "steamid": "76561199044553140",
+      "player_name": "Onyx",
+      "start_tick": 51127,
+      "end_tick": 51382,
+      "start_time": 798.86,
+      "end_time": 802.84,
+      "suspicion_score": 0.8898
+    },
+    {
+      "steamid": "76561198820974239",
+      "player_name": "Thor",
+      "start_tick": 28171,
+      "end_tick": 28426,
+      "start_time": 440.17,
+      "end_time": 444.16,
+      "suspicion_score": 0.8788
+    },
+    {
+      "steamid": "76561198018420406",
+      "player_name": "Zaca",
+      "start_tick": 38740,
+      "end_tick": 38995,
+      "start_time": 605.31,
+      "end_time": 609.3,
+      "suspicion_score": 0.8602
+    },
+    {
+      "steamid": "76561199044553140",
+      "player_name": "Onyx",
+      "start_tick": 11528,
+      "end_tick": 11783,
+      "start_time": 180.12,
+      "end_time": 184.11,
+      "suspicion_score": 0.8594
+    },
+    {
+      "steamid": "76561198045960909",
+      "player_name": "AceTen",
+      "start_tick": 95215,
+      "end_tick": 95470,
+      "start_time": 1487.73,
+      "end_time": 1491.72,
+      "suspicion_score": 0.8569
+    },
+    {
+      "steamid": "76561198820974239",
+      "player_name": "Thor",
+      "start_tick": 55926,
+      "end_tick": 56181,
+      "start_time": 873.84,
+      "end_time": 877.83,
+      "suspicion_score": 0.8538
+    },
+    {
+      "steamid": "76561198018420406",
+      "player_name": "Zaca",
+      "start_tick": 36692,
+      "end_tick": 36947,
+      "start_time": 573.31,
+      "end_time": 577.3,
+      "suspicion_score": 0.8349
+    },
+    {
+      "steamid": "76561198328075079",
+      "player_name": "FridX",
+      "start_tick": 103426,
+      "end_tick": 103681,
+      "start_time": 1616.03,
+      "end_time": 1620.02,
+      "suspicion_score": 0.8348
+    },
+    {
+      "steamid": "76561198018420406",
+      "player_name": "Zaca",
+      "start_tick": 72364,
+      "end_tick": 72619,
+      "start_time": 1130.69,
+      "end_time": 1134.67,
+      "suspicion_score": 0.8308
+    },
+    {
+      "steamid": "76561198045960909",
+      "player_name": "AceTen",
+      "start_tick": 95343,
+      "end_tick": 95598,
+      "start_time": 1489.73,
+      "end_time": 1493.72,
+      "suspicion_score": 0.8288
+    },
+    {
+      "steamid": "76561198820974239",
+      "player_name": "Thor",
+      "start_tick": 14091,
+      "end_tick": 14346,
+      "start_time": 220.17,
+      "end_time": 224.16,
+      "suspicion_score": 0.8165
+    },
+    {
+      "steamid": "76561198820974239",
+      "player_name": "Thor",
+      "start_tick": 30475,
+      "end_tick": 30730,
+      "start_time": 476.17,
+      "end_time": 480.16,
+      "suspicion_score": 0.8133
+    },
+    {
+      "steamid": "76561198328075079",
+      "player_name": "FridX",
+      "start_tick": 43107,
+      "end_tick": 43362,
+      "start_time": 673.55,
+      "end_time": 677.53,
+      "suspicion_score": 0.8022
+    },
+    {
+      "steamid": "76561198820974239",
+      "player_name": "Thor",
+      "start_tick": 56054,
+      "end_tick": 56309,
+      "start_time": 875.84,
+      "end_time": 879.83,
+      "suspicion_score": 0.8002
+    },
+    {
+      "steamid": "76561198328075079",
+      "player_name": "FridX",
+      "start_tick": 14156,
+      "end_tick": 14411,
+      "start_time": 221.19,
+      "end_time": 225.17,
+      "suspicion_score": 0.7995
+    },
+    {
+      "steamid": "76561198018420406",
+      "player_name": "Zaca",
+      "start_tick": 53708,
+      "end_tick": 53963,
+      "start_time": 839.19,
+      "end_time": 843.17,
+      "suspicion_score": 0.7916
+    },
+    {
+      "steamid": "76561199183687887",
+      "player_name": "Trriickss",
+      "start_tick": 81705,
+      "end_tick": 81960,
+      "start_time": 1276.64,
+      "end_time": 1280.62,
+      "suspicion_score": 0.7906
+    },
+    {
+      "steamid": "76561199183687887",
+      "player_name": "Trriickss",
+      "start_tick": 18228,
+      "end_tick": 18483,
+      "start_time": 284.81,
+      "end_time": 288.8,
+      "suspicion_score": 0.7867
+    },
+    {
+      "steamid": "76561198018420406",
+      "player_name": "Zaca",
+      "start_tick": 31444,
+      "end_tick": 31699,
+      "start_time": 491.31,
+      "end_time": 495.3,
+      "suspicion_score": 0.7794
+    },
+    {
+      "steamid": "76561198018420406",
+      "player_name": "Zaca",
+      "start_tick": 27348,
+      "end_tick": 27603,
+      "start_time": 427.31,
+      "end_time": 431.3,
+      "suspicion_score": 0.7779
+    },
+    {
+      "steamid": "76561198046012724",
+      "player_name": "Cardee",
+      "start_tick": 17825,
+      "end_tick": 18080,
+      "start_time": 278.52,
+      "end_time": 282.5,
+      "suspicion_score": 0.7761
+    },
+    {
+      "steamid": "76561198328075079",
+      "player_name": "FridX",
+      "start_tick": 100226,
+      "end_tick": 100481,
+      "start_time": 1566.03,
+      "end_time": 1570.02,
+      "suspicion_score": 0.7723
+    },
+    {
+      "steamid": "76561197964713516",
+      "player_name": "kanubis",
+      "start_tick": 58190,
+      "end_tick": 58445,
+      "start_time": 909.22,
+      "end_time": 913.2,
+      "suspicion_score": 0.7636
+    },
+    {
+      "steamid": "76561198328075079",
+      "player_name": "FridX",
+      "start_tick": 44387,
+      "end_tick": 44642,
+      "start_time": 693.55,
+      "end_time": 697.53,
+      "suspicion_score": 0.7602
+    },
+    {
+      "steamid": "76561198018420406",
+      "player_name": "Zaca",
+      "start_tick": 33748,
+      "end_tick": 34003,
+      "start_time": 527.31,
+      "end_time": 531.3,
+      "suspicion_score": 0.7591
+    },
+    {
+      "steamid": "76561198018420406",
+      "player_name": "Zaca",
+      "start_tick": 67700,
+      "end_tick": 67955,
+      "start_time": 1057.81,
+      "end_time": 1061.8,
+      "suspicion_score": 0.7576
+    },
+    {
+      "steamid": "76561198046012724",
+      "player_name": "Cardee",
+      "start_tick": 17953,
+      "end_tick": 18208,
+      "start_time": 280.52,
+      "end_time": 284.5,
+      "suspicion_score": 0.7552
+    },
+    {
+      "steamid": "76561198018420406",
+      "player_name": "Zaca",
+      "start_tick": 31572,
+      "end_tick": 31827,
+      "start_time": 493.31,
+      "end_time": 497.3,
+      "suspicion_score": 0.7549
+    },
+    {
+      "steamid": "76561198820974239",
+      "player_name": "Thor",
+      "start_tick": 10763,
+      "end_tick": 11018,
+      "start_time": 168.17,
+      "end_time": 172.16,
+      "suspicion_score": 0.754
+    },
+    {
+      "steamid": "76561198820974239",
+      "player_name": "Thor",
+      "start_tick": 45579,
+      "end_tick": 45834,
+      "start_time": 712.17,
+      "end_time": 716.16,
+      "suspicion_score": 0.7526
+    },
+    {
+      "steamid": "76561198328075079",
+      "player_name": "FridX",
+      "start_tick": 34939,
+      "end_tick": 35194,
+      "start_time": 545.92,
+      "end_time": 549.91,
+      "suspicion_score": 0.7525
+    },
+    {
+      "steamid": "76561198820974239",
+      "player_name": "Thor",
+      "start_tick": 18955,
+      "end_tick": 19210,
+      "start_time": 296.17,
+      "end_time": 300.16,
+      "suspicion_score": 0.7489
+    },
+    {
+      "steamid": "76561199183687887",
+      "player_name": "Trriickss",
+      "start_tick": 94333,
+      "end_tick": 94588,
+      "start_time": 1473.95,
+      "end_time": 1477.94,
+      "suspicion_score": 0.7468
+    },
+    {
+      "steamid": "76561198018420406",
+      "player_name": "Zaca",
+      "start_tick": 27220,
+      "end_tick": 27475,
+      "start_time": 425.31,
+      "end_time": 429.3,
+      "suspicion_score": 0.7379
+    },
+    {
+      "steamid": "76561198046012724",
+      "player_name": "Cardee",
+      "start_tick": 95053,
+      "end_tick": 95308,
+      "start_time": 1485.2,
+      "end_time": 1489.19,
+      "suspicion_score": 0.7365
+    },
+    {
+      "steamid": "76561198328075079",
+      "player_name": "FridX",
+      "start_tick": 44003,
+      "end_tick": 44258,
+      "start_time": 687.55,
+      "end_time": 691.53,
+      "suspicion_score": 0.7342
+    },
+    {
+      "steamid": "76561198018420406",
+      "player_name": "Zaca",
+      "start_tick": 43348,
+      "end_tick": 43603,
+      "start_time": 677.31,
+      "end_time": 681.3,
+      "suspicion_score": 0.7318
+    },
+    {
+      "steamid": "76561199044553140",
+      "player_name": "Onyx",
+      "start_tick": 61431,
+      "end_tick": 61686,
+      "start_time": 959.86,
+      "end_time": 963.84,
+      "suspicion_score": 0.7316
+    },
+    {
+      "steamid": "76561199044553140",
+      "player_name": "Onyx",
+      "start_tick": 91139,
+      "end_tick": 91394,
+      "start_time": 1424.05,
+      "end_time": 1428.03,
+      "suspicion_score": 0.7276
+    },
+    {
+      "steamid": "76561199044553140",
+      "player_name": "Onyx",
+      "start_tick": 39493,
+      "end_tick": 39748,
+      "start_time": 617.08,
+      "end_time": 621.06,
+      "suspicion_score": 0.7272
+    },
+    {
+      "steamid": "76561198820974239",
+      "player_name": "Thor",
+      "start_tick": 88026,
+      "end_tick": 93270,
+      "start_time": 1375.41,
+      "end_time": 1457.34,
+      "suspicion_score": 0.7265
+    },
+    {
+      "steamid": "76561198046012724",
+      "player_name": "Cardee",
+      "start_tick": 109009,
+      "end_tick": 109264,
+      "start_time": 1703.27,
+      "end_time": 1707.25,
+      "suspicion_score": 0.7257
+    },
+    {
+      "steamid": "76561198820974239",
+      "player_name": "Thor",
+      "start_tick": 86746,
+      "end_tick": 87001,
+      "start_time": 1355.41,
+      "end_time": 1359.39,
+      "suspicion_score": 0.7249
+    },
+    {
+      "steamid": "76561198328075079",
+      "player_name": "FridX",
+      "start_tick": 106498,
+      "end_tick": 106753,
+      "start_time": 1664.03,
+      "end_time": 1668.02,
+      "suspicion_score": 0.7199
+    },
+    {
+      "steamid": "76561199044553140",
+      "player_name": "Onyx",
+      "start_tick": 51511,
+      "end_tick": 51766,
+      "start_time": 804.86,
+      "end_time": 808.84,
+      "suspicion_score": 0.7194
+    },
+    {
+      "steamid": "76561199044553140",
+      "player_name": "Onyx",
+      "start_tick": 51639,
+      "end_tick": 51894,
+      "start_time": 806.86,
+      "end_time": 810.84,
+      "suspicion_score": 0.7184
+    },
+    {
+      "steamid": "76561199044553140",
+      "player_name": "Onyx",
+      "start_tick": 51767,
+      "end_tick": 52022,
+      "start_time": 808.86,
+      "end_time": 812.84,
+      "suspicion_score": 0.7184
+    }
+  ],
+  "forensic_proofs": {
+    "kill_breakdowns": {
+      "76561197964713516": {
+        "player_name": "kanubis",
+        "total_kills": 16,
+        "headshot_count": 7,
+        "headshot_rate": 0.438,
+        "blind_kills": 0,
+        "smoke_kills": 1,
+        "wallbang_kills": 0,
+        "air_kills": 0,
+        "hitgroups": {
+          "Head (Headshot)": 7,
+          "Upper Chest": 3,
+          "Stomach": 2,
+          "Right Arm": 2,
+          "Left Arm": 1,
+          "Left Leg": 1
+        },
+        "weapons": {
+          "AK47": 9,
+          "M4A1_SILENCER": 2,
+          "GLOCK": 1,
+          "USP_SILENCER": 1,
+          "DEAGLE": 1,
+          "FIVESEVEN": 1,
+          "M4A1": 1
+        }
+      },
+      "76561198018420406": {
+        "player_name": "Zaca",
+        "total_kills": 17,
+        "headshot_count": 10,
+        "headshot_rate": 0.588,
+        "blind_kills": 1,
+        "smoke_kills": 2,
+        "wallbang_kills": 1,
+        "air_kills": 1,
+        "hitgroups": {
+          "Head (Headshot)": 10,
+          "Upper Chest": 5,
+          "Stomach": 2
+        },
+        "weapons": {
+          "AK47": 14,
+          "GLOCK": 1,
+          "MP7": 1,
+          "M4A1_SILENCER": 1
+        }
+      },
+      "76561198045960909": {
+        "player_name": "AceTen",
+        "total_kills": 6,
+        "headshot_count": 4,
+        "headshot_rate": 0.667,
+        "blind_kills": 0,
+        "smoke_kills": 0,
+        "wallbang_kills": 0,
+        "air_kills": 0,
+        "hitgroups": {
+          "Head (Headshot)": 4,
+          "Upper Chest": 1,
+          "Generic / Body": 1
+        },
+        "weapons": {
+          "MAC10": 3,
+          "HEGRENADE": 1,
+          "AK47": 1,
+          "USP_SILENCER": 1
+        }
+      },
+      "76561198046012724": {
+        "player_name": "Cardee",
+        "total_kills": 20,
+        "headshot_count": 10,
+        "headshot_rate": 0.5,
+        "blind_kills": 0,
+        "smoke_kills": 0,
+        "wallbang_kills": 2,
+        "air_kills": 0,
+        "hitgroups": {
+          "Head (Headshot)": 10,
+          "Upper Chest": 5,
+          "Stomach": 2,
+          "Left Leg": 1,
+          "Right Arm": 1,
+          "Unknown": 1
+        },
+        "weapons": {
+          "M4A1_SILENCER": 5,
+          "AK47": 5,
+          "P250": 3,
+          "USP_SILENCER": 2,
+          "SSG08": 1,
+          "GLOCK": 1,
+          "INFERNO": 1,
+          "AWP": 1,
+          "XM1014": 1
+        }
+      },
+      "76561198295779505": {
+        "player_name": "\ud835\udcdd\ud835\udcee\ud835\udcf4\ud835\udcf8",
+        "total_kills": 12,
+        "headshot_count": 6,
+        "headshot_rate": 0.5,
+        "blind_kills": 0,
+        "smoke_kills": 1,
+        "wallbang_kills": 0,
+        "air_kills": 0,
+        "hitgroups": {
+          "Head (Headshot)": 6,
+          "Upper Chest": 4,
+          "Unknown": 1,
+          "Right Arm": 1
+        },
+        "weapons": {
+          "AK47": 4,
+          "XM1014": 2,
+          "USP_SILENCER": 1,
+          "DEAGLE": 1,
+          "M4A1_SILENCER": 1,
+          "AWP": 1,
+          "MP7": 1,
+          "INFERNO": 1
+        }
+      },
+      "76561198328075079": {
+        "player_name": "FridX",
+        "total_kills": 10,
+        "headshot_count": 7,
+        "headshot_rate": 0.7,
+        "blind_kills": 0,
+        "smoke_kills": 0,
+        "wallbang_kills": 1,
+        "air_kills": 0,
+        "hitgroups": {
+          "Head (Headshot)": 7,
+          "Upper Chest": 1,
+          "Right Arm": 1,
+          "Stomach": 1
+        },
+        "weapons": {
+          "AWP": 3,
+          "AK47": 3,
+          "USP_SILENCER": 1,
+          "FAMAS": 1,
+          "MP7": 1,
+          "GLOCK": 1
+        }
+      },
+      "76561198820974239": {
+        "player_name": "Thor",
+        "total_kills": 17,
+        "headshot_count": 5,
+        "headshot_rate": 0.294,
+        "blind_kills": 0,
+        "smoke_kills": 3,
+        "wallbang_kills": 1,
+        "air_kills": 0,
+        "hitgroups": {
+          "Upper Chest": 10,
+          "Head (Headshot)": 5,
+          "Stomach": 2
+        },
+        "weapons": {
+          "AWP": 9,
+          "SSG08": 5,
+          "USP_SILENCER": 2,
+          "AK47": 1
+        }
+      },
+      "76561199044553140": {
+        "player_name": "Onyx",
+        "total_kills": 7,
+        "headshot_count": 4,
+        "headshot_rate": 0.571,
+        "blind_kills": 0,
+        "smoke_kills": 0,
+        "wallbang_kills": 0,
+        "air_kills": 0,
+        "hitgroups": {
+          "Head (Headshot)": 4,
+          "Unknown": 1,
+          "Upper Chest": 1,
+          "Stomach": 1
+        },
+        "weapons": {
+          "M4A1_SILENCER": 3,
+          "DEAGLE": 3,
+          "WORLD": 1
+        }
+      },
+      "76561199183687887": {
+        "player_name": "Trriickss",
+        "total_kills": 6,
+        "headshot_count": 4,
+        "headshot_rate": 0.667,
+        "blind_kills": 0,
+        "smoke_kills": 0,
+        "wallbang_kills": 0,
+        "air_kills": 0,
+        "hitgroups": {
+          "Head (Headshot)": 4,
+          "Stomach": 1,
+          "Generic / Body": 1
+        },
+        "weapons": {
+          "M4A1_SILENCER": 2,
+          "DEAGLE": 1,
+          "XM1014": 1,
+          "AK47": 1,
+          "HEGRENADE": 1
+        }
+      },
+      "76561199229254469": {
+        "player_name": "FREAKYt0xic_",
+        "total_kills": 8,
+        "headshot_count": 5,
+        "headshot_rate": 0.625,
+        "blind_kills": 0,
+        "smoke_kills": 0,
+        "wallbang_kills": 0,
+        "air_kills": 0,
+        "hitgroups": {
+          "Head (Headshot)": 5,
+          "Upper Chest": 2,
+          "Stomach": 1
+        },
+        "weapons": {
+          "AK47": 4,
+          "M4A1": 3,
+          "MAC10": 1
+        }
+      }
+    },
+    "proof_incidents": [
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "AceTen",
+        "steamid": "76561198045960909",
+        "tick": 37090,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 93.1% anomaly probability across ticks 37090 - 37345.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "Thor",
+        "steamid": "76561198820974239",
+        "tick": 45707,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 91.6% anomaly probability across ticks 45707 - 45962.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "AceTen",
+        "steamid": "76561198045960909",
+        "tick": 60476,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 91.2% anomaly probability across ticks 60476 - 60731.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "Onyx",
+        "steamid": "76561199044553140",
+        "tick": 51127,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 89.0% anomaly probability across ticks 51127 - 51382.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "Thor",
+        "steamid": "76561198820974239",
+        "tick": 28171,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 87.9% anomaly probability across ticks 28171 - 28426.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "Zaca",
+        "steamid": "76561198018420406",
+        "tick": 38740,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 86.0% anomaly probability across ticks 38740 - 38995.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "Onyx",
+        "steamid": "76561199044553140",
+        "tick": 11528,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 85.9% anomaly probability across ticks 11528 - 11783.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "AceTen",
+        "steamid": "76561198045960909",
+        "tick": 95215,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 85.7% anomaly probability across ticks 95215 - 95470.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "Thor",
+        "steamid": "76561198820974239",
+        "tick": 55926,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 85.4% anomaly probability across ticks 55926 - 56181.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Vision Occlusion Violation",
+        "cheat_type": "ESP / Blind Aimbot",
+        "severity": "High",
+        "player_name": "Zaca",
+        "steamid": "76561198018420406",
+        "tick": 58179,
+        "weapon": "AK47",
+        "victim": "Onyx",
+        "evidence": "Eliminated Onyx while fully flash-blinded.",
+        "reasoning": "Standard human players suffer complete visual deprivation during flashbang blinding. Firing with pinpoint accuracy while blind indicates crosshair locking or ESP radar assistance."
+      },
+      {
+        "category": "Volumetric Smoke Tracking",
+        "cheat_type": "ESP / Smoke Wireframe",
+        "severity": "Medium",
+        "player_name": "Zaca",
+        "steamid": "76561198018420406",
+        "tick": 50009,
+        "weapon": "AK47",
+        "victim": "FridX",
+        "evidence": "Eliminated FridX completely through active volumetric smoke.",
+        "reasoning": "Volumetric CS2 smoke blocks all visual raycasts. Consistent headshot eliminations through smoke clouds without radar spotted tags indicate wireframe or overlay cheats."
+      },
+      {
+        "category": "Volumetric Smoke Tracking",
+        "cheat_type": "ESP / Smoke Wireframe",
+        "severity": "Medium",
+        "player_name": "Zaca",
+        "steamid": "76561198018420406",
+        "tick": 73668,
+        "weapon": "AK47",
+        "victim": "\ud835\udcdd\ud835\udcee\ud835\udcf4\ud835\udcf8",
+        "evidence": "Eliminated \ud835\udcdd\ud835\udcee\ud835\udcf4\ud835\udcf8 completely through active volumetric smoke.",
+        "reasoning": "Volumetric CS2 smoke blocks all visual raycasts. Consistent headshot eliminations through smoke clouds without radar spotted tags indicate wireframe or overlay cheats."
+      },
+      {
+        "category": "Wall Penetration Anomaly",
+        "cheat_type": "Wallhack / Pre-Aim Tracking",
+        "severity": "Medium",
+        "player_name": "Cardee",
+        "steamid": "76561198046012724",
+        "tick": 2447,
+        "weapon": "P250",
+        "victim": "Trriickss",
+        "evidence": "Wallbang kill penetrating 1 layers of geometry (Headshot: True).",
+        "reasoning": "Repeated multi-layer surface penetration directly to head bone coordinates often correlates with player model tracking through non-visible brush geometry."
+      },
+      {
+        "category": "Wall Penetration Anomaly",
+        "cheat_type": "Wallhack / Pre-Aim Tracking",
+        "severity": "Medium",
+        "player_name": "FridX",
+        "steamid": "76561198328075079",
+        "tick": 47472,
+        "weapon": "AWP",
+        "victim": "Thor",
+        "evidence": "Wallbang kill penetrating 1 layers of geometry (Headshot: True).",
+        "reasoning": "Repeated multi-layer surface penetration directly to head bone coordinates often correlates with player model tracking through non-visible brush geometry."
+      },
+      {
+        "category": "Wall Penetration Anomaly",
+        "cheat_type": "Wallhack / Pre-Aim Tracking",
+        "severity": "Medium",
+        "player_name": "Thor",
+        "steamid": "76561198820974239",
+        "tick": 69073,
+        "weapon": "AWP",
+        "victim": "\ud835\udcdd\ud835\udcee\ud835\udcf4\ud835\udcf8",
+        "evidence": "Wallbang kill penetrating 1 layers of geometry (Headshot: True).",
+        "reasoning": "Repeated multi-layer surface penetration directly to head bone coordinates often correlates with player model tracking through non-visible brush geometry."
+      },
+      {
+        "category": "Volumetric Smoke Tracking",
+        "cheat_type": "ESP / Smoke Wireframe",
+        "severity": "Medium",
+        "player_name": "Thor",
+        "steamid": "76561198820974239",
+        "tick": 36552,
+        "weapon": "AWP",
+        "victim": "FREAKYt0xic_",
+        "evidence": "Eliminated FREAKYt0xic_ completely through active volumetric smoke.",
+        "reasoning": "Volumetric CS2 smoke blocks all visual raycasts. Consistent headshot eliminations through smoke clouds without radar spotted tags indicate wireframe or overlay cheats."
+      },
+      {
+        "category": "Volumetric Smoke Tracking",
+        "cheat_type": "ESP / Smoke Wireframe",
+        "severity": "Medium",
+        "player_name": "Thor",
+        "steamid": "76561198820974239",
+        "tick": 36880,
+        "weapon": "AWP",
+        "victim": "Trriickss",
+        "evidence": "Eliminated Trriickss completely through active volumetric smoke.",
+        "reasoning": "Volumetric CS2 smoke blocks all visual raycasts. Consistent headshot eliminations through smoke clouds without radar spotted tags indicate wireframe or overlay cheats."
+      }
+    ]
+  },
+  "analysis_id": "analysis_9783d6b05275",
+  "match_id": "analysis_9783d6b05275",
+  "completed_at": "2026-11-17T08:20:14.035433+00:00",
+  "demo_path": "C:\\Visual Studio Code\\Cheat-and-Bot-Detection-in-Competitive-FPS-Games\\data\\demos\\analysis_9783d6b05275_CSGO-4CKLL-FKTLp-pUcHE-nVFnE-sST8N.dem"
+}

@@ -1,51 +1,139 @@
-import React, { useEffect, useState } from 'react';
-import { api } from './services/api';
+import React, { useState, useEffect } from 'react';
+import { api, AnalysisListItem, MatchListItem, HealthInfo } from './services/api';
+import { Sidebar } from './components/Sidebar';
+import { Header } from './components/Header';
+import { DashboardPage } from './pages/DashboardPage';
+import { UploadDemoPage } from './pages/UploadDemoPage';
+import { MatchesPage } from './pages/MatchesPage';
+import { MatchAnalysisPage } from './pages/MatchAnalysisPage';
+import { PlayerDetailsPage } from './pages/PlayerDetailsPage';
+import { PlayersIndexPage } from './pages/PlayersIndexPage';
 
 export const App: React.FC = () => {
-  const [serverStatus, setServerStatus] = useState<string>('Connecting...');
+  const [currentTab, setCurrentTab] = useState<string>('dashboard');
+  const [selectedMatchId, setSelectedMatchId] = useState<string | null>(null);
+  const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null);
+
+  const [health, setHealth] = useState<HealthInfo | null>(null);
+  const [serverOnline, setServerOnline] = useState<boolean>(false);
+  const [analyses, setAnalyses] = useState<AnalysisListItem[]>([]);
+  const [matches, setMatches] = useState<MatchListItem[]>([]);
+  const [loadingData, setLoadingData] = useState<boolean>(true);
+
+  // Poll system health and match listings
+  const loadOverviewData = async () => {
+    try {
+      const [healthData, analysesData, matchesData] = await Promise.all([
+        api.getHealth().catch(() => null),
+        api.listAnalyses().catch(() => []),
+        api.listMatches().catch(() => []),
+      ]);
+
+      if (healthData) {
+        setHealth(healthData);
+        setServerOnline(true);
+      } else {
+        setServerOnline(false);
+      }
+
+      setAnalyses(analysesData);
+      setMatches(matchesData);
+    } catch {
+      setServerOnline(false);
+    } finally {
+      setLoadingData(false);
+    }
+  };
 
   useEffect(() => {
-    api.getHealth()
-      .then((data) => setServerStatus(`Connected (${data.app})`))
-      .catch(() => setServerStatus('Backend server unreachable'));
+    loadOverviewData();
+    const interval = setInterval(loadOverviewData, 8000);
+    return () => clearInterval(interval);
   }, []);
 
+  const handleTabChange = (tab: string) => {
+    setCurrentTab(tab);
+    setSelectedMatchId(null);
+    setSelectedPlayerId(null);
+  };
+
+  const handleSelectMatch = (matchId: string) => {
+    setSelectedMatchId(matchId);
+    setSelectedPlayerId(null);
+    setCurrentTab('match-detail');
+  };
+
+  const handleSelectPlayer = (playerId: string) => {
+    setSelectedPlayerId(playerId);
+    setCurrentTab('player-detail');
+  };
+
+  const handleUploadSuccess = (analysisId: string) => {
+    loadOverviewData();
+    handleSelectMatch(analysisId);
+  };
+
   return (
-    <div style={{ fontFamily: 'system-ui, sans-serif', padding: '2rem', maxWidth: '1000px', margin: '0 auto' }}>
-      <header style={{ borderBottom: '1px solid #e2e8f0', paddingBottom: '1rem', marginBottom: '2rem' }}>
-        <h1 style={{ margin: 0, color: '#1e293b' }}>FPS Anti-Cheat & Bot Detection</h1>
-        <p style={{ margin: '0.5rem 0 0', color: '#64748b' }}>
-          CS2 Telemetry Analysis & Evidence Dashboard
-        </p>
-        <span style={{
-          display: 'inline-block',
-          marginTop: '0.5rem',
-          padding: '0.25rem 0.75rem',
-          borderRadius: '9999px',
-          fontSize: '0.875rem',
-          backgroundColor: serverStatus.includes('Connected') ? '#dcfce7' : '#fee2e2',
-          color: serverStatus.includes('Connected') ? '#166534' : '#991b1b',
-        }}>
-          {serverStatus}
-        </span>
-      </header>
+    <div className="min-h-screen bg-surface-bg font-sans text-text-primary antialiased flex selection:bg-cs-orange/30 selection:text-cs-orange">
+      {/* Authentic Tactical CS2 Sidebar */}
+      <Sidebar
+        currentTab={currentTab}
+        onTabChange={handleTabChange}
+        serverOnline={serverOnline}
+        defaultModel={health?.default_model || 'XGBoost v2.4'}
+      />
 
-      <main>
-        <section style={{ background: '#f8fafc', padding: '1.5rem', borderRadius: '8px', marginBottom: '1.5rem' }}>
-          <h2 style={{ marginTop: 0, fontSize: '1.25rem', color: '#334155' }}>Upload CS2 Demo (.dem)</h2>
-          <p style={{ color: '#64748b', fontSize: '0.9rem' }}>
-            Upload a match replay file to extract tick telemetry, view angles, and detect suspicious aiming or bot movement.
-          </p>
-          <input type="file" accept=".dem" style={{ marginTop: '0.5rem' }} />
-        </section>
+      {/* Main Content Pane */}
+      <div className="pl-64 flex flex-col flex-1 min-h-screen">
+        <Header />
 
-        <section style={{ background: '#ffffff', border: '1px solid #e2e8f0', padding: '1.5rem', borderRadius: '8px' }}>
-          <h2 style={{ marginTop: 0, fontSize: '1.25rem', color: '#334155' }}>Match Overview</h2>
-          <p style={{ color: '#64748b', fontSize: '0.9rem' }}>
-            No match selected yet. Upload a .dem file to view player risk assessments, angular velocity graphs, and evidence timelines.
-          </p>
-        </section>
-      </main>
+        <main className="w-full pt-20 px-6 pb-8 flex-1 bg-surface-bg">
+          <div className="max-w-[1600px] mx-auto">
+            {currentTab === 'dashboard' && (
+              <DashboardPage
+                analyses={analyses}
+                matches={matches}
+                onSelectMatch={handleSelectMatch}
+                onNavigateTab={handleTabChange}
+                loading={loadingData}
+              />
+            )}
+
+            {currentTab === 'new-analysis' && (
+              <UploadDemoPage onUploadSuccess={handleUploadSuccess} />
+            )}
+
+            {currentTab === 'matches' && (
+              <MatchesPage
+                matches={matches}
+                onSelectMatch={handleSelectMatch}
+                onNavigateUpload={() => handleTabChange('new-analysis')}
+                loading={loadingData}
+              />
+            )}
+
+            {currentTab === 'players' && (
+              <PlayersIndexPage onSelectPlayer={handleSelectPlayer} />
+            )}
+
+            {currentTab === 'match-detail' && selectedMatchId && (
+              <MatchAnalysisPage
+                matchId={selectedMatchId}
+                onBack={() => handleTabChange('dashboard')}
+                onSelectPlayer={handleSelectPlayer}
+              />
+            )}
+
+            {currentTab === 'player-detail' && selectedPlayerId && (
+              <PlayerDetailsPage
+                playerId={selectedPlayerId}
+                onBack={() => handleTabChange('players')}
+                onSelectMatch={handleSelectMatch}
+              />
+            )}
+          </div>
+        </main>
+      </div>
     </div>
   );
 };
