@@ -1,14 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { api, PlayerDetail } from '../services/api';
+import {
+  displayFilename,
+  ErrorState,
+  Figures,
+  formatNumber,
+  formatPct,
+  Loading,
+  Mono,
+  PageHeader,
+  RatioBar,
+  SectionTitle,
+  VerdictBadge,
+} from '../components/ui';
 
 interface PlayerDetailsPageProps {
   playerId: string;
+  backLabel?: string;
   onBack: () => void;
   onSelectMatch: (matchId: string) => void;
 }
 
 export const PlayerDetailsPage: React.FC<PlayerDetailsPageProps> = ({
   playerId,
+  backLabel = 'Players',
   onBack,
   onSelectMatch,
 }) => {
@@ -17,166 +32,145 @@ export const PlayerDetailsPage: React.FC<PlayerDetailsPageProps> = ({
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchPlayer = async () => {
-      try {
-        setLoading(true);
-        const data = await api.getPlayerDetails(playerId);
-        setPlayer(data);
-      } catch (err: any) {
-        setError(err.message || 'Failed loading player data');
-      } finally {
-        setLoading(false);
-      }
+    let cancelled = false;
+    setLoading(true);
+    setError(null);
+    api
+      .getPlayerDetails(playerId)
+      .then((data) => !cancelled && setPlayer(data))
+      .catch((err: unknown) => !cancelled && setError(err instanceof Error ? err.message : 'Failed to load player.'))
+      .finally(() => !cancelled && setLoading(false));
+    return () => {
+      cancelled = true;
     };
-
-    fetchPlayer();
   }, [playerId]);
+
+  const back = { label: backLabel, onClick: onBack };
 
   if (loading) {
     return (
-      <div className="py-20 flex flex-col items-center justify-center gap-3">
-        <span className="material-symbols-outlined animate-spin text-4xl text-cs-orange">sync</span>
-        <p className="text-sm font-semibold text-text-primary">Loading Player Telemetry Profile...</p>
+      <div>
+        <PageHeader title="Player" back={back} />
+        <Loading label="Loading player" />
       </div>
     );
   }
 
   if (error || !player) {
     return (
-      <div className="py-20 flex flex-col items-center justify-center gap-3">
-        <span className="material-symbols-outlined text-4xl text-cs-red">person_off</span>
-        <p className="text-base font-bold text-text-primary">Player Not Found</p>
-        <p className="text-xs text-text-tertiary">{error}</p>
-        <button
-          onClick={onBack}
-          className="mt-2 px-4 py-2 bg-surface-card border border-border-subtle text-text-primary rounded-lg text-xs font-mono font-semibold"
-        >
-          Back
-        </button>
+      <div>
+        <PageHeader title="Player" back={back} />
+        <ErrorState
+          title="No record for this player"
+          message={`SteamID64 ${playerId} does not appear in any completed analysis.`}
+          action={
+            <button className="btn-secondary" onClick={onBack}>
+              Go back
+            </button>
+          }
+        />
       </div>
     );
   }
 
-  const isFlagged = player.overall_verdict === 'Flagged';
+  const flagged = player.overall_verdict === 'Flagged';
+  const matches = [...(player.matches || [])].sort((a, b) => b.suspicious_ratio - a.suspicious_ratio);
+  const peak = Math.max(0, ...matches.map((m) => m.max_suspicion_score || 0));
 
   return (
-    <div className="flex flex-col gap-6 w-full">
-      {/* Header and Breadcrumb */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div className="flex flex-col gap-1">
-          <div className="flex items-center gap-2">
-            <button
-              onClick={onBack}
-              className="flex items-center gap-1 text-cs-orange hover:text-cs-orange-hover text-xs font-mono font-semibold"
+    <div>
+      <PageHeader
+        title={
+          <span className="flex flex-wrap items-center gap-3">
+            {player.player_name}
+            <VerdictBadge verdict={player.overall_verdict} />
+          </span>
+        }
+        back={back}
+        description={
+          <span>
+            <Mono>{player.player_id}</Mono>
+            <span className="mx-2 text-ink-3">·</span>
+            <a
+              className="link"
+              href={`https://steamcommunity.com/profiles/${encodeURIComponent(player.player_id)}`}
+              target="_blank"
+              rel="noreferrer noopener"
             >
-              <span className="material-symbols-outlined text-sm">arrow_back</span>
-              <span>Player Registry</span>
-            </button>
-            <span className="text-border-subtle text-xs">/</span>
-            <span className="font-mono text-xs text-text-tertiary">{player.player_id}</span>
-          </div>
-          <h1 className="text-xl font-bold text-text-primary tracking-tight flex items-center gap-2">
-            <span>{player.player_name}</span>
-            <span
-              className={`px-2.5 py-0.5 rounded font-mono text-xs font-bold uppercase border ${
-                isFlagged
-                  ? 'bg-cs-red/20 text-cs-red border-cs-red/40'
-                  : 'bg-cs-green/10 text-cs-green border-cs-green/30'
-              }`}
-            >
-              {player.overall_verdict.toUpperCase()}
-            </span>
-          </h1>
-          <p className="text-xs text-text-tertiary font-mono">
-            SteamID64: {player.player_id} • Evaluated across {player.matches_analyzed} match demo(s)
-          </p>
-        </div>
-      </div>
+              Steam profile
+            </a>
+          </span>
+        }
+      />
 
-      {/* Aggregate Profile Metrics */}
-      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-surface-card p-5 rounded-xl border border-border-subtle shadow-md flex flex-col justify-between">
-          <span className="font-mono text-[11px] uppercase tracking-wider text-text-tertiary">
-            Matches Evaluated
-          </span>
-          <span className="text-3xl font-extrabold text-text-primary tracking-tight mt-1 font-mono">
-            {player.matches_analyzed}
-          </span>
-          <span className="text-xs font-mono text-text-tertiary mt-2">Historical replays</span>
-        </div>
+      <Figures
+        items={[
+          {
+            label: 'Flagged share',
+            value: formatPct(player.overall_suspicious_ratio),
+            tone: flagged ? 'flag' : 'clean',
+            note: 'Across all matches',
+          },
+          {
+            label: 'Flagged windows',
+            value: formatNumber(player.suspicious_windows),
+            note: `of ${formatNumber(player.total_windows)} scored`,
+          },
+          { label: 'Peak score', value: peak.toFixed(3), note: 'Highest single window' },
+          { label: 'Matches', value: formatNumber(player.matches_analyzed) },
+        ]}
+      />
 
-        <div className="bg-surface-card p-5 rounded-xl border border-border-subtle shadow-md flex flex-col justify-between">
-          <span className="font-mono text-[11px] uppercase tracking-wider text-text-tertiary">
-            Total Telemetry Windows
-          </span>
-          <span className="text-3xl font-extrabold text-text-primary tracking-tight mt-1 font-mono">
-            {player.total_windows}
-          </span>
-          <span className="text-xs font-mono text-text-tertiary mt-2">256-tick increments</span>
-        </div>
-
-        <div className="bg-surface-card p-5 rounded-xl border border-border-subtle shadow-md flex flex-col justify-between">
-          <span className="font-mono text-[11px] uppercase tracking-wider text-text-tertiary">
-            Flagged Windows
-          </span>
-          <span className={`text-3xl font-extrabold tracking-tight mt-1 font-mono ${isFlagged ? 'text-cs-red' : 'text-cs-green'}`}>
-            {player.suspicious_windows}
-          </span>
-          <span className="text-xs font-mono text-text-tertiary mt-2">ML threshold exceeded</span>
-        </div>
-
-        <div className="bg-surface-card p-5 rounded-xl border border-border-subtle shadow-md flex flex-col justify-between">
-          <span className="font-mono text-[11px] uppercase tracking-wider text-text-tertiary">
-            Overall Anomaly Ratio
-          </span>
-          <span className={`text-3xl font-extrabold tracking-tight mt-1 font-mono ${isFlagged ? 'text-cs-red' : 'text-cs-green'}`}>
-            {((player.overall_suspicious_ratio || 0) * 100).toFixed(1)}%
-          </span>
-          <span className="text-xs font-mono text-text-tertiary mt-2">Lifetime mean</span>
-        </div>
-      </section>
-
-      {/* Match History Table */}
-      <section className="bg-surface-card p-6 rounded-xl border border-border-subtle shadow-lg flex flex-col gap-4">
-        <h2 className="text-base font-bold text-text-primary">Match Replay History</h2>
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
-            <thead>
-              <tr className="border-b border-border-subtle text-text-tertiary font-mono uppercase text-[10px] bg-surface-panel/60">
-                <th className="py-2.5 px-3">Match ID</th>
-                <th className="py-2.5 px-3">Windows</th>
-                <th className="py-2.5 px-3">Suspect</th>
-                <th className="py-2.5 px-3">Anomaly Ratio</th>
-                <th className="py-2.5 px-3 text-right">Action</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y border-border-subtle font-mono">
-              {(player.matches || []).map((m) => (
-                <tr key={m.match_id} className="hover:bg-surface-card-hover transition-colors">
-                  <td className="py-3 px-3 text-text-primary font-semibold">{m.match_id.slice(0, 16)}...</td>
-                  <td className="py-3 px-3 text-text-secondary">{m.total_windows}</td>
-                  <td className="py-3 px-3">
-                    <span className={m.suspicious_windows > 0 ? 'text-cs-red font-bold' : 'text-text-primary'}>
-                      {m.suspicious_windows}
-                    </span>
-                  </td>
-                  <td className="py-3 px-3">
-                    <span className={m.suspicious_windows > 0 ? 'text-cs-red font-bold' : 'text-cs-green'}>
-                      {((m.suspicious_ratio || 0) * 100).toFixed(1)}%
-                    </span>
-                  </td>
-                  <td className="py-3 px-3 text-right">
-                    <button
-                      onClick={() => onSelectMatch(m.match_id)}
-                      className="text-cs-orange hover:text-cs-orange-hover font-bold hover:underline"
-                    >
-                      Inspect Match →
-                    </button>
-                  </td>
+      <section className="mt-10">
+        <SectionTitle title="Match history" meta="Highest flagged share first" />
+        <div className="panel overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead className="border-b border-line bg-sunken/50">
+                <tr>
+                  <th className="th">Demo</th>
+                  <th className="th">Verdict</th>
+                  <th className="th">Flagged share</th>
+                  <th className="th text-right">Flagged / total</th>
+                  <th className="th text-right">Mean</th>
+                  <th className="th text-right">Peak</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-line">
+                {matches.map((m) => (
+                  <tr
+                    key={m.match_id}
+                    onClick={() => onSelectMatch(m.match_id)}
+                    className="cursor-pointer transition-colors hover:bg-sunken/60"
+                  >
+                    <td className="td max-w-[340px]">
+                      <button
+                        className="block max-w-full truncate text-left font-medium text-ink hover:underline"
+                        title={displayFilename(m.demo_filename)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onSelectMatch(m.match_id);
+                        }}
+                      >
+                        {displayFilename(m.demo_filename)}
+                      </button>
+                    </td>
+                    <td className="td">
+                      <VerdictBadge verdict={m.verdict} />
+                    </td>
+                    <td className="td">
+                      <RatioBar value={m.suspicious_ratio} flagged={m.verdict === 'Flagged'} />
+                    </td>
+                    <td className="td num text-right text-ink-2">
+                      {m.suspicious_windows} / {m.total_windows}
+                    </td>
+                    <td className="td num text-right text-ink-2">{(m.mean_suspicion_score || 0).toFixed(3)}</td>
+                    <td className="td num text-right text-ink-2">{(m.max_suspicion_score || 0).toFixed(3)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
     </div>

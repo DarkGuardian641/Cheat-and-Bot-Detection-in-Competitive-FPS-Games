@@ -1,33 +1,191 @@
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('/fonts/ibm-plex-sans-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('/fonts/ibm-plex-sans-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/ibm-plex-mono-400-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/ibm-plex-mono-400-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/ibm-plex-mono-500-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/ibm-plex-mono-500-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  html, body {
-    margin: 0;
-    padding: 0;
-    background-color: #0b0f14;
-    color: #f0f4f8;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  :root {
+    /* Ground and surfaces: cool paper with a faint green cast */
+    --ground: 150 10% 96%;
+    --surface: 0 0% 100%;
+    --sunken: 150 9% 93.5%;
+    --line: 150 8% 87%;
+    --line-strong: 150 7% 78%;
+
+    /* Ink */
+    --ink: 160 14% 10%;
+    --ink-2: 160 6% 32%;
+    --ink-3: 160 5% 42%;
+
+    /* Shell rail: deep pine */
+    --rail: 162 24% 11%;
+    --rail-2: 162 18% 16%;
+    --rail-ink: 150 12% 92%;
+    --rail-ink-2: 155 8% 68%;
+
+    /* Action: CS ember orange, darkened to carry white text */
+    --ember: 16 76% 42%;
+    --ember-hover: 16 78% 36%;
+    --ember-soft: 18 80% 95%;
+
+    /* States */
+    --flag: 4 74% 41%;
+    --flag-soft: 4 80% 96%;
+    --clean: 148 46% 30%;
+    --clean-soft: 145 40% 94%;
+    --pending: 38 92% 30%;
+    --pending-soft: 44 90% 93%;
+
+    color-scheme: light;
+  }
+
+  html {
+    background: hsl(var(--ground));
+    color: hsl(var(--ink));
+    font-family: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
   body {
-    overscroll-behavior: none;
+    margin: 0;
+    min-height: 100vh;
+    background: hsl(var(--ground));
+    line-height: 1.5;
+  }
+
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: hsl(var(--ember) / 0.18);
+    color: hsl(var(--ink));
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--ember));
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  input {
+    caret-color: hsl(var(--ember));
+  }
+
+  a {
+    text-underline-offset: 3px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--line-strong));
+    border-radius: 999px;
+    border: 3px solid hsl(var(--ground));
   }
 }
 
-/* Tactical Thin Custom Scrollbars */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+@layer components {
+  .num {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .panel {
+    @apply rounded-lg border border-line bg-surface;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-md px-3.5 h-9 text-sm font-medium transition-colors duration-150 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn bg-ember text-white hover:bg-ember-hover;
+  }
+  .btn-secondary {
+    @apply btn border border-line-strong bg-surface text-ink hover:bg-sunken;
+  }
+  .btn-ghost {
+    @apply btn text-ink-2 hover:bg-sunken hover:text-ink;
+  }
+
+  .field {
+    @apply h-9 w-full rounded-md border border-line-strong bg-surface px-3 text-sm text-ink placeholder:text-ink-3 transition-colors focus:border-ember focus:outline-none focus:ring-2 focus:ring-ember/20;
+  }
+
+  .th {
+    @apply px-4 py-2.5 text-left text-xs font-medium text-ink-3 whitespace-nowrap;
+  }
+  .td {
+    @apply px-4 py-3 align-middle;
+  }
+
+  .link {
+    @apply font-medium text-ember hover:text-ember-hover hover:underline;
+  }
 }
-::-webkit-scrollbar-track {
-  background: #0b0f14;
-}
-::-webkit-scrollbar-thumb {
-  background: #222c3c;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #33435c;
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

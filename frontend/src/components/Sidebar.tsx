@@ -1,117 +1,78 @@
 import React from 'react';
+import { LayoutGrid, Upload, Film, Users } from 'lucide-react';
 
 interface SidebarProps {
   currentTab: string;
   onTabChange: (tab: string) => void;
-  serverOnline: boolean;
-  defaultModel: string;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({
-  currentTab,
-  onTabChange,
-  serverOnline,
-  defaultModel,
-}) => {
-  const navItems = [
-    { id: 'dashboard', label: 'Live Overview', icon: 'dashboard' },
-    { id: 'new-analysis', label: 'Ingest Demo (.dem)', icon: 'cloud_upload' },
-    { id: 'matches', label: 'Match Vault', icon: 'sports_esports' },
-    { id: 'players', label: 'Player Registry', icon: 'group' },
-  ];
+const navItems = [
+  { id: 'dashboard', label: 'Overview', short: 'Overview', icon: LayoutGrid, owns: [] as string[] },
+  { id: 'matches', label: 'Matches', short: 'Matches', icon: Film, owns: ['match-detail'] },
+  { id: 'players', label: 'Players', short: 'Players', icon: Users, owns: ['player-detail'] },
+  { id: 'new-analysis', label: 'Upload demo', short: 'Upload', icon: Upload, owns: [] as string[] },
+];
+
+const Mark: React.FC = () => (
+  <svg viewBox="0 0 32 32" className="h-7 w-7 shrink-0" aria-hidden>
+    <rect width="32" height="32" rx="7" fill="hsl(var(--rail-2))" />
+    <path
+      d="M16 6.5 8.5 9.3v6.1c0 4.6 3.2 8.6 7.5 10.1 4.3-1.5 7.5-5.5 7.5-10.1V9.3L16 6.5Z"
+      fill="none"
+      stroke="hsl(var(--rail-ink))"
+      strokeWidth="2"
+      strokeLinejoin="round"
+    />
+    <circle cx="16" cy="15.5" r="2.4" fill="hsl(var(--ember))" />
+  </svg>
+);
+
+export const Sidebar: React.FC<SidebarProps> = ({ currentTab, onTabChange }) => {
+  const isActive = (item: (typeof navItems)[number]) => currentTab === item.id || item.owns.includes(currentTab);
 
   return (
-    <aside className="fixed left-0 top-0 h-screen w-64 bg-surface-panel border-r border-border-subtle z-50 flex flex-col justify-between p-4">
-      <div className="flex flex-col gap-6">
-        {/* Platform Brand Header */}
-        <div className="flex items-center gap-3 px-1 py-1">
-          <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-cs-orange to-amber-600 flex items-center justify-center shadow-lg shadow-cs-orange/20 border border-cs-orange/30">
-            <span className="material-symbols-outlined text-black font-bold text-xl">shield</span>
-          </div>
-          <div className="flex flex-col">
-            <div className="flex items-center gap-1.5">
-              <span className="font-bold text-text-primary text-base tracking-tight font-sans">SENTINEL</span>
-              <span className="text-[10px] font-mono font-bold px-1.5 py-0.2 rounded bg-cs-orange/20 text-cs-orange border border-cs-orange/30">
-                CS2
-              </span>
-            </div>
-            <span className="font-mono text-[10px] text-text-tertiary tracking-wider uppercase">
-              Esports Integrity Engine
-            </span>
-          </div>
+    <aside className="z-30 bg-rail text-rail-ink lg:fixed lg:inset-y-0 lg:left-0 lg:flex lg:w-60 lg:flex-col">
+      <div className="flex items-center gap-2.5 px-5 pb-3 pt-4 lg:pb-6 lg:pt-6">
+        <Mark />
+        <div className="leading-tight">
+          <div className="font-semibold tracking-[-0.01em]">Sentinel</div>
+          <div className="text-xs text-rail-ink-2">CS2 match review</div>
         </div>
-
-        {/* Navigation Links */}
-        <nav className="flex flex-col gap-1.5">
-          <div className="px-2 pb-1 text-[10px] font-mono font-semibold uppercase tracking-wider text-text-tertiary">
-            Operations Console
-          </div>
-          {navItems.map((item) => {
-            const isActive = currentTab === item.id;
-            return (
-              <button
-                key={item.id}
-                onClick={() => onTabChange(item.id)}
-                className={`flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all text-left border ${
-                  isActive
-                    ? 'bg-cs-orange/15 text-cs-orange font-semibold border-cs-orange/30 shadow-sm'
-                    : 'text-text-secondary hover:text-text-primary hover:bg-surface-card border-transparent'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <span className="material-symbols-outlined text-lg">{item.icon}</span>
-                  <span>{item.label}</span>
-                </div>
-                {isActive && (
-                  <span className="w-1.5 h-1.5 rounded-full bg-cs-orange animate-pulse" />
-                )}
-              </button>
-            );
-          })}
-        </nav>
       </div>
 
-      {/* System Status Card */}
-      <div className="flex flex-col gap-2 p-3 rounded-xl bg-surface-card border border-border-subtle">
-        <div className="flex items-center justify-between">
-          <span className="font-mono text-[11px] text-text-tertiary uppercase tracking-wider flex items-center gap-1.5">
-            <span
-              className={`w-2 h-2 rounded-full ${
-                serverOnline
-                  ? 'bg-cs-green shadow-[0_0_8px_rgba(16,185,129,0.5)]'
-                  : 'bg-cs-red shadow-[0_0_8px_rgba(239,68,68,0.5)]'
+      <nav
+        aria-label="Primary"
+        className="grid grid-cols-4 gap-1 px-2 pb-2 lg:flex lg:flex-1 lg:flex-col lg:px-3 lg:pb-0"
+      >
+        {navItems.map((item) => {
+          const active = isActive(item);
+          const Icon = item.icon;
+          return (
+            <button
+              key={item.id}
+              onClick={() => onTabChange(item.id)}
+              aria-current={active ? 'page' : undefined}
+              className={`flex h-9 min-w-0 items-center justify-center gap-2 rounded-md px-2 text-sm transition-colors lg:justify-start lg:gap-2.5 lg:px-3 ${
+                active
+                  ? 'bg-rail-2 font-medium text-rail-ink'
+                  : 'text-rail-ink-2 hover:bg-rail-2/60 hover:text-rail-ink'
               }`}
-            />
-            Telemetry Node
+            >
+              <Icon size={16} strokeWidth={1.8} className={`hidden shrink-0 sm:block ${active ? 'text-[#f08a5d]' : ''}`} />
+              <span className="truncate lg:hidden">{item.short}</span>
+              <span className="hidden lg:inline">{item.label}</span>
+            </button>
+          );
+        })}
+      </nav>
+
+      <div className="group hidden border-t border-rail-2 px-5 py-5 lg:block">
+        <p className="text-xs text-rail-ink-2">Designed by</p>
+        <p className="mt-1 text-[15px] font-medium tracking-[-0.01em] text-rail-ink">
+          <span className="bg-[linear-gradient(hsl(var(--ember)),hsl(var(--ember)))] bg-[length:1.25rem_2px] bg-left-bottom bg-no-repeat pb-1 transition-[background-size] duration-500 ease-out group-hover:bg-[length:100%_2px]">
+            Atharva Baikar
           </span>
-          <span
-            className={`font-mono text-[10px] font-semibold px-1.5 py-0.5 rounded ${
-              serverOnline
-                ? 'bg-cs-green/10 text-cs-green border border-cs-green/20'
-                : 'bg-cs-red/10 text-cs-red border border-cs-red/20'
-            }`}
-          >
-            {serverOnline ? 'ONLINE' : 'OFFLINE'}
-          </span>
-        </div>
-        <div className="flex flex-col gap-1.5 font-mono text-[11px] text-text-tertiary pt-2 border-t border-border-subtle">
-          <div className="flex items-center justify-between">
-            <span className="flex items-center gap-1 text-text-secondary">
-              <span className="material-symbols-outlined text-xs text-cs-green">speed</span>
-              Pipeline
-            </span>
-            <span className="text-text-primary font-semibold">Sub-tick v2.4</span>
-          </div>
-          <div className="flex items-center justify-between">
-            <span className="flex items-center gap-1 text-text-secondary">
-              <span className="material-symbols-outlined text-xs text-cs-orange">memory</span>
-              Classifier
-            </span>
-            <span className="truncate max-w-[100px] text-text-primary" title={defaultModel}>
-              {defaultModel || 'XGBoost'}
-            </span>
-          </div>
-        </div>
+        </p>
       </div>
     </aside>
   );

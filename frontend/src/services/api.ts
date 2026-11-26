@@ -193,19 +193,19 @@ export const api = {
   },
 
   getAnalysisStatus: async (id: string): Promise<AnalysisStatus> => {
-    const res = await fetch(`${BASE_URL}/analyses/${id}`);
+    const res = await fetch(`${BASE_URL}/analyses/${encodeURIComponent(id)}`);
     if (!res.ok) throw new Error(`Failed to get status for ${id}: ${res.statusText}`);
     return res.json();
   },
 
   getAnalysisResults: async (id: string): Promise<MatchAnalysisResults> => {
-    const res = await fetch(`${BASE_URL}/analyses/${id}/results`);
+    const res = await fetch(`${BASE_URL}/analyses/${encodeURIComponent(id)}/results`);
     if (!res.ok) throw new Error(`Failed to get results for ${id}: ${res.statusText}`);
     return res.json();
   },
 
   getPlayerDetails: async (playerId: string): Promise<PlayerDetail> => {
-    const res = await fetch(`${BASE_URL}/players/${playerId}`);
+    const res = await fetch(`${BASE_URL}/players/${encodeURIComponent(playerId)}`);
     if (!res.ok) throw new Error(`Failed to get player ${playerId}: ${res.statusText}`);
     return res.json();
   },
@@ -216,17 +216,38 @@ export const api = {
     return res.json();
   },
 
-  uploadDemo: async (file: File): Promise<{ analysis_id: string; status: string; filename: string; message: string }> => {
-    const formData = new FormData();
-    formData.append('file', file);
-    const res = await fetch(`${BASE_URL}/analyses/upload`, {
-      method: 'POST',
-      body: formData,
+  /**
+   * Upload a .dem file. Uses XHR (not fetch) so callers can show real
+   * transfer progress for large demos via `onProgress` (0 to 1).
+   */
+  uploadDemo: (
+    file: File,
+    onProgress?: (fraction: number) => void,
+  ): Promise<{ analysis_id: string; status: string; filename: string; message: string }> => {
+    return new Promise((resolve, reject) => {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', `${BASE_URL}/analyses/upload`);
+      xhr.responseType = 'json';
+
+      if (onProgress) {
+        xhr.upload.onprogress = (e) => {
+          if (e.lengthComputable) onProgress(e.loaded / e.total);
+        };
+      }
+
+      xhr.onload = () => {
+        const body = xhr.response;
+        if (xhr.status >= 200 && xhr.status < 300) {
+          resolve(body);
+        } else {
+          reject(new Error(body?.detail || xhr.statusText || 'Upload failed'));
+        }
+      };
+      xhr.onerror = () => reject(new Error('Could not reach the backend. Is it running on port 8000?'));
+      xhr.send(formData);
     });
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({ detail: res.statusText }));
-      throw new Error(err.detail || 'Upload failed');
-    }
-    return res.json();
   },
 };
