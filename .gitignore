@@ -67,4 +67,11 @@ stitch_cs2_anti_cheat_dashboard/
 Thumbs.db
 
 # Docs
+crazy_demos/
+crazy_demos/*
 docs/
+
+*.parquet
+data/demos/
+data/analysis/
+data/processed/

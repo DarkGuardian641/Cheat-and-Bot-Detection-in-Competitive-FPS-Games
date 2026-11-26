@@ -4,7 +4,7 @@
 
 ## What it is
 
-A local review desk for Counter-Strike 2 match integrity. An operator uploads a `.dem` replay; the backend parses it, scores every player in 256-tick windows with a calibrated XGBoost model, and stores a report. The UI lets the operator find which players crossed the threshold, see when in the match it happened, and read the supporting evidence.
+A local review desk for Counter-Strike 2 match integrity. An operator uploads a `.dem` replay or `.parquet` pre-extracted match dataset; the backend parses/loads it, scores every player in 256-tick windows with a calibrated XGBoost model, and stores a report. The UI lets the operator find which players crossed the threshold, see when in the match it happened, and read the supporting evidence.
 
 ## Who uses it
 

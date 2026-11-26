@@ -44,7 +44,20 @@ def test_upload_invalid_extension():
     fake_txt = io.BytesIO(b"Not a real demo file")
     res = client.post("/analyses/upload", files={"file": ("match.txt", fake_txt, "text/plain")})
     assert res.status_code == 400
-    assert "Only Counter-Strike 2 (.dem) replay files are supported" in res.json()["detail"]
+    assert "Only Counter-Strike 2 (.dem) replay files or (.parquet) dataset files are supported" in res.json()["detail"]
+
+
+def test_upload_parquet_valid():
+    import pandas as pd
+    p_df = pd.read_parquet("crazy_demos/c_match_01.parquet")
+    bio = io.BytesIO()
+    p_df.to_parquet(bio, index=False)
+    bio.seek(0)
+    res = client.post("/analyses/upload", files={"file": ("test_match.parquet", bio, "application/octet-stream")})
+    assert res.status_code == 202
+    data = res.json()
+    assert "analysis_id" in data
+    assert data["status"] == "pending"
 
 
 def test_upload_empty_file():

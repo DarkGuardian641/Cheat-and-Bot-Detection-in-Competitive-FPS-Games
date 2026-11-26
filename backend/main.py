@@ -12,7 +12,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from backend.config import settings
 from backend.parser import validate_demo_file
-from backend.pipeline import analyze_demo_file
+from backend.pipeline import analyze_demo_file, analyze_parquet_file
 from backend.schemas import (
     AnalysisListItem,
     AnalysisResultsResponse,
@@ -60,7 +60,7 @@ def _sanitize_filename(filename: str) -> str:
     base_name = Path(filename).name
     # Remove any characters other than alphanumeric, dots, underscores, dashes
     sanitized = re.sub(r"[^a-zA-Z0-9._-]", "_", base_name)
-    return sanitized or "unnamed.dem"
+    return sanitized or "unnamed_match"
 
 
 def _get_analysis_path(analysis_id: str) -> Path:
@@ -109,32 +109,40 @@ def _save_analysis_data(analysis_id: str, data: dict[str, Any]) -> None:
         temporary_path.unlink(missing_ok=True)
 
 
-def run_demo_pipeline_task(demo_path: Path, analysis_id: str) -> None:
+def run_demo_pipeline_task(file_path: Path, analysis_id: str) -> None:
     """
     Background worker:
-    Executes parsing and ML inference completely outside the HTTP request lifecycle.
+    Executes parsing / feature inference completely outside the HTTP request lifecycle.
+    Supports both native .dem replay binary files and .parquet pre-extracted dataset files.
     Updates job status: pending -> processing -> completed / failed.
     """
-    logger.info("Background task started: analysis_id=%s, file=%s", analysis_id, demo_path.name)
+    logger.info("Background task started: analysis_id=%s, file=%s", analysis_id, file_path.name)
     try:
         current_data = _read_analysis_data(analysis_id)
         current_data["status"] = "processing"
         current_data["updated_at"] = datetime.now(UTC).isoformat()
         _save_analysis_data(analysis_id, current_data)
 
-        # Run demo parsing, feature extraction & ML inference
-        report = analyze_demo_file(
-            demo_path=demo_path,
-            model_path=settings.DEFAULT_MODEL_PATH,
-            config_path=settings.DEFAULT_CONFIG_PATH,
-        )
+        if file_path.suffix.lower() == ".parquet":
+            report = analyze_parquet_file(
+                parquet_path=file_path,
+                model_path=settings.DEFAULT_MODEL_PATH,
+                config_path=settings.DEFAULT_CONFIG_PATH,
+            )
+        else:
+            # Run demo parsing, feature extraction & ML inference
+            report = analyze_demo_file(
+                demo_path=file_path,
+                model_path=settings.DEFAULT_MODEL_PATH,
+                config_path=settings.DEFAULT_CONFIG_PATH,
+            )
 
         # Merge job metadata
         report["analysis_id"] = analysis_id
         report["match_id"] = analysis_id
         report["status"] = "completed"
         report["completed_at"] = datetime.now(UTC).isoformat()
-        report["demo_path"] = str(demo_path)
+        report["demo_path"] = str(file_path)
 
         _save_analysis_data(analysis_id, report)
         logger.info("Background task completed successfully: analysis_id=%s", analysis_id)
@@ -194,17 +202,21 @@ def health_check():
 )
 async def upload_demo(
     background_tasks: BackgroundTasks,
-    file: Annotated[UploadFile, File(description="Counter-Strike 2 replay file (.dem)")],
+    file: Annotated[UploadFile, File(description="Counter-Strike 2 replay file (.dem) or dataset match (.parquet)")],
 ):
     """
-    Upload a CS2 .dem replay file for cheat detection analysis.
-    Validates file format and size, stores the demo locally, and starts asynchronous analysis.
+    Upload a CS2 .dem replay file or a .parquet telemetry dataset file for cheat detection analysis.
+    Validates file format and size, stores the file locally, and starts asynchronous analysis.
     """
     raw_filename = file.filename or ""
-    if not raw_filename.lower().endswith(".dem"):
+    lower_name = raw_filename.lower()
+    is_dem = lower_name.endswith(".dem")
+    is_parquet = lower_name.endswith(".parquet")
+
+    if not (is_dem or is_parquet):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Invalid file format. Only Counter-Strike 2 (.dem) replay files are supported.",
+            detail="Invalid file format. Only Counter-Strike 2 (.dem) replay files or (.parquet) dataset files are supported.",
         )
 
     safe_name = _sanitize_filename(raw_filename)
@@ -219,18 +231,27 @@ async def upload_demo(
         logger.error("Failed writing uploaded file to %s: %s", save_path, e)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Failed to store uploaded demo file.",
+            detail="Failed to store uploaded file.",
         ) from e
 
-    # Validate file size & magic bytes
-    is_valid, err_msg = validate_demo_file(save_path, max_size_mb=settings.MAX_DEMO_SIZE_MB)
-    if not is_valid:
-        save_path.unlink(missing_ok=True)
-        logger.warning("Demo validation failed for %s: %s", raw_filename, err_msg)
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Demo validation error: {err_msg}",
-        )
+    # Validate file size & magic bytes for .dem files (or basic check for .parquet)
+    if is_dem:
+        is_valid, err_msg = validate_demo_file(save_path, max_size_mb=settings.MAX_DEMO_SIZE_MB)
+        if not is_valid:
+            save_path.unlink(missing_ok=True)
+            logger.warning("Demo validation failed for %s: %s", raw_filename, err_msg)
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Demo validation error: {err_msg}",
+            )
+    elif is_parquet:
+        file_size_mb = save_path.stat().st_size / (1024 * 1024)
+        if file_size_mb > settings.MAX_DEMO_SIZE_MB:
+            save_path.unlink(missing_ok=True)
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"File exceeds maximum allowed size of {settings.MAX_DEMO_SIZE_MB}MB.",
+            )
 
     # Persist pending record
     initial_record = {
@@ -253,7 +274,7 @@ async def upload_demo(
         "match_id": analysis_id,
         "status": "pending",
         "filename": safe_name,
-        "message": "Demo uploaded and validated successfully. Background processing initiated.",
+        "message": f"{'Demo' if is_dem else 'Parquet dataset'} uploaded and validated successfully. Background processing initiated.",
     }
 
 

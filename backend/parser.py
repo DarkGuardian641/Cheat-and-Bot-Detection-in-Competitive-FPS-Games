@@ -10,15 +10,14 @@ from __future__ import annotations
 
 import logging
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any
 
-import numpy as np
 import pandas as pd
 
 logger = logging.getLogger(__name__)
 
 
-def validate_demo_file(file_path: str | Path, max_size_mb: int = 500) -> Tuple[bool, str]:
+def validate_demo_file(file_path: str | Path, max_size_mb: int = 500) -> tuple[bool, str]:
     """
     Validate that file exists, has a .dem extension, is not empty,
     and does not exceed max_size_mb.
@@ -42,9 +41,9 @@ def validate_demo_file(file_path: str | Path, max_size_mb: int = 500) -> Tuple[b
         with open(path, "rb") as f:
             header = f.read(8)
             # Standard Source / Source 2 demo headers usually start with HL2DEMO or PBDEMS
-            if not (header.startswith(b"HL2DEMO") or header.startswith(b"PBDEMS")):
+            if not header.startswith((b"HL2DEMO", b"PBDEMS")):
                 logger.warning("Demo file %s does not begin with standard demo magic bytes.", path.name)
-    except Exception as e:
+    except OSError as e:
         return False, f"Failed reading file header: {e}"
 
     return True, "Valid"
@@ -67,30 +66,30 @@ class CS2DemoParser:
         except ImportError:
             raise ImportError("demoparser2 is not installed. Please run: pip install demoparser2")
 
-    def parse_header(self) -> Dict[str, Any]:
+    def parse_header(self) -> dict[str, Any]:
         """Parse demo header info (map, server, tick rate, etc.)."""
         try:
             header = self._parser.parse_header()
             return header if isinstance(header, dict) else {}
-        except Exception as e:
+        except (ValueError, RuntimeError, KeyError, AttributeError, OSError) as e:
             logger.warning("Could not parse demo header: %e", e)
             return {}
 
-    def parse_events(self) -> Dict[str, pd.DataFrame]:
+    def parse_events(self) -> dict[str, pd.DataFrame]:
         """
         Extract round events, weapon fires, player deaths, and player hurts.
         """
-        events: Dict[str, pd.DataFrame] = {}
+        events: dict[str, pd.DataFrame] = {}
         for event_name in ["weapon_fire", "player_death", "player_hurt", "round_start", "round_end"]:
             try:
                 df = self._parser.parse_event(event_name)
                 events[event_name] = df if isinstance(df, pd.DataFrame) else pd.DataFrame()
-            except Exception as e:
+            except (ValueError, RuntimeError, KeyError, AttributeError, OSError) as e:
                 logger.debug("Event %s not found or failed to parse: %s", event_name, e)
                 events[event_name] = pd.DataFrame()
         return events
 
-    def parse_telemetry(self, extra_fields: Optional[List[str]] = None) -> pd.DataFrame:
+    def parse_telemetry(self, extra_fields: list[str] | None = None) -> pd.DataFrame:
         """
         Extract player positions, angles, ticks, and state for ML windowing.
         """
@@ -120,9 +119,9 @@ class CS2DemoParser:
             tick_df = self._parser.parse_ticks(fields)
             if not isinstance(tick_df, pd.DataFrame):
                 tick_df = pd.DataFrame(tick_df)
-        except Exception as e:
+        except (ValueError, RuntimeError, KeyError, AttributeError, OSError) as e:
             logger.error("Failed to parse ticks from demo %s: %s", self.demo_path, e)
-            raise RuntimeError(f"Failed to parse ticks: {e}")
+            raise RuntimeError(f"Failed to parse ticks: {e}") from e
 
         # Normalize column names and datatypes
         rename_map = {
@@ -145,7 +144,7 @@ class CS2DemoParser:
         tick_df = tick_df.sort_values(by=["steamid", "tick"]).reset_index(drop=True)
         return tick_df
 
-    def parse_full(self) -> Tuple[pd.DataFrame, Dict[str, pd.DataFrame], Dict[str, Any]]:
+    def parse_full(self) -> tuple[pd.DataFrame, dict[str, pd.DataFrame], dict[str, Any]]:
         """
         Parse header, events, and telemetry in one go.
         """
@@ -155,7 +154,7 @@ class CS2DemoParser:
         return telemetry, events, header
 
 
-def parse_demo(demo_path: str | Path, fields: Optional[List[str]] = None) -> pd.DataFrame:
+def parse_demo(demo_path: str | Path, fields: list[str] | None = None) -> pd.DataFrame:
     """
     Backwards-compatible convenience function.
     """

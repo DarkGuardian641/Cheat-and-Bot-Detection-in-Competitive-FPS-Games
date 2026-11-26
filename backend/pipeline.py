@@ -626,3 +626,80 @@ def analyze_demo_file(
         logger.info("Saved analysis report to %s", report_file)
 
     return report
+
+
+def analyze_parquet_file(
+    parquet_path: str | Path,
+    model_path: str | Path | None = None,
+    config_path: str | Path | None = None,
+    output_dir: str | Path | None = None,
+) -> dict[str, Any]:
+    """
+    Direct analysis pipeline for pre-extracted / benchmark dataset windows (.parquet).
+    Loads window telemetry, aligns feature matrix, executes ML model inference,
+    and aggregates player-level verdicts and forensic proofs.
+    """
+    import pandas as pd
+
+    p_file = Path(parquet_path)
+    logger.info("Loading parquet window dataset from %s...", p_file.name)
+    df = pd.read_parquet(p_file)
+
+    model, config = load_model_and_config(model_path, config_path)
+    feature_cols = config.get("feature_cols", [])
+
+    meta_cols = [c for c in ["steamid", "start_tick", "end_tick"] if c in df.columns]
+    metadata_df = df[meta_cols].copy() if meta_cols else pd.DataFrame(index=df.index)
+
+    if "steamid" not in metadata_df.columns:
+        metadata_df["steamid"] = "Player_Unknown"
+    metadata_df["player_name"] = metadata_df["steamid"]
+
+    if "start_tick" not in metadata_df.columns:
+        metadata_df["start_tick"] = df.index * 256
+    if "end_tick" not in metadata_df.columns:
+        metadata_df["end_tick"] = metadata_df["start_tick"] + 256
+
+    metadata_df["start_time"] = metadata_df["start_tick"] / 64.0
+    metadata_df["end_time"] = metadata_df["end_tick"] / 64.0
+    metadata_df["round_num"] = (metadata_df["start_tick"] // 1280) + 1
+
+    # Extract or zero-fill missing feature columns
+    features_df = pd.DataFrame(index=df.index)
+    for col in feature_cols:
+        if col in df.columns:
+            features_df[col] = df[col]
+        else:
+            features_df[col] = 0.0
+    features_df = features_df.fillna(0.0)
+
+    logger.info("Executing ML inference on %d windows from parquet...", len(features_df))
+    probs, preds = predict_windows(model, config, features_df)
+
+    match_info = {
+        "demo_filename": p_file.name,
+        "map_name": f"{p_file.stem} (CS2CD Dataset)",
+        "server_name": "CS2CD Benchmark",
+        "model_name": config.get("model_name", "Detector"),
+    }
+
+    report = aggregate_analysis(
+        metadata_df=metadata_df,
+        features_df=features_df,
+        probs=probs,
+        preds=preds,
+        threshold=config.get("threshold", 0.61),
+        match_info=match_info,
+        events={},
+        telemetry=pd.DataFrame(),
+    )
+
+    if output_dir:
+        out_dir = Path(output_dir)
+        out_dir.mkdir(parents=True, exist_ok=True)
+        report_file = out_dir / f"{p_file.stem}_analysis.json"
+        with open(report_file, "w", encoding="utf-8") as f:
+            json.dump(report, f, indent=2)
+        logger.info("Saved parquet analysis report to %s", report_file)
+
+    return report

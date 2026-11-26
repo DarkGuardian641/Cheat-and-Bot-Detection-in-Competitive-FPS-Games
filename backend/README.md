@@ -1,6 +1,6 @@
 # FPS Cheat & Bot Detection Backend
 
-FastAPI service for Counter-Strike 2 (`.dem`) replay analysis, telemetry feature extraction, and ML-assisted cheat/bot detection.
+FastAPI service for Counter-Strike 2 match replay (`.dem`) and telemetry dataset (`.parquet`) analysis, kinematic feature extraction, and ML-assisted cheat/bot detection.
 
 ---
 
@@ -38,23 +38,25 @@ Start the API with Uvicorn:
 | Method | Endpoint | Description | Status Code |
 | :--- | :--- | :--- | :--- |
 | `GET` | `/health` | Service health status, model artifact presence, storage paths | `200 OK` |
-| `POST` | `/analyses/upload` | Upload `.dem` CS2 replay file for asynchronous processing | `202 Accepted` |
+| `POST` | `/analyses/upload` (or `/api/upload`) | Upload `.dem` CS2 replay file or `.parquet` pre-extracted match dataset for asynchronous processing | `202 Accepted` |
 | `GET` | `/analyses` | List all historical analysis jobs and processing states | `200 OK` |
 | `GET` | `/analyses/{analysis_id}` | Retrieve processing status (`pending`, `processing`, `completed`, `failed`) | `200 OK` / `404` |
 | `GET` | `/analyses/{analysis_id}/results` | Retrieve full suspicion scores, flagged players, and window evidence | `200 OK` / `404` |
 | `GET` | `/matches` | List all analyzed matches with summarized suspicion indicators | `200 OK` |
+| `GET` | `/players` | Aggregate and list all tracked players across analyzed match replays | `200 OK` |
 | `GET` | `/players/{player_id}` | Historical aggregate cheat statistics for a specific player across matches | `200 OK` / `404` |
 
 ---
 
-## 4. Demo Upload & Analysis Workflow
+## 4. Match Upload & Analysis Workflow
 
 1. **Upload (`POST /analyses/upload`)**:
-   - Accepts `.dem` binary uploads via multipart form data (`file`).
-   - Validates file format, size limits (`MAX_DEMO_SIZE_MB = 500 MB`), non-empty payloads, and Valve demo headers (`HL2DEMO` / `PBDEMS`).
+   - Accepts `.dem` binary replays or `.parquet` telemetry files via multipart form data (`file`).
+   - Validates file format, size limits (`MAX_DEMO_SIZE_MB = 500 MB`), non-empty payloads, and demo headers.
    - Returns unique `analysis_id` immediately with status `pending`.
 2. **Background Processing**:
-   - Slices telemetry into 256-tick sliding windows (128-tick step).
+   - For `.dem`: parses raw packets, cleans latency spikes, and segments into 256-tick windows.
+   - For `.parquet`: loads windowed telemetry directly and aligns the 31 kinematic features.
    - Computes 31 kinematic and behavioral features (`ml.features`).
    - Runs model inference (`models/best_detector.joblib`).
    - Applies the calibrated decision threshold (`0.61`).
@@ -68,7 +70,7 @@ Start the API with Uvicorn:
 
 No external database (PostgreSQL, SQLite, Redis) is required. Data is stored on disk:
 
-- `data/demos/`: Uploaded `.dem` demo files.
+- `data/demos/`: Uploaded `.dem` and `.parquet` match files.
 - `data/analysis/`: Analysis output JSON files (`{analysis_id}.json`).
 - `data/logs/`: Backend server and worker execution logs (`backend.log`).
 
@@ -84,8 +86,8 @@ Run the test suite using pytest:
 
 Tests cover:
 - Health check verification.
-- Valid `.dem` upload and background task dispatch.
-- Invalid file formats (e.g., `.txt`) and 0-byte corrupt demo rejections.
+- Valid `.dem` and `.parquet` upload and background task dispatch.
+- Invalid file formats (e.g., `.txt`) and 0-byte corrupt file rejections.
 - Oversized file upload protection.
 - Analysis status and missing analysis ID handling.
 - Telemetry preprocessing and 256-tick window extraction.
@@ -97,4 +99,4 @@ Tests cover:
 ## 7. Known Limitations
 
 - **Reaction Latency Telemetry**: Target visibility timestamps are currently stubs (`0.0`) in the public CS2CD dataset, so reaction features return baseline values until visibility tracking is enabled.
-- **Model Predictions are Suspicion Scores**: Predictions indicate statistical kinematic anomaly, **never** an automatic ban verdict. Human review is recommended for flagged evidence windows.
+- **Model Predictions are Suspicion Scores**: Predictions indicate statistical kinematic anomaly, **never** an automatic ban verdict. Human referee review is recommended for flagged evidence windows.

@@ -40,8 +40,12 @@ export const UploadDemoPage: React.FC<UploadDemoPageProps> = ({ health, onUpload
 
   const handleFileSelected = (file: File) => {
     setErrorMsg(null);
-    if (!file.name.toLowerCase().endsWith('.dem')) {
-      setErrorMsg(`${file.name} is not a .dem file. Export the replay from CS2 and choose the .dem it saves.`);
+    const lowerName = file.name.toLowerCase();
+    const isDem = lowerName.endsWith('.dem');
+    const isParquet = lowerName.endsWith('.parquet');
+
+    if (!isDem && !isParquet) {
+      setErrorMsg(`${file.name} is not a valid file. Please select a CS2 match replay (.dem) or dataset match (.parquet).`);
       return;
     }
     if (file.size === 0) {
@@ -49,7 +53,7 @@ export const UploadDemoPage: React.FC<UploadDemoPageProps> = ({ health, onUpload
       return;
     }
     if (file.size > MAX_MB * 1024 * 1024) {
-      setErrorMsg(`${file.name} is ${formatSize(file.size)}. The backend accepts demos up to ${MAX_MB} MB.`);
+      setErrorMsg(`${file.name} is ${formatSize(file.size)}. The backend accepts files up to ${MAX_MB} MB.`);
       return;
     }
     setSelectedFile(file);
@@ -72,8 +76,8 @@ export const UploadDemoPage: React.FC<UploadDemoPageProps> = ({ health, onUpload
   return (
     <div className="max-w-2xl">
       <PageHeader
-        title="Upload a demo"
-        description="Choose a CS2 match replay (.dem). Once it uploads, the backend parses it, scores every player, and the report opens here."
+        title="Upload a match"
+        description="Choose a CS2 match replay (.dem) or dataset match (.parquet). Once it uploads, the backend scores every player and the forensic report opens here."
       />
 
       {health && !health.model_exists && (
@@ -95,7 +99,7 @@ export const UploadDemoPage: React.FC<UploadDemoPageProps> = ({ health, onUpload
         <input
           ref={fileInputRef}
           type="file"
-          accept=".dem"
+          accept=".dem,.parquet"
           className="sr-only"
           id="demo-file"
           onChange={(e) => {
@@ -148,7 +152,7 @@ export const UploadDemoPage: React.FC<UploadDemoPageProps> = ({ health, onUpload
             className="flex cursor-pointer flex-col items-center px-6 py-14 text-center"
           >
             <FileUp size={24} strokeWidth={1.6} className="mb-3 text-ink-3" />
-            <span className="font-medium text-ink">Drop a .dem file here</span>
+            <span className="font-medium text-ink">Drop a .dem or .parquet file here</span>
             <span className="mt-1 text-sm text-ink-2">
               or <span className="link">choose one from your computer</span>
             </span>

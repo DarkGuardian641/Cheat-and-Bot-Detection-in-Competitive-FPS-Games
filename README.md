@@ -39,18 +39,27 @@ cheat-and-bot-detection-in-competitive-fps/
 │   └── vite.config.ts
 │
 ├── data/                     # Local Storage (Zero external database dependency)
-│   ├── demos/                # Uploaded CS2 match replay files (.dem)
+│   ├── demos/                # Uploaded CS2 match replay files (.dem / .parquet)
 │   ├── analysis/             # Persisted match analysis JSON results
 │   ├── logs/                 # Backend server logs (backend.log)
 │   └── processed/            # Extracted CSV / Parquet feature datasets
 │
+├── crazy_demos/              # Pre-sorted evaluation matches (c_match_*.parquet & no_match_*.parquet)
+│
 ├── models/                   # Saved trained model files & calibrated configs
 │   ├── best_detector.joblib  # Trained champion model (XGBoost)
-│   ├── best_detector.json    # Calibrated decision threshold (0.61) & feature list
-│   └── detector_baseline.joblib
+│   └── best_detector.json    # Calibrated decision threshold (0.61) & feature list
 │
 ├── docs/                     # Project documentation & reference
-│   └── evaluation_results.md
+│   ├── architecture.md       # High-level system architecture & diagrams
+│   ├── calibration_and_evaluation.md # Advanced threshold sweep & calibration curves
+│   ├── dataset_audit.md      # CS2CD dataset provenance & ground truth audit
+│   ├── evaluation_results.md # Window-level model comparison results
+│   ├── metrics.md            # Retrained player-level evaluation metrics (>80% all)
+│   ├── CS2_Cheat_Detection_Research_Report.docx # Comprehensive research report manuscript
+│   ├── CS2_AntiCheat_Presentation.pptx # Project presentation slide deck
+│   ├── diagrams/             # Architecture, data flow & cleaning flowcharts
+│   └── assets/               # Institutional logo assets
 │
 ├── requirements.txt          # Python dependencies
 ├── .env.example              # Environment variables template
@@ -94,9 +103,24 @@ npm run dev
 ## REST API Overview
 
 - `GET /health` — Check server status, active ML model, and local storage layout.
-- `POST /analyses/upload` — Upload CS2 `.dem` replay file (asynchronous background processing).
+- `POST /analyses/upload` (or `POST /api/upload`) — Upload CS2 `.dem` replay file or `.parquet` pre-extracted match dataset (asynchronous background processing).
 - `GET /analyses` — List all historical and in-progress analysis jobs.
 - `GET /analyses/{analysis_id}` — Check status (`pending`, `processing`, `completed`, `failed`).
 - `GET /analyses/{analysis_id}/results` — Fetch complete prediction report, suspicious player summaries, and 256-tick window evidence.
-- `GET /matches` — List all analyzed matches.
-- `GET /players/{player_id}` — Get aggregate analysis history and suspicion scores across matches for a specific player.
+- `GET /matches` — List all analyzed matches with aggregated verdicts.
+- `GET /players` — List tracked players across all uploaded and analyzed matches.
+- `GET /players/{player_id}` — Detailed history, match appearances, and flagged incidents for a specific player.
+
+---
+
+## Documentation Index (`docs/`)
+
+| Document | Description |
+|:---|:---|
+| [`docs/architecture.md`](docs/architecture.md) | High-level system architecture, dual-path ingestion pipeline & flowcharts |
+| [`docs/evaluation_results.md`](docs/evaluation_results.md) | Window-level and player-level model comparison benchmarks (XGBoost, RF, IF) |
+| [`docs/calibration_and_evaluation.md`](docs/calibration_and_evaluation.md) | Probability calibration, threshold sweeping ($\tau = 0.61$), and false-positive clustering |
+| [`docs/metrics.md`](docs/metrics.md) | Aggregated player-level evaluation metrics (>80% Precision, Recall, F1) |
+| [`docs/dataset_audit.md`](docs/dataset_audit.md) | CS2CD dataset audit, label provenance, schema, and known limitations |
+| [`docs/codebase-review.md`](docs/codebase-review.md) | Implementation roadmap and historical review resolution notes |
+
