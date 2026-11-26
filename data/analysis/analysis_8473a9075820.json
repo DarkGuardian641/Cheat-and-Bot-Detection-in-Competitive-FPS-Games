@@ -1,0 +1,1205 @@
+{
+  "match_info": {
+    "demo_filename": "analysis_8473a9075820_CSGO-3nbbd-z6WC8-VvK3y-QZNsk-mtLMB.dem",
+    "map_name": "de_dust2",
+    "server_name": "Valve Counter-Strike 2 spain Server (srcds2023-mad1.196.271)",
+    "model_name": "XGBoost"
+  },
+  "status": "completed",
+  "threshold_used": 0.61,
+  "total_windows": 8329,
+  "suspicious_windows_count": 246,
+  "suspicious_players": [
+    {
+      "steamid": "76561199122883822",
+      "player_name": "pig benis",
+      "total_windows": 861,
+      "suspicious_windows": 38,
+      "suspicious_ratio": 0.0441,
+      "mean_suspicion_score": 0.447,
+      "max_suspicion_score": 0.9081,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561198020412524",
+      "player_name": "tony",
+      "total_windows": 823,
+      "suspicious_windows": 36,
+      "suspicious_ratio": 0.0437,
+      "mean_suspicion_score": 0.4186,
+      "max_suspicion_score": 0.9211,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561198151952470",
+      "player_name": "qubb",
+      "total_windows": 731,
+      "suspicious_windows": 30,
+      "suspicious_ratio": 0.041,
+      "mean_suspicion_score": 0.4015,
+      "max_suspicion_score": 0.8914,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561198873431122",
+      "player_name": "Valt",
+      "total_windows": 718,
+      "suspicious_windows": 27,
+      "suspicious_ratio": 0.0376,
+      "mean_suspicion_score": 0.4127,
+      "max_suspicion_score": 0.6991,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561199482648944",
+      "player_name": "KoBy",
+      "total_windows": 803,
+      "suspicious_windows": 25,
+      "suspicious_ratio": 0.0311,
+      "mean_suspicion_score": 0.3937,
+      "max_suspicion_score": 0.9229,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561198209087875",
+      "player_name": "Mam\u00e8ne",
+      "total_windows": 857,
+      "suspicious_windows": 26,
+      "suspicious_ratio": 0.0303,
+      "mean_suspicion_score": 0.3903,
+      "max_suspicion_score": 0.804,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561198121324937",
+      "player_name": "ZaRpX",
+      "total_windows": 874,
+      "suspicious_windows": 24,
+      "suspicious_ratio": 0.0275,
+      "mean_suspicion_score": 0.3613,
+      "max_suspicion_score": 0.826,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561198367919010",
+      "player_name": "Yuu Ayase",
+      "total_windows": 855,
+      "suspicious_windows": 14,
+      "suspicious_ratio": 0.0164,
+      "mean_suspicion_score": 0.3542,
+      "max_suspicion_score": 0.8509,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561198073116271",
+      "player_name": "Mcrn",
+      "total_windows": 960,
+      "suspicious_windows": 14,
+      "suspicious_ratio": 0.0146,
+      "mean_suspicion_score": 0.3183,
+      "max_suspicion_score": 0.9219,
+      "status": "Flagged"
+    },
+    {
+      "steamid": "76561198051165513",
+      "player_name": "Apollo#",
+      "total_windows": 847,
+      "suspicious_windows": 12,
+      "suspicious_ratio": 0.0142,
+      "mean_suspicion_score": 0.3808,
+      "max_suspicion_score": 0.7604,
+      "status": "Flagged"
+    }
+  ],
+  "player_summaries": {
+    "76561198020412524": {
+      "steamid": "76561198020412524",
+      "player_name": "tony",
+      "total_windows": 823,
+      "suspicious_windows": 36,
+      "suspicious_ratio": 0.0437,
+      "mean_suspicion_score": 0.4186,
+      "max_suspicion_score": 0.9211,
+      "status": "Flagged"
+    },
+    "76561198051165513": {
+      "steamid": "76561198051165513",
+      "player_name": "Apollo#",
+      "total_windows": 847,
+      "suspicious_windows": 12,
+      "suspicious_ratio": 0.0142,
+      "mean_suspicion_score": 0.3808,
+      "max_suspicion_score": 0.7604,
+      "status": "Flagged"
+    },
+    "76561198073116271": {
+      "steamid": "76561198073116271",
+      "player_name": "Mcrn",
+      "total_windows": 960,
+      "suspicious_windows": 14,
+      "suspicious_ratio": 0.0146,
+      "mean_suspicion_score": 0.3183,
+      "max_suspicion_score": 0.9219,
+      "status": "Flagged"
+    },
+    "76561198121324937": {
+      "steamid": "76561198121324937",
+      "player_name": "ZaRpX",
+      "total_windows": 874,
+      "suspicious_windows": 24,
+      "suspicious_ratio": 0.0275,
+      "mean_suspicion_score": 0.3613,
+      "max_suspicion_score": 0.826,
+      "status": "Flagged"
+    },
+    "76561198151952470": {
+      "steamid": "76561198151952470",
+      "player_name": "qubb",
+      "total_windows": 731,
+      "suspicious_windows": 30,
+      "suspicious_ratio": 0.041,
+      "mean_suspicion_score": 0.4015,
+      "max_suspicion_score": 0.8914,
+      "status": "Flagged"
+    },
+    "76561198209087875": {
+      "steamid": "76561198209087875",
+      "player_name": "Mam\u00e8ne",
+      "total_windows": 857,
+      "suspicious_windows": 26,
+      "suspicious_ratio": 0.0303,
+      "mean_suspicion_score": 0.3903,
+      "max_suspicion_score": 0.804,
+      "status": "Flagged"
+    },
+    "76561198367919010": {
+      "steamid": "76561198367919010",
+      "player_name": "Yuu Ayase",
+      "total_windows": 855,
+      "suspicious_windows": 14,
+      "suspicious_ratio": 0.0164,
+      "mean_suspicion_score": 0.3542,
+      "max_suspicion_score": 0.8509,
+      "status": "Flagged"
+    },
+    "76561198873431122": {
+      "steamid": "76561198873431122",
+      "player_name": "Valt",
+      "total_windows": 718,
+      "suspicious_windows": 27,
+      "suspicious_ratio": 0.0376,
+      "mean_suspicion_score": 0.4127,
+      "max_suspicion_score": 0.6991,
+      "status": "Flagged"
+    },
+    "76561199122883822": {
+      "steamid": "76561199122883822",
+      "player_name": "pig benis",
+      "total_windows": 861,
+      "suspicious_windows": 38,
+      "suspicious_ratio": 0.0441,
+      "mean_suspicion_score": 0.447,
+      "max_suspicion_score": 0.9081,
+      "status": "Flagged"
+    },
+    "76561199482648944": {
+      "steamid": "76561199482648944",
+      "player_name": "KoBy",
+      "total_windows": 803,
+      "suspicious_windows": 25,
+      "suspicious_ratio": 0.0311,
+      "mean_suspicion_score": 0.3937,
+      "max_suspicion_score": 0.9229,
+      "status": "Flagged"
+    }
+  },
+  "evidence_windows": [
+    {
+      "steamid": "76561199482648944",
+      "player_name": "KoBy",
+      "start_tick": 120951,
+      "end_tick": 121206,
+      "start_time": 1889.86,
+      "end_time": 1893.84,
+      "suspicion_score": 0.9229
+    },
+    {
+      "steamid": "76561198073116271",
+      "player_name": "Mcrn",
+      "start_tick": 67498,
+      "end_tick": 67753,
+      "start_time": 1054.66,
+      "end_time": 1058.64,
+      "suspicion_score": 0.9219
+    },
+    {
+      "steamid": "76561198020412524",
+      "player_name": "tony",
+      "start_tick": 26084,
+      "end_tick": 26339,
+      "start_time": 407.56,
+      "end_time": 411.55,
+      "suspicion_score": 0.9211
+    },
+    {
+      "steamid": "76561199122883822",
+      "player_name": "pig benis",
+      "start_tick": 69625,
+      "end_tick": 69880,
+      "start_time": 1087.89,
+      "end_time": 1091.88,
+      "suspicion_score": 0.9081
+    },
+    {
+      "steamid": "76561199122883822",
+      "player_name": "pig benis",
+      "start_tick": 58732,
+      "end_tick": 58987,
+      "start_time": 917.69,
+      "end_time": 921.67,
+      "suspicion_score": 0.8967
+    },
+    {
+      "steamid": "76561198151952470",
+      "player_name": "qubb",
+      "start_tick": 51012,
+      "end_tick": 51267,
+      "start_time": 797.06,
+      "end_time": 801.05,
+      "suspicion_score": 0.8914
+    },
+    {
+      "steamid": "76561199122883822",
+      "player_name": "pig benis",
+      "start_tick": 92950,
+      "end_tick": 93205,
+      "start_time": 1452.34,
+      "end_time": 1456.33,
+      "suspicion_score": 0.8845
+    },
+    {
+      "steamid": "76561199122883822",
+      "player_name": "pig benis",
+      "start_tick": 113238,
+      "end_tick": 113976,
+      "start_time": 1769.34,
+      "end_time": 1780.88,
+      "suspicion_score": 0.8635
+    },
+    {
+      "steamid": "76561198367919010",
+      "player_name": "Yuu Ayase",
+      "start_tick": 50694,
+      "end_tick": 50949,
+      "start_time": 792.09,
+      "end_time": 796.08,
+      "suspicion_score": 0.8509
+    },
+    {
+      "steamid": "76561198151952470",
+      "player_name": "qubb",
+      "start_tick": 101279,
+      "end_tick": 107769,
+      "start_time": 1582.48,
+      "end_time": 1683.89,
+      "suspicion_score": 0.8501
+    },
+    {
+      "steamid": "76561198020412524",
+      "player_name": "tony",
+      "start_tick": 26212,
+      "end_tick": 26467,
+      "start_time": 409.56,
+      "end_time": 413.55,
+      "suspicion_score": 0.834
+    },
+    {
+      "steamid": "76561199482648944",
+      "player_name": "KoBy",
+      "start_tick": 121079,
+      "end_tick": 121334,
+      "start_time": 1891.86,
+      "end_time": 1895.84,
+      "suspicion_score": 0.8316
+    },
+    {
+      "steamid": "76561199482648944",
+      "player_name": "KoBy",
+      "start_tick": 92336,
+      "end_tick": 92591,
+      "start_time": 1442.75,
+      "end_time": 1446.73,
+      "suspicion_score": 0.8304
+    },
+    {
+      "steamid": "76561199122883822",
+      "player_name": "pig benis",
+      "start_tick": 58092,
+      "end_tick": 58347,
+      "start_time": 907.69,
+      "end_time": 911.67,
+      "suspicion_score": 0.8276
+    },
+    {
+      "steamid": "76561198121324937",
+      "player_name": "ZaRpX",
+      "start_tick": 73609,
+      "end_tick": 73864,
+      "start_time": 1150.14,
+      "end_time": 1154.12,
+      "suspicion_score": 0.826
+    },
+    {
+      "steamid": "76561198151952470",
+      "player_name": "qubb",
+      "start_tick": 47044,
+      "end_tick": 47299,
+      "start_time": 735.06,
+      "end_time": 739.05,
+      "suspicion_score": 0.8236
+    },
+    {
+      "steamid": "76561198020412524",
+      "player_name": "tony",
+      "start_tick": 3969,
+      "end_tick": 4224,
+      "start_time": 62.02,
+      "end_time": 66.0,
+      "suspicion_score": 0.8204
+    },
+    {
+      "steamid": "76561199482648944",
+      "player_name": "KoBy",
+      "start_tick": 68867,
+      "end_tick": 69122,
+      "start_time": 1076.05,
+      "end_time": 1080.03,
+      "suspicion_score": 0.8161
+    },
+    {
+      "steamid": "76561199122883822",
+      "player_name": "pig benis",
+      "start_tick": 69753,
+      "end_tick": 70008,
+      "start_time": 1089.89,
+      "end_time": 1093.88,
+      "suspicion_score": 0.8156
+    },
+    {
+      "steamid": "76561198367919010",
+      "player_name": "Yuu Ayase",
+      "start_tick": 139379,
+      "end_tick": 139634,
+      "start_time": 2177.8,
+      "end_time": 2181.78,
+      "suspicion_score": 0.8083
+    },
+    {
+      "steamid": "76561198209087875",
+      "player_name": "Mam\u00e8ne",
+      "start_tick": 42721,
+      "end_tick": 42976,
+      "start_time": 667.52,
+      "end_time": 671.5,
+      "suspicion_score": 0.804
+    },
+    {
+      "steamid": "76561198151952470",
+      "player_name": "qubb",
+      "start_tick": 47172,
+      "end_tick": 47427,
+      "start_time": 737.06,
+      "end_time": 741.05,
+      "suspicion_score": 0.7953
+    },
+    {
+      "steamid": "76561198209087875",
+      "player_name": "Mam\u00e8ne",
+      "start_tick": 26394,
+      "end_tick": 26649,
+      "start_time": 412.41,
+      "end_time": 416.39,
+      "suspicion_score": 0.7871
+    },
+    {
+      "steamid": "76561198073116271",
+      "player_name": "Mcrn",
+      "start_tick": 107299,
+      "end_tick": 107554,
+      "start_time": 1676.55,
+      "end_time": 1680.53,
+      "suspicion_score": 0.7865
+    },
+    {
+      "steamid": "76561198020412524",
+      "player_name": "tony",
+      "start_tick": 5377,
+      "end_tick": 5632,
+      "start_time": 84.02,
+      "end_time": 88.0,
+      "suspicion_score": 0.7854
+    },
+    {
+      "steamid": "76561199482648944",
+      "player_name": "KoBy",
+      "start_tick": 121591,
+      "end_tick": 121846,
+      "start_time": 1899.86,
+      "end_time": 1903.84,
+      "suspicion_score": 0.7853
+    },
+    {
+      "steamid": "76561198209087875",
+      "player_name": "Mam\u00e8ne",
+      "start_tick": 141435,
+      "end_tick": 141690,
+      "start_time": 2209.92,
+      "end_time": 2213.91,
+      "suspicion_score": 0.772
+    },
+    {
+      "steamid": "76561199482648944",
+      "player_name": "KoBy",
+      "start_tick": 140072,
+      "end_tick": 140327,
+      "start_time": 2188.62,
+      "end_time": 2192.61,
+      "suspicion_score": 0.7668
+    },
+    {
+      "steamid": "76561198051165513",
+      "player_name": "Apollo#",
+      "start_tick": 101932,
+      "end_tick": 102187,
+      "start_time": 1592.69,
+      "end_time": 1596.67,
+      "suspicion_score": 0.7604
+    },
+    {
+      "steamid": "76561198151952470",
+      "player_name": "qubb",
+      "start_tick": 47428,
+      "end_tick": 47683,
+      "start_time": 741.06,
+      "end_time": 745.05,
+      "suspicion_score": 0.7601
+    },
+    {
+      "steamid": "76561198121324937",
+      "player_name": "ZaRpX",
+      "start_tick": 31703,
+      "end_tick": 31958,
+      "start_time": 495.36,
+      "end_time": 499.34,
+      "suspicion_score": 0.759
+    },
+    {
+      "steamid": "76561199482648944",
+      "player_name": "KoBy",
+      "start_tick": 140200,
+      "end_tick": 140455,
+      "start_time": 2190.62,
+      "end_time": 2194.61,
+      "suspicion_score": 0.7567
+    },
+    {
+      "steamid": "76561199122883822",
+      "player_name": "pig benis",
+      "start_tick": 70649,
+      "end_tick": 70904,
+      "start_time": 1103.89,
+      "end_time": 1107.88,
+      "suspicion_score": 0.7549
+    },
+    {
+      "steamid": "76561199122883822",
+      "player_name": "pig benis",
+      "start_tick": 58220,
+      "end_tick": 58475,
+      "start_time": 909.69,
+      "end_time": 913.67,
+      "suspicion_score": 0.7487
+    },
+    {
+      "steamid": "76561198020412524",
+      "player_name": "tony",
+      "start_tick": 143596,
+      "end_tick": 143851,
+      "start_time": 2243.69,
+      "end_time": 2247.67,
+      "suspicion_score": 0.743
+    },
+    {
+      "steamid": "76561198151952470",
+      "player_name": "qubb",
+      "start_tick": 35076,
+      "end_tick": 35331,
+      "start_time": 548.06,
+      "end_time": 552.05,
+      "suspicion_score": 0.7362
+    },
+    {
+      "steamid": "76561198121324937",
+      "player_name": "ZaRpX",
+      "start_tick": 144956,
+      "end_tick": 145211,
+      "start_time": 2264.94,
+      "end_time": 2268.92,
+      "suspicion_score": 0.7361
+    },
+    {
+      "steamid": "76561198073116271",
+      "player_name": "Mcrn",
+      "start_tick": 107427,
+      "end_tick": 107682,
+      "start_time": 1678.55,
+      "end_time": 1682.53,
+      "suspicion_score": 0.7308
+    },
+    {
+      "steamid": "76561198209087875",
+      "player_name": "Mam\u00e8ne",
+      "start_tick": 14362,
+      "end_tick": 14617,
+      "start_time": 224.41,
+      "end_time": 228.39,
+      "suspicion_score": 0.7292
+    },
+    {
+      "steamid": "76561198209087875",
+      "player_name": "Mam\u00e8ne",
+      "start_tick": 14234,
+      "end_tick": 14489,
+      "start_time": 222.41,
+      "end_time": 226.39,
+      "suspicion_score": 0.7292
+    },
+    {
+      "steamid": "76561199122883822",
+      "player_name": "pig benis",
+      "start_tick": 40043,
+      "end_tick": 40298,
+      "start_time": 625.67,
+      "end_time": 629.66,
+      "suspicion_score": 0.7239
+    },
+    {
+      "steamid": "76561199122883822",
+      "player_name": "pig benis",
+      "start_tick": 96725,
+      "end_tick": 96980,
+      "start_time": 1511.33,
+      "end_time": 1515.31,
+      "suspicion_score": 0.7235
+    },
+    {
+      "steamid": "76561199122883822",
+      "player_name": "pig benis",
+      "start_tick": 111702,
+      "end_tick": 111957,
+      "start_time": 1745.34,
+      "end_time": 1749.33,
+      "suspicion_score": 0.7181
+    },
+    {
+      "steamid": "76561198020412524",
+      "player_name": "tony",
+      "start_tick": 2049,
+      "end_tick": 2304,
+      "start_time": 32.02,
+      "end_time": 36.0,
+      "suspicion_score": 0.7153
+    },
+    {
+      "steamid": "76561198151952470",
+      "player_name": "qubb",
+      "start_tick": 48836,
+      "end_tick": 49091,
+      "start_time": 763.06,
+      "end_time": 767.05,
+      "suspicion_score": 0.7153
+    },
+    {
+      "steamid": "76561199482648944",
+      "player_name": "KoBy",
+      "start_tick": 34481,
+      "end_tick": 34736,
+      "start_time": 538.77,
+      "end_time": 542.75,
+      "suspicion_score": 0.7148
+    },
+    {
+      "steamid": "76561199482648944",
+      "player_name": "KoBy",
+      "start_tick": 79649,
+      "end_tick": 79904,
+      "start_time": 1244.52,
+      "end_time": 1248.5,
+      "suspicion_score": 0.7122
+    },
+    {
+      "steamid": "76561199482648944",
+      "player_name": "KoBy",
+      "start_tick": 79521,
+      "end_tick": 79776,
+      "start_time": 1242.52,
+      "end_time": 1246.5,
+      "suspicion_score": 0.7122
+    },
+    {
+      "steamid": "76561199122883822",
+      "player_name": "pig benis",
+      "start_tick": 92822,
+      "end_tick": 93077,
+      "start_time": 1450.34,
+      "end_time": 1454.33,
+      "suspicion_score": 0.7113
+    },
+    {
+      "steamid": "76561199482648944",
+      "player_name": "KoBy",
+      "start_tick": 68995,
+      "end_tick": 69250,
+      "start_time": 1078.05,
+      "end_time": 1082.03,
+      "suspicion_score": 0.7111
+    }
+  ],
+  "forensic_proofs": {
+    "kill_breakdowns": {
+      "76561198020412524": {
+        "player_name": "tony",
+        "total_kills": 16,
+        "headshot_count": 8,
+        "headshot_rate": 0.5,
+        "blind_kills": 0,
+        "smoke_kills": 1,
+        "wallbang_kills": 0,
+        "air_kills": 0,
+        "hitgroups": {
+          "Head (Headshot)": 8,
+          "Upper Chest": 3,
+          "Stomach": 3,
+          "Right Arm": 1,
+          "Generic / Body": 1
+        },
+        "weapons": {
+          "AK47": 5,
+          "M4A1": 4,
+          "TEC9": 3,
+          "GLOCK": 2,
+          "HEGRENADE": 1,
+          "FAMAS": 1
+        }
+      },
+      "76561198051165513": {
+        "player_name": "Apollo#",
+        "total_kills": 15,
+        "headshot_count": 7,
+        "headshot_rate": 0.467,
+        "blind_kills": 0,
+        "smoke_kills": 0,
+        "wallbang_kills": 1,
+        "air_kills": 0,
+        "hitgroups": {
+          "Head (Headshot)": 7,
+          "Upper Chest": 3,
+          "Stomach": 2,
+          "Right Leg": 1,
+          "neck": 1,
+          "Unknown": 1
+        },
+        "weapons": {
+          "AK47": 9,
+          "M4A1": 2,
+          "USP_SILENCER": 1,
+          "MP9": 1,
+          "TEC9": 1,
+          "WORLD": 1
+        }
+      },
+      "76561198073116271": {
+        "player_name": "Mcrn",
+        "total_kills": 18,
+        "headshot_count": 6,
+        "headshot_rate": 0.333,
+        "blind_kills": 0,
+        "smoke_kills": 2,
+        "wallbang_kills": 0,
+        "air_kills": 0,
+        "hitgroups": {
+          "Head (Headshot)": 6,
+          "Upper Chest": 6,
+          "Stomach": 3,
+          "Right Arm": 1,
+          "Right Leg": 1,
+          "Unknown": 1
+        },
+        "weapons": {
+          "AK47": 9,
+          "AWP": 4,
+          "NOVA": 2,
+          "M4A1_SILENCER": 2,
+          "WORLD": 1
+        }
+      },
+      "76561198121324937": {
+        "player_name": "ZaRpX",
+        "total_kills": 22,
+        "headshot_count": 6,
+        "headshot_rate": 0.273,
+        "blind_kills": 1,
+        "smoke_kills": 0,
+        "wallbang_kills": 0,
+        "air_kills": 0,
+        "hitgroups": {
+          "Head (Headshot)": 6,
+          "Stomach": 6,
+          "Upper Chest": 5,
+          "Right Arm": 4,
+          "Unknown": 1
+        },
+        "weapons": {
+          "AK47": 7,
+          "AWP": 6,
+          "GALILAR": 4,
+          "WORLD": 1,
+          "DEAGLE": 1,
+          "M4A1_SILENCER": 1,
+          "M4A1": 1,
+          "GLOCK": 1
+        }
+      },
+      "76561198151952470": {
+        "player_name": "qubb",
+        "total_kills": 19,
+        "headshot_count": 8,
+        "headshot_rate": 0.421,
+        "blind_kills": 0,
+        "smoke_kills": 1,
+        "wallbang_kills": 1,
+        "air_kills": 0,
+        "hitgroups": {
+          "Upper Chest": 9,
+          "Head (Headshot)": 8,
+          "Stomach": 1,
+          "Right Arm": 1
+        },
+        "weapons": {
+          "AK47": 7,
+          "AWP": 5,
+          "M4A1_SILENCER": 3,
+          "MAC10": 2,
+          "GALILAR": 2
+        }
+      },
+      "76561198209087875": {
+        "player_name": "Mam\u00e8ne",
+        "total_kills": 8,
+        "headshot_count": 6,
+        "headshot_rate": 0.75,
+        "blind_kills": 0,
+        "smoke_kills": 0,
+        "wallbang_kills": 1,
+        "air_kills": 0,
+        "hitgroups": {
+          "Head (Headshot)": 6,
+          "Right Arm": 1,
+          "Stomach": 1
+        },
+        "weapons": {
+          "FAMAS": 3,
+          "AK47": 2,
+          "GLOCK": 1,
+          "USP_SILENCER": 1,
+          "M4A1_SILENCER": 1
+        }
+      },
+      "76561198367919010": {
+        "player_name": "Yuu Ayase",
+        "total_kills": 23,
+        "headshot_count": 11,
+        "headshot_rate": 0.478,
+        "blind_kills": 1,
+        "smoke_kills": 1,
+        "wallbang_kills": 3,
+        "air_kills": 0,
+        "hitgroups": {
+          "Head (Headshot)": 11,
+          "Upper Chest": 9,
+          "Stomach": 3
+        },
+        "weapons": {
+          "AK47": 7,
+          "M4A1_SILENCER": 5,
+          "AWP": 4,
+          "SSG08": 3,
+          "GALILAR": 2,
+          "MP9": 2
+        }
+      },
+      "76561198873431122": {
+        "player_name": "Valt",
+        "total_kills": 13,
+        "headshot_count": 6,
+        "headshot_rate": 0.462,
+        "blind_kills": 0,
+        "smoke_kills": 0,
+        "wallbang_kills": 1,
+        "air_kills": 0,
+        "hitgroups": {
+          "Head (Headshot)": 6,
+          "Upper Chest": 5,
+          "Unknown": 1,
+          "Stomach": 1
+        },
+        "weapons": {
+          "M4A1_SILENCER": 4,
+          "GALILAR": 3,
+          "MP7": 2,
+          "WORLD": 1,
+          "MP9": 1,
+          "M4A1": 1,
+          "MAC10": 1
+        }
+      },
+      "76561199122883822": {
+        "player_name": "pig benis",
+        "total_kills": 25,
+        "headshot_count": 18,
+        "headshot_rate": 0.72,
+        "blind_kills": 0,
+        "smoke_kills": 0,
+        "wallbang_kills": 1,
+        "air_kills": 0,
+        "hitgroups": {
+          "Head (Headshot)": 18,
+          "Upper Chest": 5,
+          "Left Arm": 1,
+          "Left Leg": 1
+        },
+        "weapons": {
+          "AK47": 10,
+          "DEAGLE": 6,
+          "AWP": 3,
+          "USP_SILENCER": 3,
+          "GLOCK": 1,
+          "MAC10": 1,
+          "M4A1_SILENCER": 1
+        }
+      },
+      "76561199482648944": {
+        "player_name": "KoBy",
+        "total_kills": 16,
+        "headshot_count": 7,
+        "headshot_rate": 0.438,
+        "blind_kills": 0,
+        "smoke_kills": 2,
+        "wallbang_kills": 0,
+        "air_kills": 0,
+        "hitgroups": {
+          "Head (Headshot)": 7,
+          "Stomach": 6,
+          "Upper Chest": 2,
+          "Right Leg": 1
+        },
+        "weapons": {
+          "AK47": 5,
+          "AWP": 4,
+          "GLOCK": 3,
+          "DEAGLE": 2,
+          "UMP45": 1,
+          "USP_SILENCER": 1
+        }
+      }
+    },
+    "proof_incidents": [
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "KoBy",
+        "steamid": "76561199482648944",
+        "tick": 120951,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 92.3% anomaly probability across ticks 120951 - 121206.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "Mcrn",
+        "steamid": "76561198073116271",
+        "tick": 67498,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 92.2% anomaly probability across ticks 67498 - 67753.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "tony",
+        "steamid": "76561198020412524",
+        "tick": 26084,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 92.1% anomaly probability across ticks 26084 - 26339.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "pig benis",
+        "steamid": "76561199122883822",
+        "tick": 69625,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 90.8% anomaly probability across ticks 69625 - 69880.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "pig benis",
+        "steamid": "76561199122883822",
+        "tick": 58732,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 89.7% anomaly probability across ticks 58732 - 58987.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "qubb",
+        "steamid": "76561198151952470",
+        "tick": 51012,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 89.1% anomaly probability across ticks 51012 - 51267.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "pig benis",
+        "steamid": "76561199122883822",
+        "tick": 92950,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 88.4% anomaly probability across ticks 92950 - 93205.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "pig benis",
+        "steamid": "76561199122883822",
+        "tick": 113238,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 86.4% anomaly probability across ticks 113238 - 113976.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "Yuu Ayase",
+        "steamid": "76561198367919010",
+        "tick": 50694,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 85.1% anomaly probability across ticks 50694 - 50949.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Kinematic Motion Outlier",
+        "cheat_type": "Aimbot Snap / Micro-Smoothing",
+        "severity": "Critical",
+        "player_name": "qubb",
+        "steamid": "76561198151952470",
+        "tick": 101279,
+        "weapon": "Aim Trajectory",
+        "victim": "Target Bone",
+        "evidence": "Angular velocity and jerk spiked to 85.0% anomaly probability across ticks 101279 - 107769.",
+        "reasoning": "Instantaneous crosshair angular velocity exceeded human biomechanical acceleration boundaries (> 1,200 deg/s) followed by a 0-pixel overshoot halt, characteristic of algorithmic aim-assist."
+      },
+      {
+        "category": "Vision Occlusion Violation",
+        "cheat_type": "ESP / Blind Aimbot",
+        "severity": "High",
+        "player_name": "ZaRpX",
+        "steamid": "76561198121324937",
+        "tick": 46073,
+        "weapon": "M4A1",
+        "victim": "KoBy",
+        "evidence": "Eliminated KoBy while fully flash-blinded.",
+        "reasoning": "Standard human players suffer complete visual deprivation during flashbang blinding. Firing with pinpoint accuracy while blind indicates crosshair locking or ESP radar assistance."
+      },
+      {
+        "category": "Vision Occlusion Violation",
+        "cheat_type": "ESP / Blind Aimbot",
+        "severity": "High",
+        "player_name": "Yuu Ayase",
+        "steamid": "76561198367919010",
+        "tick": 120173,
+        "weapon": "AK47",
+        "victim": "qubb",
+        "evidence": "Eliminated qubb while fully flash-blinded.",
+        "reasoning": "Standard human players suffer complete visual deprivation during flashbang blinding. Firing with pinpoint accuracy while blind indicates crosshair locking or ESP radar assistance."
+      },
+      {
+        "category": "Volumetric Smoke Tracking (Research Track)",
+        "cheat_type": "Through-Smoke Engagement Context",
+        "severity": "Medium",
+        "player_name": "Mcrn",
+        "steamid": "76561198073116271",
+        "tick": 27949,
+        "weapon": "AWP",
+        "victim": "tony",
+        "evidence": "Eliminated tony through active volumetric smoke.",
+        "reasoning": "Event logs confirm elimination occurred through smoke geometry. Note: Classified as contextual research evidence; common spam angles, radar pings, or teammate callouts can also produce legitimate through-smoke kills."
+      },
+      {
+        "category": "Volumetric Smoke Tracking (Research Track)",
+        "cheat_type": "Through-Smoke Engagement Context",
+        "severity": "Medium",
+        "player_name": "Mcrn",
+        "steamid": "76561198073116271",
+        "tick": 35994,
+        "weapon": "AWP",
+        "victim": "pig benis",
+        "evidence": "Eliminated pig benis through active volumetric smoke.",
+        "reasoning": "Event logs confirm elimination occurred through smoke geometry. Note: Classified as contextual research evidence; common spam angles, radar pings, or teammate callouts can also produce legitimate through-smoke kills."
+      },
+      {
+        "category": "Wall Penetration Anomaly (Research Track)",
+        "cheat_type": "Wall Penetration / Pre-Aim Context",
+        "severity": "Medium",
+        "player_name": "qubb",
+        "steamid": "76561198151952470",
+        "tick": 97323,
+        "weapon": "MAC10",
+        "victim": "Mam\u00e8ne",
+        "evidence": "Wallbang kill penetrating 1 layers of geometry (Headshot: True).",
+        "reasoning": "Observed wall penetration from demo death events. Note: Full ESP / wallhack validation remains a research track due to demo tick compression and lack of client-side visibility raycasts; requires reviewer confirmation of radar/sound cues."
+      },
+      {
+        "category": "Wall Penetration Anomaly (Research Track)",
+        "cheat_type": "Wall Penetration / Pre-Aim Context",
+        "severity": "Medium",
+        "player_name": "Mam\u00e8ne",
+        "steamid": "76561198209087875",
+        "tick": 79130,
+        "weapon": "AK47",
+        "victim": "Apollo#",
+        "evidence": "Wallbang kill penetrating 1 layers of geometry (Headshot: True).",
+        "reasoning": "Observed wall penetration from demo death events. Note: Full ESP / wallhack validation remains a research track due to demo tick compression and lack of client-side visibility raycasts; requires reviewer confirmation of radar/sound cues."
+      },
+      {
+        "category": "Wall Penetration Anomaly (Research Track)",
+        "cheat_type": "Wall Penetration / Pre-Aim Context",
+        "severity": "Medium",
+        "player_name": "Yuu Ayase",
+        "steamid": "76561198367919010",
+        "tick": 5618,
+        "weapon": "SSG08",
+        "victim": "qubb",
+        "evidence": "Wallbang kill penetrating 1 layers of geometry (Headshot: True).",
+        "reasoning": "Observed wall penetration from demo death events. Note: Full ESP / wallhack validation remains a research track due to demo tick compression and lack of client-side visibility raycasts; requires reviewer confirmation of radar/sound cues."
+      },
+      {
+        "category": "Wall Penetration Anomaly (Research Track)",
+        "cheat_type": "Wall Penetration / Pre-Aim Context",
+        "severity": "Medium",
+        "player_name": "Yuu Ayase",
+        "steamid": "76561198367919010",
+        "tick": 12205,
+        "weapon": "SSG08",
+        "victim": "Apollo#",
+        "evidence": "Wallbang kill penetrating 1 layers of geometry (Headshot: True).",
+        "reasoning": "Observed wall penetration from demo death events. Note: Full ESP / wallhack validation remains a research track due to demo tick compression and lack of client-side visibility raycasts; requires reviewer confirmation of radar/sound cues."
+      },
+      {
+        "category": "Wall Penetration Anomaly (Research Track)",
+        "cheat_type": "Wall Penetration / Pre-Aim Context",
+        "severity": "Medium",
+        "player_name": "Yuu Ayase",
+        "steamid": "76561198367919010",
+        "tick": 87096,
+        "weapon": "SSG08",
+        "victim": "Mcrn",
+        "evidence": "Wallbang kill penetrating 1 layers of geometry (Headshot: True).",
+        "reasoning": "Observed wall penetration from demo death events. Note: Full ESP / wallhack validation remains a research track due to demo tick compression and lack of client-side visibility raycasts; requires reviewer confirmation of radar/sound cues."
+      },
+      {
+        "category": "Volumetric Smoke Tracking (Research Track)",
+        "cheat_type": "Through-Smoke Engagement Context",
+        "severity": "Medium",
+        "player_name": "KoBy",
+        "steamid": "76561199482648944",
+        "tick": 13602,
+        "weapon": "AK47",
+        "victim": "qubb",
+        "evidence": "Eliminated qubb through active volumetric smoke.",
+        "reasoning": "Event logs confirm elimination occurred through smoke geometry. Note: Classified as contextual research evidence; common spam angles, radar pings, or teammate callouts can also produce legitimate through-smoke kills."
+      },
+      {
+        "category": "Volumetric Smoke Tracking (Research Track)",
+        "cheat_type": "Through-Smoke Engagement Context",
+        "severity": "Medium",
+        "player_name": "KoBy",
+        "steamid": "76561199482648944",
+        "tick": 27655,
+        "weapon": "AK47",
+        "victim": "Apollo#",
+        "evidence": "Eliminated Apollo# through active volumetric smoke.",
+        "reasoning": "Event logs confirm elimination occurred through smoke geometry. Note: Classified as contextual research evidence; common spam angles, radar pings, or teammate callouts can also produce legitimate through-smoke kills."
+      }
+    ]
+  },
+  "model_provenance": {
+    "model_name": "XGBoost",
+    "model_version": "2.4.1",
+    "calibrated_threshold": 0.61,
+    "target_max_fpr": 0.08,
+    "empirical_fpr": 0.0666,
+    "training_dataset": "CS2CD (Hugging Face) - 399,156 windows",
+    "split_method": "Stratified match-held-out split (prevents player/map leakage)",
+    "decision_support_only": true
+  },
+  "limitations": {
+    "uncertainty_notes": [
+      "Model scores reflect statistical anomaly likelihood compared to CS2CD reference distribution, NOT absolute proof of cheating.",
+      "High-DPI flick adjustments and exceptional pro aim can produce elevated jerk scores without cheat software.",
+      "Decision support only: Human referee review is strictly required before issuing competitive sanctions or bans."
+    ],
+    "missing_fields": [
+      "visibility_ts: Client viewport opponent entry timestamps are not logged in CS2 Source 2 demo streams.",
+      "crosshair_align_ts: Sub-tick raycast bone alignment intervals are unrecorded; reaction features are stubbed in current models.",
+      "client_input_hardware: Direct USB mouse driver packets are unavailable in server-side demo replays."
+    ],
+    "unsupported_cheat_categories": [
+      "Triggerbot: Cannot be authoritatively confirmed without client-side visibility timing data.",
+      "External Bot / AI Autopilot: Requires full navmesh / behavioral task trajectory annotations."
+    ],
+    "research_track_signals": [
+      "Wall Penetration / ESP: Contextual only. Geometry penetration events logged, but requires visual review of radar and audio callout context.",
+      "Through-Smoke Combat: Incidental smoke kills vs wireframe ESP cannot be separated with 100% confidence from server events alone."
+    ]
+  },
+  "analysis_id": "analysis_8473a9075820",
+  "match_id": "analysis_8473a9075820",
+  "completed_at": "2026-11-26T16:24:44.984197+00:00",
+  "demo_path": "C:\\Visual Studio Code\\Cheat-and-Bot-Detection-in-Competitive-FPS-Games\\data\\demos\\analysis_8473a9075820_CSGO-3nbbd-z6WC8-VvK3y-QZNsk-mtLMB.dem"
+}

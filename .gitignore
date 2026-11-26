@@ -65,3 +65,6 @@ stitch_cs2_anti_cheat_dashboard/
 # OS generated
 .DS_Store
 Thumbs.db
+
+# Docs
+docs/
