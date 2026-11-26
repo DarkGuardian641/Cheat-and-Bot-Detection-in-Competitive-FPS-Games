@@ -2,6 +2,7 @@ import json
 import logging
 import re
 import shutil
+import time
 import uuid
 from datetime import UTC, datetime
 from pathlib import Path
@@ -101,12 +102,27 @@ def _read_analysis_data(analysis_id: str) -> dict[str, Any]:
 def _save_analysis_data(analysis_id: str, data: dict[str, Any]) -> None:
     path = _get_analysis_path(analysis_id)
     temporary_path = path.with_suffix(".json.tmp")
-    try:
-        with open(temporary_path, "w", encoding="utf-8") as f:
-            json.dump(data, f, indent=2)
-        temporary_path.replace(path)
-    finally:
-        temporary_path.unlink(missing_ok=True)
+    
+    # Retry loop to handle Windows file locking / antivirus delays during atomic replace
+    for attempt in range(5):
+        try:
+            with open(temporary_path, "w", encoding="utf-8") as f:
+                json.dump(data, f, indent=2)
+            temporary_path.replace(path)
+            return
+        except PermissionError:
+            if attempt == 4:
+                # Fallback to direct write if Windows replace continues to be blocked
+                try:
+                    with open(path, "w", encoding="utf-8") as f:
+                        json.dump(data, f, indent=2)
+                    return
+                except Exception:
+                    pass
+                raise
+            time.sleep(0.05 * (attempt + 1))
+        finally:
+            temporary_path.unlink(missing_ok=True)
 
 
 def run_demo_pipeline_task(file_path: Path, analysis_id: str) -> None:
