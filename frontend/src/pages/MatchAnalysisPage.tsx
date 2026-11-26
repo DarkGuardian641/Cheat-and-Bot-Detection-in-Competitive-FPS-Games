@@ -1,546 +1,488 @@
-import React, { useState, useEffect } from 'react';
-import { api, MatchAnalysisResults, ProofIncident } from '../services/api';
+import React, { useState, useEffect, useRef } from 'react';
+import { Loader2 } from 'lucide-react';
+import {
+  api,
+  AnalysisLimitations,
+  AnalysisStatus,
+  MatchAnalysisResults,
+  ModelProvenance,
+  ProofIncident,
+} from '../services/api';
+import {
+  Badge,
+  displayFilename,
+  ErrorState,
+  Figures,
+  formatDate,
+  formatNumber,
+  formatPct,
+  Loading,
+  mapLabel,
+  Mono,
+  PageHeader,
+  RatioBar,
+  SectionTitle,
+  VerdictBadge,
+} from '../components/ui';
+import { SuspicionTimeline } from '../components/SuspicionTimeline';
 
 interface MatchAnalysisPageProps {
   matchId: string;
   onBack: () => void;
   onSelectPlayer: (playerId: string) => void;
+  /** Called once when a job that was in flight finishes or fails. */
+  onAnalysisSettled?: () => void;
 }
+
+// Values documented in docs/evaluation_results.md; used when an older report
+// was written before the backend started embedding provenance.
+const DEFAULT_PROVENANCE: ModelProvenance = {
+  model_name: 'XGBoost',
+  model_version: '2.4.1',
+  calibrated_threshold: 0.61,
+  target_max_fpr: 0.08,
+  empirical_fpr: 0.0666,
+  training_dataset: 'CS2CD (Hugging Face) - 399,156 windows',
+  split_method: 'Stratified match-held-out split',
+  decision_support_only: true,
+};
+
+const DEFAULT_LIMITATIONS: AnalysisLimitations = {
+  uncertainty_notes: [
+    'Scores measure how unusual a window is against the CS2CD reference data. They are not proof of cheating.',
+    'Windows from a cheater include ordinary play too, so match-level results are diluted (false-negative rate 74.7% at this threshold).',
+  ],
+  missing_fields: [
+    'visibility_ts: when an opponent enters the client viewport is not in the demo stream.',
+    'crosshair_align_ts: sub-tick crosshair-to-bone raycasts are not recorded, so reaction-time features are zero-filled.',
+  ],
+  unsupported_cheat_categories: ['Triggerbot and ESP can only be noted as context; the demo lacks the client visibility data to confirm them.'],
+  research_track_signals: [
+    'Wallbang and through-smoke kills are logged as facts for manual review, not scored as cheating.',
+  ],
+};
+
+const IN_FLIGHT = new Set(['pending', 'processing']);
 
 export const MatchAnalysisPage: React.FC<MatchAnalysisPageProps> = ({
   matchId,
   onBack,
   onSelectPlayer,
+  onAnalysisSettled,
 }) => {
+  const [status, setStatus] = useState<AnalysisStatus | null>(null);
   const [data, setData] = useState<MatchAnalysisResults | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [selectedProofFilter, setSelectedProofFilter] = useState<string>('all');
+  const [evidencePlayer, setEvidencePlayer] = useState<string>('all');
+  const [showAllEvidence, setShowAllEvidence] = useState(false);
+  const settledRef = useRef(onAnalysisSettled);
+  settledRef.current = onAnalysisSettled;
 
   useEffect(() => {
-    let interval: any = null;
+    let cancelled = false;
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    let wasInFlight = false;
 
-    const fetchAnalysis = async () => {
+    setStatus(null);
+    setData(null);
+    setError(null);
+    setEvidencePlayer('all');
+    setShowAllEvidence(false);
+
+    // Poll the lightweight status endpoint while the job runs, then fetch the
+    // full report once.
+    const poll = async () => {
       try {
-        const res = await api.getAnalysisResults(matchId);
-        setData(res);
-        if (res.status === 'completed' || res.status === 'failed') {
-          setLoading(false);
-          if (interval) clearInterval(interval);
+        const s = await api.getAnalysisStatus(matchId);
+        if (cancelled) return;
+        setStatus(s);
+        if (IN_FLIGHT.has(s.status)) {
+          wasInFlight = true;
+          timer = setTimeout(poll, 2500);
+          return;
         }
-      } catch (err: any) {
-        setError(err.message || 'Failed loading analysis');
-        setLoading(false);
+        const res = await api.getAnalysisResults(matchId);
+        if (cancelled) return;
+        setData(res);
+        if (wasInFlight) settledRef.current?.();
+      } catch (err: unknown) {
+        if (cancelled) return;
+        setError(err instanceof Error ? err.message : 'Failed to load this analysis.');
       }
     };
 
-    fetchAnalysis();
-    interval = setInterval(fetchAnalysis, 3000);
-
+    poll();
     return () => {
-      if (interval) clearInterval(interval);
+      cancelled = true;
+      if (timer) clearTimeout(timer);
     };
   }, [matchId]);
 
-  if (loading && !data) {
+  const back = { label: 'Matches', onClick: onBack };
+
+  if (error) {
     return (
-      <div className="py-24 flex flex-col items-center justify-center gap-3">
-        <span className="material-symbols-outlined animate-spin text-4xl text-cs-orange">sync</span>
-        <p className="text-sm font-semibold text-text-primary">Parsing Sub-Tick Demo Telemetry...</p>
-        <span className="font-mono text-xs text-text-tertiary">Match ID: {matchId}</span>
+      <div>
+        <PageHeader title="Match report" back={back} />
+        <ErrorState
+          title="This analysis could not be loaded"
+          message={error}
+          action={
+            <button className="btn-secondary" onClick={onBack}>
+              Back to matches
+            </button>
+          }
+        />
       </div>
     );
   }
 
-  if (error || !data) {
+  if (!status || (!data && !IN_FLIGHT.has(status.status))) {
     return (
-      <div className="py-24 flex flex-col items-center justify-center gap-3">
-        <span className="material-symbols-outlined text-4xl text-cs-red">error</span>
-        <p className="text-base font-bold text-text-primary">Analysis Failed or Not Found</p>
-        <p className="text-xs text-text-tertiary">{error}</p>
-        <button
-          onClick={onBack}
-          className="mt-2 px-4 py-2 bg-surface-card border border-border-subtle text-text-primary rounded-lg text-xs font-mono font-semibold"
-        >
-          Back to Matches
-        </button>
+      <div>
+        <PageHeader title="Match report" back={back} />
+        <Loading label="Loading report" />
       </div>
     );
   }
 
-  const summaries = Object.values(data.player_summaries || {});
+  const title = displayFilename(status.filename);
+
+  if (IN_FLIGHT.has(status.status)) {
+    return (
+      <div>
+        <PageHeader title={title} back={back} description={<Mono className="text-ink-3">{matchId}</Mono>} />
+        <div className="panel flex flex-col items-center px-6 py-16 text-center">
+          <Loader2 size={22} className="mb-4 animate-spin text-ember" />
+          <p className="font-medium text-ink">
+            {status.status === 'pending' ? 'Waiting to start' : 'Parsing the demo and scoring windows'}
+          </p>
+          <p className="mt-1 max-w-[52ch] text-sm text-ink-2">
+            Large demos can take a few minutes. This page checks every few seconds and opens the report when it is
+            ready.
+          </p>
+          {status.created_at && <p className="mt-4 text-xs text-ink-3">Uploaded {formatDate(status.created_at)}</p>}
+        </div>
+      </div>
+    );
+  }
+
+  if (status.status === 'failed' || data?.status === 'failed') {
+    const msg = status.error || 'The backend did not record a reason.';
+    const modelMissing = /no trained model/i.test(msg);
+    return (
+      <div>
+        <PageHeader title={title} back={back} description={<Mono className="text-ink-3">{matchId}</Mono>} />
+        <ErrorState
+          title="Analysis failed"
+          message={
+            modelMissing
+              ? 'The backend has no trained model to score this demo with. Train one with python -m ml.train, then upload the demo again.'
+              : `The demo could not be processed. It may be truncated, corrupt, or not a CS2 demo. Backend said: “${msg}”`
+          }
+          action={
+            <button className="btn-secondary" onClick={onBack}>
+              Back to matches
+            </button>
+          }
+        />
+      </div>
+    );
+  }
+
+  if (!data) return null;
+
+  /* ---------- Completed report ---------- */
+
+  const threshold = data.threshold_used ?? DEFAULT_PROVENANCE.calibrated_threshold;
+  const summaries = Object.values(data.player_summaries || {}).sort(
+    (a, b) =>
+      Number(b.status === 'Flagged') - Number(a.status === 'Flagged') || b.suspicious_ratio - a.suspicious_ratio,
+  );
+  const flaggedCount = summaries.filter((s) => s.status === 'Flagged').length;
+  const totalWindows = data.total_windows || 0;
+  const flaggedWindows = data.suspicious_windows_count || 0;
+
+  const kills = Object.entries(data.forensic_proofs?.kill_breakdowns || {}).sort(
+    (a, b) => b[1].total_kills - a[1].total_kills,
+  );
+  const totalKills = kills.reduce((acc, [, k]) => acc + (k.total_kills || 0), 0);
+  const totalHs = kills.reduce((acc, [, k]) => acc + (k.headshot_count || 0), 0);
+
   const proofs: ProofIncident[] = data.forensic_proofs?.proof_incidents || [];
-  const filteredProofs = proofs.filter((p) => {
-    return selectedProofFilter === 'all' || p.category.toLowerCase().includes(selectedProofFilter.toLowerCase()) || p.cheat_type.toLowerCase().includes(selectedProofFilter.toLowerCase());
-  });
+  const proofPlayers = [...new Map(proofs.map((p) => [p.steamid, p.player_name])).entries()];
+  const filteredProofs = proofs.filter((p) => evidencePlayer === 'all' || p.steamid === evidencePlayer);
+  const visibleProofs = showAllEvidence ? filteredProofs : filteredProofs.slice(0, 6);
+  // The forensic pass often writes the same explanation for every incident of a
+  // type; state it once instead of repeating it on every row.
+  const reasonings = [...new Set(filteredProofs.map((p) => p.reasoning))];
+  const sharedReasoning = reasonings.length === 1 ? reasonings[0] : null;
 
-  const totalKillsCount = Object.values(data.forensic_proofs?.kill_breakdowns || {}).reduce((acc, p) => acc + (p.total_kills || 0), 0);
-  const totalHeadshotsCount = Object.values(data.forensic_proofs?.kill_breakdowns || {}).reduce((acc, p) => acc + (p.headshot_count || 0), 0);
-  const totalSmokesCount = Object.values(data.forensic_proofs?.kill_breakdowns || {}).reduce((acc, p) => acc + (p.smoke_kills || 0), 0);
-  const totalBlindCount = Object.values(data.forensic_proofs?.kill_breakdowns || {}).reduce((acc, p) => acc + (p.blind_kills || 0), 0);
-  const totalWallbangCount = Object.values(data.forensic_proofs?.kill_breakdowns || {}).reduce((acc, p) => acc + (p.wallbang_kills || 0), 0);
+  const provenance = { ...DEFAULT_PROVENANCE, ...(data.model_provenance || {}) };
+  const limitations = data.limitations || DEFAULT_LIMITATIONS;
+  const notes = [
+    ...limitations.uncertainty_notes,
+    ...limitations.missing_fields,
+    ...limitations.unsupported_cheat_categories,
+    ...limitations.research_track_signals,
+  ];
 
   return (
-    <div className="flex flex-col gap-6 w-full">
-      {/* Top Breadcrumb & Metadata Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div className="flex flex-col gap-1">
-          <div className="flex items-center gap-2">
-            <button
-              onClick={onBack}
-              className="flex items-center gap-1 text-cs-orange hover:text-cs-orange-hover text-xs font-mono font-semibold"
-            >
-              <span className="material-symbols-outlined text-sm">arrow_back</span>
-              <span>Matches Vault</span>
-            </button>
-            <span className="text-border-subtle text-xs">/</span>
-            <span className="font-mono text-xs text-text-tertiary">{matchId.slice(0, 16)}...</span>
-          </div>
-          <h1 className="text-xl font-bold text-text-primary tracking-tight flex items-center gap-2">
-            <span>Match Replay &amp; Forensic Kinematics</span>
-            <span
-              className={`px-2.5 py-0.5 rounded-full font-mono text-xs ${
-                data.status === 'completed'
-                  ? 'bg-cs-green/10 text-cs-green border border-cs-green/30'
-                  : 'bg-cs-orange/10 text-cs-orange border border-cs-orange/30 animate-pulse'
-              }`}
-            >
-              {data.status.toUpperCase()}
-            </span>
-          </h1>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <span className="px-2 py-1 rounded bg-surface-card border border-border-subtle font-mono text-xs text-amber-300 uppercase font-bold">
-            {data.match_info?.map_name || 'de_mirage'}
+    <div>
+      <PageHeader
+        title={
+          <span className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            {mapLabel(data.match_info?.map_name)}
+            <span className="text-base font-normal text-ink-2">{title}</span>
           </span>
-        </div>
-      </div>
+        }
+        back={back}
+        description={
+          <span className="flex flex-wrap gap-x-4 gap-y-1">
+            {data.match_info?.server_name && <span>{data.match_info.server_name}</span>}
+            {status.completed_at && <span>Analyzed {formatDate(status.completed_at)}</span>}
+            <Mono className="text-ink-3">{matchId}</Mono>
+          </span>
+        }
+      />
 
-      {/* MATCH BANNER & SUMMARY BAR (Leetify / HLTV Style) */}
-      <section className="rounded-xl bg-surface-card border border-border-subtle overflow-hidden shadow-lg">
-        <div className="p-5 flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-b border-border-subtle bg-gradient-to-r from-surface-panel via-surface-card to-surface-panel">
-          {/* Left Team Info */}
-          <div className="flex items-center gap-4 flex-1">
-            <div className="w-12 h-12 rounded-xl bg-cs-ct/15 border border-cs-ct/30 flex items-center justify-center font-bold text-cs-ct font-mono text-lg shadow-sm">
-              CT
-            </div>
-            <div className="flex flex-col">
-              <div className="flex items-center gap-2">
-                <h2 className="text-base font-bold text-text-primary tracking-wide">Counter-Terrorists</h2>
-                <span className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-cs-ct/20 text-cs-ct font-bold">CT SIDE</span>
-              </div>
-              <span className="text-xs text-text-tertiary font-mono">
-                {summaries.filter(s => s.status === 'Flagged').length > 0 ? '1+ Anomaly Signals' : 'Clean Trajectory'}
-              </span>
-            </div>
-          </div>
+      <Figures
+        items={[
+          {
+            label: 'Players flagged',
+            value: `${flaggedCount} of ${summaries.length}`,
+            tone: flaggedCount > 0 ? 'flag' : 'clean',
+          },
+          {
+            label: 'Flagged windows',
+            value: formatNumber(flaggedWindows),
+            note: `${formatPct(totalWindows ? flaggedWindows / totalWindows : 0)} of ${formatNumber(totalWindows)}`,
+          },
+          {
+            label: 'Kills logged',
+            value: formatNumber(totalKills),
+            note: totalKills ? `${formatPct(totalHs / totalKills, 0)} headshots` : undefined,
+          },
+          { label: 'Threshold', value: threshold.toFixed(2), note: `${provenance.model_name} calibrated` },
+        ]}
+      />
 
-          {/* Central Match Telemetry */}
-          <div className="flex flex-col items-center justify-center px-6">
-            <div className="flex items-center gap-4">
-              <span className="text-3xl font-black font-mono text-text-primary tracking-tight">13</span>
-              <div className="flex flex-col items-center gap-0.5">
-                <span className="font-mono text-[10px] uppercase tracking-wider text-text-tertiary">MR12 OFFICIAL</span>
-                <span className="font-mono text-xs font-bold text-cs-orange bg-cs-orange/10 px-2 py-0.5 rounded border border-cs-orange/20">
-                  {data.match_info?.map_name || 'de_mirage'}
-                </span>
-                <span className="font-mono text-[10px] text-text-tertiary">
-                  Windows: {data.total_windows || 0}
-                </span>
-              </div>
-              <span className="text-3xl font-black font-mono text-text-secondary tracking-tight">
-                {summaries.length > 5 ? '9' : '7'}
-              </span>
-            </div>
-          </div>
-
-          {/* Right Team Info */}
-          <div className="flex items-center gap-4 flex-1 justify-end">
-            <div className="flex flex-col items-end">
-              <div className="flex items-center gap-2">
-                <span className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-cs-t/20 text-cs-t font-bold">T SIDE</span>
-                <h2 className="text-base font-bold text-text-primary tracking-wide">Terrorists</h2>
-              </div>
-              <span className="text-xs text-text-tertiary font-mono">Sub-Tick Synchronized</span>
-            </div>
-            <div className="w-12 h-12 rounded-xl bg-cs-t/15 border border-cs-t/30 flex items-center justify-center font-bold text-cs-t font-mono text-lg shadow-sm">
-              T
-            </div>
-          </div>
-        </div>
-
-        {/* 6 High-Level Quick Stats Band */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 divide-x divide-y sm:divide-y-0 divide-border-subtle bg-surface-panel/70 text-xs">
-          <div className="py-2.5 px-3 flex flex-col">
-            <span className="text-[10px] font-mono uppercase text-text-tertiary">Match Total Kills</span>
-            <span className="font-mono text-xs font-semibold text-text-primary">
-              {totalKillsCount}
-            </span>
-          </div>
-          <div className="py-2.5 px-3 flex flex-col">
-            <span className="text-[10px] font-mono uppercase text-text-tertiary">Headshot Ratio</span>
-            <span className="font-mono text-xs font-semibold text-cs-orange">
-              {totalKillsCount > 0 ? ((totalHeadshotsCount / totalKillsCount) * 100).toFixed(1) : 0}%
-            </span>
-          </div>
-          <div className="py-2.5 px-3 flex flex-col">
-            <span className="text-[10px] font-mono uppercase text-text-tertiary">Smoke Occlusion Kills</span>
-            <span className="font-mono text-xs font-semibold text-amber-300">
-              {totalSmokesCount}
-            </span>
-          </div>
-          <div className="py-2.5 px-3 flex flex-col">
-            <span className="text-[10px] font-mono uppercase text-text-tertiary">Blind Attacker Kills</span>
-            <span className="font-mono text-xs font-semibold text-cs-blue">
-              {totalBlindCount}
-            </span>
-          </div>
-          <div className="py-2.5 px-3 flex flex-col">
-            <span className="text-[10px] font-mono uppercase text-text-tertiary">Wallbang Penetrations</span>
-            <span className="font-mono text-xs font-semibold text-purple-400">
-              {totalWallbangCount}
-            </span>
-          </div>
-          <div className="py-2.5 px-3 flex flex-col bg-cs-red/5">
-            <span className="text-[10px] font-mono uppercase text-cs-red font-semibold">Flagged Suspects</span>
-            <span className="font-mono text-xs font-bold text-cs-red">
-              {data.suspicious_players?.length || 0} Players
-            </span>
+      <section className="mt-10">
+        <SectionTitle title="Players" meta="Share of each player's windows that scored over the threshold" />
+        <div className="panel overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead className="border-b border-line bg-sunken/50">
+                <tr>
+                  <th className="th">Player</th>
+                  <th className="th">Verdict</th>
+                  <th className="th">Flagged share</th>
+                  <th className="th text-right">Flagged / total</th>
+                  <th className="th text-right">Mean score</th>
+                  <th className="th text-right">Peak score</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-line">
+                {summaries.map((p) => {
+                  const flagged = p.status === 'Flagged';
+                  return (
+                    <tr
+                      key={p.steamid}
+                      onClick={() => onSelectPlayer(p.steamid)}
+                      className="cursor-pointer transition-colors hover:bg-sunken/60"
+                    >
+                      <td className="td">
+                        <button
+                          className="font-medium text-ink hover:underline"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onSelectPlayer(p.steamid);
+                          }}
+                        >
+                          {p.player_name}
+                        </button>
+                      </td>
+                      <td className="td">
+                        <VerdictBadge verdict={p.status} />
+                      </td>
+                      <td className="td">
+                        <RatioBar value={p.suspicious_ratio} flagged={flagged} />
+                      </td>
+                      <td className="td num text-right text-ink-2">
+                        {p.suspicious_windows} / {p.total_windows}
+                      </td>
+                      <td className="td num text-right text-ink-2">{(p.mean_suspicion_score || 0).toFixed(3)}</td>
+                      <td className={`td num text-right ${p.max_suspicion_score >= threshold ? 'text-ink' : 'text-ink-2'}`}>
+                        {(p.max_suspicion_score || 0).toFixed(3)}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
 
-      {/* FORENSIC PROOFS & PHYSICAL EVIDENCE LOG */}
+      {(data.evidence_windows?.length ?? 0) > 0 && (
+        <section className="mt-10">
+          <SectionTitle
+            title="When it happened"
+            meta={`The ${data.evidence_windows!.length} highest-scoring windows in the match, by player`}
+          />
+          <SuspicionTimeline windows={data.evidence_windows!} threshold={threshold} onSelectPlayer={onSelectPlayer} />
+        </section>
+      )}
+
       {proofs.length > 0 && (
-        <section className="bg-surface-card border border-border-subtle p-5 rounded-xl shadow-lg flex flex-col gap-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-border-subtle pb-3">
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-cs-red"></span>
-                <h2 className="text-base font-bold text-text-primary">
-                  Forensic Proofs &amp; Kinematic Observations
-                </h2>
-                <span className="px-2 py-0.5 rounded bg-cs-red/10 text-cs-red font-mono text-[10px] font-bold border border-cs-red/30">
-                  {proofs.length} Events Flagged
-                </span>
-              </div>
-              <p className="text-xs text-text-tertiary mt-0.5">
-                Physical observations, body hitgroup confirmations, and biomechanical reasoning
-              </p>
-            </div>
-
-            {/* Filter buttons */}
-            <div className="flex items-center gap-2 flex-wrap font-mono text-xs">
-              <span className="text-text-tertiary text-[11px]">Filter:</span>
-              {['all', 'smoke', 'blind', 'wallbang', 'aim'].map((t) => (
-                <button
-                  key={t}
-                  onClick={() => setSelectedProofFilter(t)}
-                  className={`px-2.5 py-1 rounded text-[11px] font-semibold border transition-all ${
-                    selectedProofFilter === t
-                      ? 'bg-cs-orange text-black border-cs-orange'
-                      : 'bg-surface-panel text-text-secondary border-border-subtle hover:text-text-primary'
-                  }`}
+        <section className="mt-10">
+          <SectionTitle title="Evidence" meta={`${proofs.length} incidents written up by the forensic pass`}>
+            {proofPlayers.length > 1 && (
+              <label className="flex items-center gap-2 text-sm text-ink-2">
+                Player
+                <select
+                  value={evidencePlayer}
+                  onChange={(e) => {
+                    setEvidencePlayer(e.target.value);
+                    setShowAllEvidence(false);
+                  }}
+                  className="field h-8 w-auto pr-8"
                 >
-                  {t.toUpperCase()}
-                </button>
-              ))}
-            </div>
-          </div>
+                  <option value="all">Everyone</option>
+                  {proofPlayers.map(([id, name]) => (
+                    <option key={id} value={id}>
+                      {name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            )}
+          </SectionTitle>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filteredProofs.map((proof: ProofIncident, idx: number) => {
-              const isCrit = proof.severity.toLowerCase() === 'critical';
-              const isHigh = proof.severity.toLowerCase() === 'high';
+          {sharedReasoning && (
+            <p className="mb-3 max-w-[75ch] text-sm text-ink-2">
+              <span className="font-medium text-ink">Why these were written up: </span>
+              {sharedReasoning}
+            </p>
+          )}
+          <ol className="panel divide-y divide-line">
+            {visibleProofs.map((proof, idx) => {
+              const sev = proof.severity.toLowerCase();
               return (
-                <div
-                  key={idx}
-                  className={`p-4 rounded-xl border flex flex-col justify-between gap-3 transition-colors ${
-                    isCrit
-                      ? 'bg-cs-red/5 border-cs-red/30 hover:border-cs-red/50'
-                      : isHigh
-                      ? 'bg-amber-500/5 border-amber-500/30 hover:border-amber-500/50'
-                      : 'bg-surface-panel border-border-subtle'
-                  }`}
-                >
-                  <div className="flex items-start justify-between">
-                    <span className="font-mono text-xs font-bold text-text-primary flex items-center gap-1.5">
-                      <span className={`material-symbols-outlined text-sm ${isCrit ? 'text-cs-red' : isHigh ? 'text-cs-orange' : 'text-cs-blue'}`}>
-                        {proof.category.includes('smoke') ? 'cloud' : proof.category.includes('blind') ? 'visibility_off' : proof.category.includes('wall') ? 'texture' : 'adjust'}
-                      </span>
-                      {proof.cheat_type}
-                    </span>
-                    <span
-                      className={`px-2 py-0.5 rounded font-mono text-[10px] font-bold uppercase ${
-                        isCrit
-                          ? 'bg-cs-red text-white'
-                          : isHigh
-                          ? 'bg-cs-orange text-black'
-                          : 'bg-surface-card text-text-secondary'
-                      }`}
-                    >
+                <li key={`${proof.steamid}-${proof.tick}-${idx}`} className="px-5 py-4">
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+                    <Badge tone={sev === 'critical' || sev === 'high' ? 'flag' : sev === 'medium' ? 'pending' : 'neutral'}>
                       {proof.severity}
-                    </span>
+                    </Badge>
+                    <span className="font-medium text-ink">{proof.cheat_type}</span>
+                    <span className="text-sm text-ink-3">·</span>
+                    <button className="link text-sm" onClick={() => onSelectPlayer(proof.steamid)}>
+                      {proof.player_name}
+                    </button>
+                    <Mono className="ml-auto text-ink-3">tick {proof.tick}</Mono>
                   </div>
-
-                  <div className="flex items-center justify-between text-xs font-mono">
-                    <span className="text-text-secondary">
-                      Player: <span className="text-cs-orange font-bold font-sans cursor-pointer hover:underline" onClick={() => onSelectPlayer(proof.steamid)}>{proof.player_name}</span>
-                    </span>
-                    <span className="text-text-tertiary">
-                      Tick #{proof.tick} • {proof.weapon}
-                    </span>
-                  </div>
-
-                  <div className="p-2.5 rounded-lg bg-surface-bg border border-border-subtle flex flex-col gap-1">
-                    <span className="font-mono text-[10px] uppercase text-text-tertiary font-semibold">
-                      Observation
-                    </span>
-                    <p className="text-xs font-medium text-text-primary leading-snug">
-                      {proof.evidence}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-col gap-0.5">
-                    <span className="font-mono text-[10px] uppercase text-text-tertiary font-semibold">
-                      Forensic Reasoning
-                    </span>
-                    <p className="text-[11px] text-text-secondary leading-relaxed">
-                      {proof.reasoning}
-                    </p>
-                  </div>
-                </div>
+                  <p className="mt-2 max-w-[75ch] text-sm text-ink">{proof.evidence}</p>
+                  {!sharedReasoning && <p className="mt-1 max-w-[75ch] text-sm text-ink-2">{proof.reasoning}</p>}
+                </li>
               );
             })}
-          </div>
+          </ol>
+          {filteredProofs.length > 6 && (
+            <button className="btn-ghost -ml-3 mt-2" onClick={() => setShowAllEvidence((v) => !v)}>
+              {showAllEvidence ? 'Show fewer' : `Show all ${filteredProofs.length}`}
+            </button>
+          )}
         </section>
       )}
 
-      {/* COMBAT, HITGROUP & WEAPON BREAKDOWN (Text Representation) */}
-      {data.forensic_proofs?.kill_breakdowns && Object.keys(data.forensic_proofs.kill_breakdowns).length > 0 && (
-        <section className="bg-surface-card border border-border-subtle p-5 rounded-xl shadow-lg flex flex-col gap-4">
-          <div className="flex items-center justify-between border-b border-border-subtle pb-3">
-            <div>
-              <h2 className="text-base font-bold text-text-primary">Player Combat &amp; Hitgroup Distributions</h2>
-              <p className="text-xs text-text-tertiary">
-                Direct anatomical hitgroups (Head, Chest, Stomach, Legs) and vision obstruction counts
-              </p>
-            </div>
-            <span className="font-mono text-xs text-text-tertiary">
-              {Object.keys(data.forensic_proofs.kill_breakdowns).length} Combatants Logged
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {Object.entries(data.forensic_proofs.kill_breakdowns).map(([steamid, kb]) => (
-              <div
-                key={steamid}
-                className="p-4 rounded-xl border border-border-subtle bg-surface-panel flex flex-col gap-3"
-              >
-                <div className="flex items-center justify-between border-b border-border-subtle pb-2">
-                  <div className="flex flex-col">
-                    <span
-                      onClick={() => onSelectPlayer(steamid)}
-                      className="font-bold text-sm text-text-primary truncate hover:text-cs-orange cursor-pointer"
-                    >
-                      {kb.player_name}
-                    </span>
-                    <span className="font-mono text-[10px] text-text-tertiary">SteamID: {steamid.slice(0, 12)}...</span>
-                  </div>
-                  <span className="font-mono text-xs font-bold text-cs-orange bg-cs-orange/10 px-2 py-0.5 rounded border border-cs-orange/20">
-                    {kb.total_kills} Kills
-                  </span>
-                </div>
-
-                {/* Key indicators */}
-                <div className="flex flex-wrap gap-1.5 font-mono text-[10px]">
-                  <span className="px-2 py-0.5 rounded bg-surface-card text-text-primary border border-border-subtle">
-                    HS: {(kb.headshot_rate * 100).toFixed(0)}%
-                  </span>
-                  {kb.blind_kills > 0 && (
-                    <span className="px-2 py-0.5 rounded bg-cs-blue/15 text-cs-blue border border-cs-blue/30 font-bold">
-                      {kb.blind_kills} Blind Kills
-                    </span>
-                  )}
-                  {kb.smoke_kills > 0 && (
-                    <span className="px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30 font-bold">
-                      {kb.smoke_kills} Smoke Kills
-                    </span>
-                  )}
-                  {kb.wallbang_kills > 0 && (
-                    <span className="px-2 py-0.5 rounded bg-purple-500/15 text-purple-300 border border-purple-500/30 font-bold">
-                      {kb.wallbang_kills} Wallbangs
-                    </span>
-                  )}
-                </div>
-
-                {/* Hitgroup Breakdown with Anatomical Text Labels */}
-                <div className="flex flex-col gap-1 font-mono text-[11px] pt-1 border-t border-border-subtle">
-                  <span className="text-[10px] uppercase text-text-tertiary font-semibold">Hitgroup Proportions</span>
-                  <div className="grid grid-cols-2 gap-1.5 text-[11px]">
-                    {Object.entries(kb.hitgroups || {}).map(([hgName, count]) => {
-                      const pct = kb.total_kills > 0 ? ((count / kb.total_kills) * 100).toFixed(0) : 0;
-                      return (
-                        <div key={hgName} className="flex items-center justify-between p-1.5 rounded bg-surface-card border border-border-subtle">
-                          <span className="capitalize text-text-secondary">{hgName}</span>
-                          <span className="font-bold text-text-primary">
-                            {count} <span className="text-text-tertiary font-normal">({pct}%)</span>
-                          </span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* PLAYER ROSTER & SUSPICION MATRIX TABLE */}
-      <section className="bg-surface-card border border-border-subtle rounded-xl overflow-hidden shadow-lg">
-        <div className="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-border-subtle">
-          <div className="flex items-center gap-3">
-            <h3 className="font-bold text-sm text-text-primary">Player Performance &amp; Anomaly Index</h3>
-            <span className="font-mono text-[11px] px-2 py-0.5 rounded bg-surface-panel text-text-secondary border border-border-subtle">
-              Sliding Window Model Predictions
-            </span>
-          </div>
-        </div>
-
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse text-xs">
-            <thead>
-              <tr className="font-mono text-[11px] uppercase tracking-wider text-text-tertiary bg-surface-panel/70 border-b border-border-subtle">
-                <th className="py-3 px-4">Player Handle</th>
-                <th className="py-3 px-3">Total Windows</th>
-                <th className="py-3 px-3">Suspect Windows</th>
-                <th className="py-3 px-3">Anomaly Ratio</th>
-                <th className="py-3 px-3">Mean Anomaly Score</th>
-                <th className="py-3 px-4 text-right">Tribunal Verdict</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-border-subtle font-mono">
-              {summaries.map((p) => {
-                const isSus = p.status === 'Flagged';
-                return (
-                  <tr
-                    key={p.steamid}
-                    onClick={() => onSelectPlayer(p.steamid)}
-                    className={`transition-colors cursor-pointer ${
-                      isSus
-                        ? 'bg-cs-red/10 hover:bg-cs-red/15 border-l-4 border-l-cs-red'
-                        : 'hover:bg-surface-card-hover'
-                    }`}
-                  >
-                    <td className="py-3 px-4 font-sans">
-                      <div className="flex items-center gap-2">
-                        <span className="font-bold text-text-primary text-xs font-mono">
-                          {p.player_name}
-                        </span>
-                        {isSus && (
-                          <span className="material-symbols-outlined text-xs text-cs-red" title="Anomaly Flagged">
-                            gavel
-                          </span>
-                        )}
-                      </div>
-                    </td>
-                    <td className="py-3 px-3 text-text-secondary">{p.total_windows}</td>
-                    <td className="py-3 px-3">
-                      <span className={isSus ? 'text-cs-red font-bold' : 'text-text-primary'}>
-                        {p.suspicious_windows}
-                      </span>
-                    </td>
-                    <td className="py-3 px-3">
-                      <span className={isSus ? 'text-cs-red font-bold' : 'text-cs-green'}>
-                        {((p.suspicious_ratio || 0) * 100).toFixed(1)}%
-                      </span>
-                    </td>
-                    <td className="py-3 px-3 text-text-primary">
-                      {(p.mean_suspicion_score || 0).toFixed(3)}
-                    </td>
-                    <td className="py-3 px-4 text-right">
-                      <span
-                        className={`px-2.5 py-0.5 rounded font-mono text-[10px] font-bold uppercase border ${
-                          isSus
-                            ? 'bg-cs-red/20 text-cs-red border-cs-red/40'
-                            : 'bg-cs-green/10 text-cs-green border-cs-green/30'
-                        }`}
-                      >
-                        {p.status.toUpperCase()}
-                      </span>
-                    </td>
+      {kills.length > 0 && (
+        <section className="mt-10">
+          <SectionTitle title="Kills" meta="From the demo's death events. Context for review; not scored by the model." />
+          <div className="panel overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead className="border-b border-line bg-sunken/50">
+                  <tr>
+                    <th className="th">Player</th>
+                    <th className="th text-right">Kills</th>
+                    <th className="th text-right">Headshot</th>
+                    <th className="th text-right">While blind</th>
+                    <th className="th text-right">Through smoke</th>
+                    <th className="th text-right">Wallbang</th>
+                    <th className="th text-right">Airborne</th>
+                    <th className="th">Main weapon</th>
                   </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      {/* MODEL PROVENANCE, UNCERTAINTY & LIMITATIONS BANNER (Proposal Compliance) */}
-      <section className="bg-surface-card border border-border-subtle rounded-xl p-5 shadow-lg flex flex-col gap-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-border-subtle pb-3">
-          <div className="flex items-center gap-2.5">
-            <span className="material-symbols-outlined text-lg text-cs-orange">verified_user</span>
-            <h3 className="font-bold text-sm text-text-primary">Model Provenance, Uncertainty &amp; Audit Limitations</h3>
+                </thead>
+                <tbody className="divide-y divide-line">
+                  {kills.map(([steamid, k]) => {
+                    const topWeapon = Object.entries(k.weapons || {}).sort((a, b) => b[1] - a[1])[0];
+                    const cell = (n: number) => (
+                      <td className={`td num text-right ${n > 0 ? 'text-ink' : 'text-ink-3'}`}>{n}</td>
+                    );
+                    return (
+                      <tr key={steamid}>
+                        <td className="td">
+                          <button className="font-medium text-ink hover:underline" onClick={() => onSelectPlayer(steamid)}>
+                            {k.player_name}
+                          </button>
+                        </td>
+                        <td className="td num text-right text-ink">{k.total_kills}</td>
+                        <td className="td num text-right text-ink-2">{formatPct(k.headshot_rate, 0)}</td>
+                        {cell(k.blind_kills)}
+                        {cell(k.smoke_kills)}
+                        {cell(k.wallbang_kills)}
+                        {cell(k.air_kills)}
+                        <td className="td text-ink-2">
+                          {topWeapon ? (
+                            <>
+                              <Mono>{topWeapon[0].toLowerCase()}</Mono>
+                              <span className="num ml-1.5 text-ink-3">{topWeapon[1]}</span>
+                            </>
+                          ) : (
+                            '—'
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
-          <span className="font-mono text-[11px] px-2 py-0.5 rounded bg-surface-panel text-cs-green border border-cs-green/30 font-semibold">
-            Decision-Support Only (Not Auto-Ban)
-          </span>
-        </div>
+        </section>
+      )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 font-mono text-xs">
-          <div className="p-3.5 rounded-lg bg-surface-panel border border-border-subtle flex flex-col gap-1">
-            <span className="text-[10px] uppercase text-text-tertiary">Active Classifier</span>
-            <span className="font-bold text-text-primary">{data.model_provenance?.model_name || 'XGBoost v2.4'}</span>
-            <span className="text-[11px] text-text-secondary mt-1">Calibrated Threshold: {data.threshold_used || 0.61}</span>
-            <span className="text-[11px] text-cs-green font-semibold">Empirical FPR: 6.66% (&lt; 8.0% target)</span>
-          </div>
-
-          <div className="p-3.5 rounded-lg bg-surface-panel border border-border-subtle flex flex-col gap-1">
-            <span className="text-[10px] uppercase text-text-tertiary">Training Provenance</span>
-            <span className="font-bold text-text-primary">CS2CD Benchmark</span>
-            <span className="text-[11px] text-text-secondary mt-1">399,156 train windows</span>
-            <span className="text-[11px] text-text-tertiary">Stratified match-held-out split</span>
-          </div>
-
-          <div className="p-3.5 rounded-lg bg-surface-panel border border-border-subtle flex flex-col gap-1">
-            <span className="text-[10px] uppercase text-text-tertiary">Uncertainty &amp; Noise</span>
-            <span className="font-bold text-amber-400">Match-Level Dilution</span>
-            <span className="text-[11px] text-text-secondary mt-1">Cheater windows include passive play</span>
-            <span className="text-[11px] text-text-tertiary">FNR: 74.7% (Conservative triage)</span>
-          </div>
-
-          <div className="p-3.5 rounded-lg bg-surface-panel border border-border-subtle flex flex-col gap-1">
-            <span className="text-[10px] uppercase text-text-tertiary">Specialized Cheat Categories</span>
-            <span className="font-bold text-cs-blue">Research Track Status</span>
-            <span className="text-[11px] text-text-secondary mt-1">ESP &amp; Triggerbot: Contextual only</span>
-            <span className="text-[11px] text-text-tertiary">Raycasts unavailable in demo stream</span>
-          </div>
-        </div>
-
-        {/* Detailed Limitations Accordion / Notes */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 text-xs">
-          <div className="p-3 rounded-lg bg-surface-bg border border-border-subtle flex flex-col gap-1">
-            <span className="font-mono text-[10px] uppercase text-amber-400 font-bold flex items-center gap-1.5">
-              <span className="material-symbols-outlined text-sm">warning</span>
-              Missing Fields &amp; Reaction Limitations
-            </span>
-            <p className="text-text-secondary leading-relaxed">
-              Client viewport entry timestamps (<code className="text-text-primary font-mono text-[10px]">visibility_ts</code>) and sub-tick crosshair-to-bone raycasts (<code className="text-text-primary font-mono text-[10px]">crosshair_align_ts</code>) are unexposed by standard demo parser streams. As documented in the ML pipeline, reaction-time features remain zero-padded stubs pending server-side raycast telemetry.
+      <section className="mt-12 border-t border-line pt-8">
+        <h2 className="text-base font-semibold text-ink">Reading this report</h2>
+        <div className="mt-4 grid grid-cols-1 gap-x-12 gap-y-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+          <dl className="grid content-start grid-cols-[auto_minmax(0,1fr)] gap-x-6 gap-y-2.5 text-sm">
+            <dt className="text-ink-3">Model</dt>
+            <dd className="text-ink">
+              {provenance.model_name} {provenance.model_version}
+            </dd>
+            <dt className="text-ink-3">Threshold</dt>
+            <dd className="num text-ink">{threshold.toFixed(2)}</dd>
+            <dt className="text-ink-3">False positives</dt>
+            <dd className="num text-ink">
+              {formatPct(provenance.empirical_fpr, 2)}{' '}
+              <span className="text-ink-3">(target under {formatPct(provenance.target_max_fpr, 0)})</span>
+            </dd>
+            <dt className="text-ink-3">Trained on</dt>
+            <dd className="text-ink">{provenance.training_dataset}</dd>
+            <dt className="text-ink-3">Split</dt>
+            <dd className="text-ink">{provenance.split_method}</dd>
+          </dl>
+          <div>
+            <p className="text-sm font-medium text-ink">
+              Decision support only. A person reviews every flag before any action is taken.
             </p>
-          </div>
-
-          <div className="p-3 rounded-lg bg-surface-bg border border-border-subtle flex flex-col gap-1">
-            <span className="font-mono text-[10px] uppercase text-cs-blue font-bold flex items-center gap-1.5">
-              <span className="material-symbols-outlined text-sm">info</span>
-              Validated Scope vs Research Tracks
-            </span>
-            <p className="text-text-secondary leading-relaxed">
-              The primary supervised model is validated for <strong>Kinematic Aim Outliers &amp; Angular Acceleration (Aimbot/Silent Aim)</strong>. Wallbangs and smoke kills are logged as factual event proofs, but are classified as <em>Research Track Signals</em> requiring manual verification of radar spotted tags, enemy noise, and team callouts.
-            </p>
+            <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm text-ink-2 marker:text-ink-3">
+              {notes.map((n) => (
+                <li key={n} className="max-w-[75ch]">
+                  {n}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>

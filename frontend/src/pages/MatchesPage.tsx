@@ -1,5 +1,17 @@
 import React, { useState } from 'react';
+import { FileUp, Search } from 'lucide-react';
 import { MatchListItem } from '../services/api';
+import {
+  displayFilename,
+  EmptyState,
+  formatDate,
+  formatNumber,
+  JobStatusBadge,
+  Loading,
+  Mono,
+  PageHeader,
+  Segmented,
+} from '../components/ui';
 
 interface MatchesPageProps {
   onSelectMatch: (matchId: string) => void;
@@ -17,136 +29,125 @@ export const MatchesPage: React.FC<MatchesPageProps> = ({
   const [filterQuery, setFilterQuery] = useState<string>('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
 
-  const filtered = matches.filter((m) => {
-    const matchesQuery =
-      m.match_id.toLowerCase().includes(filterQuery.toLowerCase()) ||
-      m.filename.toLowerCase().includes(filterQuery.toLowerCase());
-    const matchesStatus =
-      statusFilter === 'all' || m.status.toLowerCase() === statusFilter.toLowerCase();
-    return matchesQuery && matchesStatus;
+  const q = filterQuery.trim().toLowerCase();
+  const byQuery = matches.filter(
+    (m) => !q || m.match_id.toLowerCase().includes(q) || m.filename.toLowerCase().includes(q),
+  );
+  const inProgress = (s: string) => s === 'pending' || s === 'processing';
+  const filtered = byQuery.filter((m) => {
+    if (statusFilter === 'all') return true;
+    if (statusFilter === 'flagged') return m.status === 'completed' && m.suspicious_players_count > 0;
+    if (statusFilter === 'processing') return inProgress(m.status);
+    return m.status === statusFilter;
   });
 
+  const counts = {
+    all: byQuery.length,
+    flagged: byQuery.filter((m) => m.status === 'completed' && m.suspicious_players_count > 0).length,
+    processing: byQuery.filter((m) => inProgress(m.status)).length,
+    failed: byQuery.filter((m) => m.status === 'failed').length,
+  };
+
   return (
-    <div className="flex flex-col gap-6 w-full">
-      {/* Header and Controls */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-xl font-bold text-text-primary tracking-tight">
-            Match Vault &amp; Telemetry Index
-          </h1>
-          <p className="text-xs text-text-tertiary mt-0.5">
-            Indexed CS2 replays, telemetry window volumes, and forensic findings
-          </p>
-        </div>
+    <div>
+      <PageHeader
+        title="Matches"
+        description="Every demo that has been uploaded, newest first."
+        actions={
+          onNavigateUpload && (
+            <button onClick={onNavigateUpload} className="btn-primary">
+              <FileUp size={16} />
+              Upload demo
+            </button>
+          )
+        }
+      />
 
-        {onNavigateUpload && (
-          <button
-            onClick={onNavigateUpload}
-            className="flex items-center gap-2 px-3.5 py-1.5 bg-gradient-to-r from-cs-orange to-amber-600 text-black font-extrabold rounded-lg text-xs font-mono shadow-md shadow-cs-orange/20 hover:from-orange-600 hover:to-amber-700 transition-all self-start md:self-auto"
-          >
-            <span className="material-symbols-outlined text-sm">cloud_upload</span>
-            <span>INGEST NEW DEMO</span>
-          </button>
-        )}
-      </div>
-
-      {/* Filter and Search Bar */}
-      <div className="bg-surface-card p-4 rounded-xl border border-border-subtle flex flex-col sm:flex-row items-center gap-3 justify-between">
-        <div className="relative w-full sm:w-80">
-          <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-tertiary text-base">
-            search
-          </span>
+      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="relative w-full sm:max-w-xs">
+          <Search size={15} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-ink-3" />
           <input
-            type="text"
-            placeholder="Filter match ID or filename..."
+            type="search"
+            aria-label="Filter matches"
+            placeholder="Filter by file name or ID"
             value={filterQuery}
             onChange={(e) => setFilterQuery(e.target.value)}
-            className="w-full pl-9 pr-3 py-1.5 bg-surface-panel text-text-primary placeholder:text-text-tertiary font-mono text-xs rounded-lg outline-none border border-border-subtle focus:border-cs-orange transition-all"
+            className="field pl-9"
           />
         </div>
-
-        <div className="flex items-center gap-2 self-start sm:self-auto">
-          {['all', 'completed', 'processing', 'failed'].map((st) => (
-            <button
-              key={st}
-              onClick={() => setStatusFilter(st)}
-              className={`px-3 py-1 rounded font-mono text-[11px] capitalize transition-colors border ${
-                statusFilter === st
-                  ? 'bg-cs-orange text-black border-cs-orange font-bold'
-                  : 'bg-surface-panel text-text-secondary border-border-subtle hover:text-text-primary'
-              }`}
-            >
-              {st}
-            </button>
-          ))}
+        <div className="overflow-x-auto">
+          <Segmented
+            label="Status"
+            value={statusFilter}
+            onChange={setStatusFilter}
+            options={[
+              { value: 'all', label: 'All', count: counts.all },
+              { value: 'flagged', label: 'Flagged', count: counts.flagged },
+              { value: 'processing', label: 'In progress', count: counts.processing },
+              { value: 'failed', label: 'Failed', count: counts.failed },
+            ]}
+          />
         </div>
       </div>
 
-      {/* Matches Table */}
-      <div className="bg-surface-card p-6 rounded-xl border border-border-subtle shadow-lg">
-        {loading ? (
-          <div className="py-12 text-center text-text-tertiary text-sm font-mono flex items-center justify-center gap-2">
-            <span className="material-symbols-outlined animate-spin text-cs-orange">sync</span>
-            <span>Loading matches...</span>
-          </div>
+      <div className="panel overflow-hidden">
+        {loading && matches.length === 0 ? (
+          <Loading label="Loading matches" />
         ) : filtered.length === 0 ? (
-          <div className="py-12 text-center flex flex-col items-center justify-center gap-2">
-            <span className="material-symbols-outlined text-3xl text-text-tertiary">search_off</span>
-            <p className="text-sm font-semibold text-text-primary">No Matches Found</p>
-            <p className="text-xs text-text-tertiary">
-              No matching replays located. Ingest a demo from <code className="text-text-secondary">sample_demos/</code> to view forensics.
-            </p>
-          </div>
+          <EmptyState
+            title={matches.length === 0 ? 'No matches yet' : 'No matches fit these filters'}
+            body={
+              matches.length === 0
+                ? 'Upload a .dem file and its report will show up here.'
+                : 'Try a different name, or switch the status filter back to All.'
+            }
+            action={
+              matches.length === 0 && onNavigateUpload ? (
+                <button className="btn-primary" onClick={onNavigateUpload}>
+                  Upload demo
+                </button>
+              ) : undefined
+            }
+          />
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
-              <thead>
-                <tr className="border-b border-border-subtle text-text-tertiary font-mono uppercase text-[10px] bg-surface-panel/60">
-                  <th className="py-3 px-3">Filename</th>
-                  <th className="py-3 px-3">Match ID</th>
-                  <th className="py-3 px-3">Windows</th>
-                  <th className="py-3 px-3">Status</th>
-                  <th className="py-3 px-3 text-right">Action</th>
+            <table className="w-full text-sm">
+              <thead className="border-b border-line bg-sunken/50">
+                <tr>
+                  <th className="th">Demo</th>
+                  <th className="th">ID</th>
+                  <th className="th">Result</th>
+                  <th className="th text-right">Windows</th>
+                  <th className="th text-right">Finished</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-border-subtle font-mono">
+              <tbody className="divide-y divide-line">
                 {filtered.map((m) => (
                   <tr
                     key={m.match_id}
                     onClick={() => onSelectMatch(m.match_id)}
-                    className="hover:bg-surface-card-hover transition-colors cursor-pointer group"
+                    className="cursor-pointer transition-colors hover:bg-sunken/60"
                   >
-                    <td className="py-3 px-3">
-                      <span className="font-semibold text-text-primary group-hover:text-cs-orange transition-colors">
-                        {m.filename}
-                      </span>
-                    </td>
-                    <td className="py-3 px-3 text-text-tertiary text-[11px]">{m.match_id.slice(0, 16)}...</td>
-                    <td className="py-3 px-3 text-text-secondary text-[11px]">
-                      {m.total_windows || 0} windows
-                    </td>
-                    <td className="py-3 px-3">
-                      <span
-                        className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded font-mono text-[10px] font-semibold border ${
-                          m.status === 'completed'
-                            ? 'bg-cs-green/10 text-cs-green border-cs-green/30'
-                            : 'bg-cs-orange/10 text-cs-orange border-cs-orange/30'
-                        }`}
-                      >
-                        {m.status.toUpperCase()}
-                      </span>
-                    </td>
-                    <td className="py-3 px-3 text-right">
+                    <td className="td max-w-[380px]">
                       <button
+                        className="block max-w-full truncate text-left font-medium text-ink hover:underline"
+                        title={displayFilename(m.filename)}
                         onClick={(e) => {
                           e.stopPropagation();
                           onSelectMatch(m.match_id);
                         }}
-                        className="text-cs-orange hover:text-cs-orange-hover font-bold hover:underline"
                       >
-                        Inspect →
+                        {displayFilename(m.filename)}
                       </button>
                     </td>
+                    <td className="td">
+                      <Mono className="text-ink-3">{m.match_id.replace(/^analysis_/, '')}</Mono>
+                    </td>
+                    <td className="td">
+                      <JobStatusBadge status={m.status} flaggedCount={m.suspicious_players_count} />
+                    </td>
+                    <td className="td num text-right text-ink-2">{formatNumber(m.total_windows)}</td>
+                    <td className="td num whitespace-nowrap text-right text-ink-2">{formatDate(m.completed_at)}</td>
                   </tr>
                 ))}
               </tbody>

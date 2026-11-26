@@ -139,7 +139,11 @@ def run_demo_pipeline_task(demo_path: Path, analysis_id: str) -> None:
         _save_analysis_data(analysis_id, report)
         logger.info("Background task completed successfully: analysis_id=%s", analysis_id)
 
-    except Exception as e:
+    except (KeyboardInterrupt, SystemExit):
+        raise
+    except BaseException as e:
+        # demoparser2 surfaces Rust panics as pyo3 PanicException, which derives
+        # from BaseException; without this the job would stay "processing" forever.
         logger.exception("Background task failed for analysis %s", analysis_id)
         try:
             failed_record = _read_analysis_data(analysis_id)
